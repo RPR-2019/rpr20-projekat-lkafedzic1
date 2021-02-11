@@ -1,0 +1,20 @@
+#btnLogIn {
+    -fx-background-color: lightskyblue;
+}
+.fieldNotValid {
+    -fx-background-color: lightpink;
+}
+.fieldValid {
+    -fx-background-color: yellowgreen;
+}
+#btnSignUp, #btnContinueAsGuest {
+    -fx-background-color: transparent;
+}
+
+#btnLogIn:hover {
+    -fx-background-color: #5fb2ff;
+}
+
+#btnSignUp:hover, #btnContinueAsGuest:hover {
+    -fx-text-fill: #5fb2ff;
+}
