@@ -9,7 +9,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery;
+    private PreparedStatement getUserFromLoginQuery, getGenderQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -31,7 +31,24 @@ public class ScientificWorkDAO {
                 throwables.printStackTrace();
             }
         }
+        try {
+            getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+    public static void removeInstance() {
+        instance.close();
+    }
+
+    private void close() {
+        try {
+            conn.close();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
     //setup
     private void regenerateDatabase() {
         Scanner input = null;
@@ -55,8 +72,17 @@ public class ScientificWorkDAO {
             e.printStackTrace();
         }
     }
-
     //getter methods
+    public String getGender(int id) {
+        try {
+            getGenderQuery.setInt(1, id);
+            return String.valueOf(getGenderQuery.executeQuery());
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return null;
+    }
+
     public User getUser(String username, String password) throws IllegalUserException {
         try {
             getUserFromLoginQuery.setString(1, username);
@@ -66,6 +92,7 @@ public class ScientificWorkDAO {
             if (!rs.next()) {
                 throw new IllegalUserException("Account not found");
             }
+            return new User(rs.getInt("id"), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5).equals("male") ? Gender.MALE : Gender.FEMALE, rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

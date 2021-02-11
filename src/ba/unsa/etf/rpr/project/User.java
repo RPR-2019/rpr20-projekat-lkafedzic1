@@ -14,7 +14,7 @@ public class User implements Person {
     private SimpleStringProperty username = new SimpleStringProperty();
     private SimpleStringProperty password = new SimpleStringProperty();
     private SimpleStringProperty email = new SimpleStringProperty();
-    private String image = "";
+    private SimpleStringProperty image = new SimpleStringProperty();
 
     public User(int id, String firstname, String lastname, String dateOfBirth, Gender gender, String username, String password, String email, String image) {
         this.id = id;
@@ -25,7 +25,7 @@ public class User implements Person {
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
         this.email = new SimpleStringProperty(email);
-        this.image = new String();
+        this.image = new SimpleStringProperty();
     }
 
     public User() {
@@ -37,7 +37,7 @@ public class User implements Person {
         username = new SimpleStringProperty();
         password = new SimpleStringProperty();
         email = new SimpleStringProperty();
-        image = new String();
+        image = new SimpleStringProperty();
     }
 
     public User(String firstname, String lastname, String dateOfBirth, Gender gender) {
@@ -146,10 +146,14 @@ public class User implements Person {
     }
 
     public String getImage() {
+        return image.get();
+    }
+
+    public SimpleStringProperty imageProperty() {
         return image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image.set(image);
     }
 }
