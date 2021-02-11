@@ -22,7 +22,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Label text="First name:" />
+      <Label fx:id="lblFirstName" text="First name:" />
       <TextField GridPane.columnIndex="1" />
       <Label text="Last name:" GridPane.rowIndex="1" />
       <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
