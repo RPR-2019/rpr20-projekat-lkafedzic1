@@ -14,7 +14,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, maxIdField;
+    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -47,7 +47,12 @@ public class ScientificWorkDAO {
             getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
             getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
             addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
+            addTypeQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
             maxIdField = conn.prepareStatement("SELECT max(id)+1 FROM field");
+            maxIdType = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,5 +178,21 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
         return types;
+    }
+
+    public void addPublicationType(String type) {
+        try {
+            ResultSet rs = maxIdType.executeQuery();
+            int id = 1;
+            if(rs.next()) {
+                id=rs.getInt(1);
+            }
+            addTypeQuery.setInt(1, id);
+            addTypeQuery.setString(2, type);
+            addTypeQuery.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
