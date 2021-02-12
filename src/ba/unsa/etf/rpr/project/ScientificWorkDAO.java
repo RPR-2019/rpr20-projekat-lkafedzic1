@@ -195,4 +195,7 @@ public class ScientificWorkDAO {
         }
 
     }
+
+    public void addScienceWork() {
+    }
 }
