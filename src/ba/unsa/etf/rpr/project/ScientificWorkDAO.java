@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.xml.transform.Result;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -13,7 +14,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery;
+    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, maxIdField;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -45,6 +46,8 @@ public class ScientificWorkDAO {
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
             getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
             getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
+            addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
+            maxIdField = conn.prepareStatement("SELECT max(id)+1 FROM field");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,6 +132,20 @@ public class ScientificWorkDAO {
         return null;
     }
 
+    public void addField(String title) {
+        try {
+            ResultSet rs = maxIdField.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addFieldQuery.setInt(1, id);
+            addFieldQuery.setString(2, title);
+            addFieldQuery.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
 
     public ObservableList<FieldOfStudy> getFields() {
         ObservableList<FieldOfStudy> fields = FXCollections.observableArrayList();

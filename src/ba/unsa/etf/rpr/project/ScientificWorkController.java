@@ -3,15 +3,18 @@ package ba.unsa.etf.rpr.project;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.DataFormat;
+
+import java.time.Year;
 
 public class ScientificWorkController {
-    public TextField fldTitle;
-    public TextField fldAuthor;
-    public ComboBox comboType;
-    public Spinner spinnerYear;
-    public TextArea txtAreaTags;
-    public Button btnAdd;
-    public Button btnCancel;
+    public TextField title;
+    public TextField author;
+    public ComboBox<PublicationType> publicationType;
+    public Spinner<Year> yearOfPublishing;
+    public TextArea tags;
+    public Button btnAdd, btnCancel;
+    public ChoiceBox<FieldOfStudy> fieldOfStudy;
 
     @FXML
     private void initialize() {
