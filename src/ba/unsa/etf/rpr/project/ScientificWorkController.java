@@ -16,7 +16,7 @@ public class ScientificWorkController {
 
     public void actionAddScienceWork(ActionEvent actionEvent) {
         ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-
+//todo finish adding new works
         database.addScienceWork();
     }
 
