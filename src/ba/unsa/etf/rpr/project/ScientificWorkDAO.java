@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr.project;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -10,7 +13,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery;
+    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -40,6 +43,7 @@ public class ScientificWorkDAO {
 
         try {
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
+            getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,4 +129,17 @@ public class ScientificWorkDAO {
     }
 
 
+    public ObservableList<FieldOfStudy> getFields() {
+        ObservableList<FieldOfStudy> fields = FXCollections.observableArrayList();
+        try {
+            ResultSet rs = getFieldsQuery.executeQuery();
+            while(rs.next()) {
+                FieldOfStudy field = new FieldOfStudy(rs.getInt(1), rs.getString(2));
+                fields.add(field);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return fields;
+    }
 }
