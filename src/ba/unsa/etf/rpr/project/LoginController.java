@@ -30,11 +30,13 @@ public class LoginController {
     private ObservableList<ScientificWork> scientificWorksList;
     private ObservableList<User> usersList;
 
-    public LoginController() {
+/*    public LoginController() {
         database = ScientificWorkDAO.getInstance();
         scientificWorksList = FXCollections.observableArrayList(ScientificWorkDAO.scientificWorks());
+*//*
         usersList = FXCollections.observableArrayList(ScientificWorkDAO.users());
-    }
+*//*
+    }*/
 
     @FXML
     public void initialize() {

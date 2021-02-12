@@ -48,7 +48,7 @@ public class ScientificWorkDAO {
         instance.close();
     }
 
-    public static ArrayList<ScientificWork> scientificWorks() {
+/*    public static ArrayList<ScientificWork> scientificWorks() {
         ArrayList<ScientificWork> result = new ArrayList<>();
         try {
             ResultSet rs = getWorksQuery.executeQuery();
@@ -64,7 +64,7 @@ public class ScientificWorkDAO {
 
     public static Object users() {
 
-    }
+    }*/
 
     private void close() {
         try {
