@@ -13,7 +13,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery;
+    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -44,6 +44,7 @@ public class ScientificWorkDAO {
         try {
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
             getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
+            getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,5 +142,19 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
         return fields;
+    }
+
+    public ObservableList<PublicationType> getTypes() {
+        ObservableList<PublicationType> types = FXCollections.observableArrayList();
+        try {
+            ResultSet rs = getTypesQuery.executeQuery();
+            while(rs.next()) {
+                PublicationType type = new PublicationType(rs.getInt(1), rs.getString(2));
+                types.add(type);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return types;
     }
 }
