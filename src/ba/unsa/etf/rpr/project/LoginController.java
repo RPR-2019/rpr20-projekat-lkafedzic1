@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -17,10 +19,23 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class LoginController {
     public TextField fldUsername;
+    public PasswordField fldPassword;
+    public Button btnLogIn;
+    public Button btnSignUp;
+    public Button btnContinueAsGuest;
+
+    private ScientificWorkDAO instance;
+
+    public LoginController() {
+    }
 
     @FXML
     public void initialize() {
-        fldUsername.getStyleClass().add("fieldNotValid");
+/*
+        instance = ScientificWorkDAO.getInstance();
+*/
+
+/*        fldUsername.getStyleClass().add("fieldNotValid");
         fldUsername.textProperty().addListener(
                 new ChangeListener<String>() {
                     @Override
@@ -34,7 +49,7 @@ public class LoginController {
                         }
                     }
                 }
-        );
+        );*/
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {

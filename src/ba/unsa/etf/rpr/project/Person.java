@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.project;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public interface Person {
 

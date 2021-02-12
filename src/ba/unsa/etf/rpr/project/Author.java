@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.project;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Author implements Person, Comparable<Author> {
     private String firstName, lastName;
@@ -62,6 +62,22 @@ public class Author implements Person, Comparable<Author> {
     @Override
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override

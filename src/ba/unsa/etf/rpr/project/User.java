@@ -3,9 +3,6 @@ package ba.unsa.etf.rpr.project;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class User implements Person {
     private int id = 0;
     private SimpleStringProperty firstname, lastname;
