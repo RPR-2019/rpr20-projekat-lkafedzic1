@@ -21,10 +21,9 @@ CREATE TABLE IF NOT EXISTS "role" (
 CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"id"	INTEGER,
 	"title"	TEXT NOT NULL,
-	"type"	TEXT,
+	"publication_type"	TEXT,
 	"year"	INTEGER,
 	"tags"	TEXT,
-	"language"	TEXT,
 	"field"	TEXT,
 	PRIMARY KEY("id")
 );
