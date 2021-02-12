@@ -2,6 +2,8 @@ package ba.unsa.etf.rpr.project;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +26,14 @@ public class LoginController {
     public Button btnSignUp;
     public Button btnContinueAsGuest;
 
-    private ScientificWorkDAO instance;
+    private ScientificWorkDAO database;
+    private ObservableList<ScientificWork> scientificWorksList;
+    private ObservableList<User> usersList;
 
     public LoginController() {
+        database = ScientificWorkDAO.getInstance();
+        scientificWorksList = FXCollections.observableArrayList(ScientificWorkDAO.scientificWorks());
+        usersList = FXCollections.observableArrayList(ScientificWorkDAO.users());
     }
 
     @FXML

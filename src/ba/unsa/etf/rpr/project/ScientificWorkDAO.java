@@ -3,18 +3,24 @@ package ba.unsa.etf.rpr.project;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScientificWorkDAO {
-    private static ScientificWorkDAO instance;
+    private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getUserFromLoginQuery, getGenderQuery;
+    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
         return instance;
     }
+
+    public static void initialize() {
+        instance = new ScientificWorkDAO();
+    }
+
     private ScientificWorkDAO() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:scientificWorks.db");
@@ -31,6 +37,7 @@ public class ScientificWorkDAO {
                 throwables.printStackTrace();
             }
         }
+
         try {
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
         } catch (SQLException e) {
@@ -39,6 +46,24 @@ public class ScientificWorkDAO {
     }
     public static void removeInstance() {
         instance.close();
+    }
+
+    public static ArrayList<ScientificWork> scientificWorks() {
+        ArrayList<ScientificWork> result = new ArrayList<>();
+        try {
+            ResultSet rs = getWorksQuery.executeQuery();
+            while (rs.next()) {
+                ScientificWork work = new ScientificWork();//dodati iz rs atribute
+                result.add(work);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return result;
+    }
+
+    public static Object users() {
+
     }
 
     private void close() {
@@ -72,7 +97,7 @@ public class ScientificWorkDAO {
             e.printStackTrace();
         }
     }
-    //getter methods
+
     public String getGender(int id) {
         try {
             getGenderQuery.setInt(1, id);
