@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="10.0" prefHeight="132.0" prefWidth="252.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.FieldOfStudyController">
+<GridPane hgap="10.0" prefHeight="132.0" prefWidth="252.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.FieldOfStudyController">
    <columnConstraints>
       <ColumnConstraints maxWidth="117.0" minWidth="29.0" prefWidth="57.0" />
       <ColumnConstraints maxWidth="185.0" minWidth="97.0" prefWidth="157.0" />

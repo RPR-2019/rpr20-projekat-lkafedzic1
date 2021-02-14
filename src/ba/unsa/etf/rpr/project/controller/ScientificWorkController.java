@@ -1,5 +1,6 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -17,6 +18,7 @@ public class ScientificWorkController {
     public void actionAddScienceWork(ActionEvent actionEvent) {
         ScientificWorkDAO database = ScientificWorkDAO.getInstance();
 //todo finish adding new works
+
         database.addScienceWork();
     }
 

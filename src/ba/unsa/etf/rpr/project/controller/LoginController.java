@@ -1,8 +1,6 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import ba.unsa.etf.rpr.project.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,18 +1,16 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class FieldOfStudyController {
+public class PublicationTypeController {
     public TextField title;
-    public Button btnAdd, btnCancel;
 
-
-    public void actionAddNewField(ActionEvent actionEvent) {
+    public void actionAddNewType(ActionEvent actionEvent) {
         ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-        database.addField(title.getText());
+        database.addPublicationType(title.getText());
     }
 
     public void actionCancel(ActionEvent actionEvent) {
