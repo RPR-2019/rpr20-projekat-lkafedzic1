@@ -26,14 +26,28 @@ public class GuestController {
         LoginController loginWindow = loader.getController();
         stage.setTitle("Login");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        stage.setMinHeight(200);
-        stage.setMinWidth(320);
+        stage.setResizable(false);
         Stage window = (Stage) lblWelcome.getScene().getWindow();
         window.close();
-        stage.setResizable(false);
         stage.show();
     }
 
     public void actionSearch(ActionEvent actionEvent) {
+    }
+
+    public void actionClose(ActionEvent actionEvent) {
+        Stage window = (Stage) lblWelcome.getScene().getWindow();
+        window.close();
+    }
+
+    public void actionAbout(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        Parent root = loader.load();
+        MainWindowController aboutWindow = loader.getController();
+        stage.setTitle("About");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }
