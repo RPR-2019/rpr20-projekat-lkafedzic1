@@ -79,5 +79,15 @@
          </BorderPane.margin>
       </VBox>
    </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Label text="Running in guest mode" />
+         </children>
+      </HBox>
+   </bottom>
    
 </BorderPane>

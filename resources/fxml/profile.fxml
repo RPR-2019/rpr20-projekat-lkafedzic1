@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.SignUpController">
+   <children>
+      <GridPane hgap="10.0" prefHeight="242.0" prefWidth="317.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints maxWidth="173.0" minWidth="93.0" prefWidth="128.0" />
+            <ColumnConstraints maxWidth="192.0" minWidth="112.0" prefWidth="157.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+         <children>
+            <Label text="Username:" />
+            <TextField fx:id="fldUsername" GridPane.columnIndex="1" />
+            <Label prefHeight="16.0" prefWidth="127.0" text="Current password:" GridPane.rowIndex="1" />
+            <Label text="Confirm password:" GridPane.rowIndex="3" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+              <buttons>
+                <Button fx:id="btnSave" defaultButton="true" mnemonicParsing="false" onAction="#actionOk" text="Save" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
+              </buttons>
+               <GridPane.margin>
+                  <Insets top="50.0" />
+               </GridPane.margin>
+            </ButtonBar>
+            <Label text="New password:" GridPane.rowIndex="2" />
+            <PasswordField fx:id="fldCurrentPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="fldNewPassword" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="fldConfirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+         </padding>
+      </GridPane>
+      <HBox>
+         <children>
+            <Label fx:id="lblStatusBar" text="Changing password">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</VBox>

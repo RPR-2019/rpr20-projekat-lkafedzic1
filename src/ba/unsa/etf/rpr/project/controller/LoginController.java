@@ -69,6 +69,8 @@ public class LoginController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
 /*        Stage window = (Stage) fldUsername.getScene().getWindow();
         window.close();*/
+        stage.setMinHeight(200);
+        stage.setMinWidth(320);
         stage.show();
     }
 
@@ -95,6 +97,8 @@ public class LoginController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
 /*        Stage window = (Stage) fldUsername.getScene().getWindow();
         window.close();*/
+        stage.setMinHeight(240);
+        stage.setMinWidth(480);
         stage.show();
     }
 }

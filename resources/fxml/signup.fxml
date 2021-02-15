@@ -4,55 +4,72 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="10.0" prefHeight="321.0" prefWidth="334.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.SignUpController">
-   <columnConstraints>
-      <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0" />
-      <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.SignUpController">
    <children>
-      <Label fx:id="lblFirstName" text="First name:" />
-      <TextField GridPane.columnIndex="1" />
-      <Label text="Last name:" GridPane.rowIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label text="Date of birth:" GridPane.rowIndex="2" />
-      <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-      <Label text="E-mail:" GridPane.rowIndex="5" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label text="Username:" GridPane.rowIndex="6" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Label text="Password:" GridPane.rowIndex="7" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label text="Gender:" GridPane.rowIndex="3" />
-      <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <GridPane alignment="CENTER" hgap="10.0" prefHeight="321.0" prefWidth="334.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0" />
+            <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
          <children>
-            <RadioButton mnemonicParsing="false" text="male">
-               <toggleGroup>
-                  <ToggleGroup fx:id="toggleGender" />
-               </toggleGroup></RadioButton>
-            <RadioButton mnemonicParsing="false" text="female" toggleGroup="$toggleGender" />
+            <Label text="First name:" />
+            <TextField fx:id="fldFirstName" GridPane.columnIndex="1" />
+            <Label text="Last name:" GridPane.rowIndex="1" />
+            <TextField fx:id="fldLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Date of birth:" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Label text="E-mail:" GridPane.rowIndex="5" />
+            <TextField fx:id="lblEmail" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Username:" GridPane.rowIndex="6" />
+            <TextField fx:id="lblUsername" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Password:" GridPane.rowIndex="7" />
+            <Label text="Gender:" GridPane.rowIndex="3" />
+            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGender" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender" />
+               </children>
+            </HBox>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="9">
+              <buttons>
+                <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" onAction="#actionOk" text="Ok" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
+              </buttons>
+            </ButtonBar>
+            <PasswordField fx:id="lblPassword" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+         </padding>
+      </GridPane>
+      <HBox prefWidth="334.0">
+         <children>
+            <Label fx:id="lblStatusBar" text="Making a new user account">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="2.0" />
+               </HBox.margin>
+            </Label>
          </children>
       </HBox>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="9">
-        <buttons>
-          <Button fx:id="btnOK" defaultButton="true" mnemonicParsing="false" onAction="#actionOk" text="Ok" />
-            <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
-        </buttons>
-      </ButtonBar>
    </children>
-   <padding>
-      <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-   </padding>
-</GridPane>
+</VBox>
