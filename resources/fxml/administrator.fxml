@@ -89,14 +89,14 @@
             <TableView prefHeight="230.0" prefWidth="661.0">
               <columns>
                 <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="155.0" text="Title" />
-                <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="126.0" text="Author" />
-                  <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="81.0" text="Year" />
-                  <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="133.0" text="Field of study" />
-                  <TableColumn fx:id="columnType" minWidth="130.0" prefWidth="134.0" text="Publicaton type" />
-                  <TableColumn fx:id="columnJournalConference" minWidth="159.0" prefWidth="160.0" text="Journal/Conference" />
+                <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="108.0" text="Author" />
+                  <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="90.0" text="Year" />
+                  <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="129.0" text="Field of study" />
+                  <TableColumn fx:id="columnType" minWidth="101.0" prefWidth="126.0" text="Publicaton type" />
+                  <TableColumn fx:id="columnJournalConference" minWidth="159.0" prefWidth="181.0" text="Journal/Conference" />
               </columns>
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TableView>
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
