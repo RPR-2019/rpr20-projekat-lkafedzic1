@@ -62,15 +62,15 @@ public class LoginController {
     public void actionLogin(ActionEvent actionEvent) throws IOException {
         if (fldUsername.getText().isEmpty()) return;
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
         Parent root = loader.load();
-        MainWindowController mainWindowController = loader.getController();
+        HomeController mainWindowController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
 /*        Stage window = (Stage) fldUsername.getScene().getWindow();
         window.close();*/
-        stage.setMinHeight(200);
-        stage.setMinWidth(320);
+        stage.setMinHeight(600);
+        stage.setMinWidth(400);
         stage.show();
     }
 

@@ -3,8 +3,15 @@ package ba.unsa.etf.rpr.project.controller;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ScientificWorkController {
     public TextField title;
@@ -14,41 +21,45 @@ public class ScientificWorkController {
     public TextArea tags;
     public Button btnAdd, btnCancel;
     public ComboBox<String> fieldOfStudy;
+    public Label lblTitle;
 
-    public void actionAddScienceWork(ActionEvent actionEvent) {
-        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-//todo finish adding new works
-
-        database.addScienceWork();
-    }
 
     @FXML
     private void initialize() {
-        publicationType.getItems().addAll(
-                "book",
-                "journal article",
-                "letter",
-                "pattent",
-                "other"
-        );
-        fieldOfStudy.getItems().addAll(
-                "computer science",
-                "engineering",
-                "psychology",
-                "mathematics",
-                "history",
-                "medicine",
-                "art",
-                "business",
-                "sociology",
-                "biology",
-                "other"
-        );
 
     }
 
     public void actionCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) author.getScene().getWindow();
+        stage.close();
+    }
+
+    public void actionDownload(ActionEvent actionEvent) {
+    }
+
+    public void actionDelete(ActionEvent actionEvent) {
+    }
+
+    public void actionAbout(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        Parent root = loader.load();
+        HomeController aboutWindow = loader.getController();
+        stage.setTitle("About");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public void actionAddScienceWork(ActionEvent actionEvent) {
+
+    }
+
+    public void actionUpload(ActionEvent actionEvent) {
+    }
+
+    public void actionClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) lblTitle.getScene().getWindow();
         stage.close();
     }
 }

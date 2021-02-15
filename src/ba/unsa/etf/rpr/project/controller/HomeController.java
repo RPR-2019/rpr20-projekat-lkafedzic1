@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class MainWindowController {
+public class HomeController {
 
     public Label lblStatusBar;
 
@@ -33,10 +33,33 @@ public class MainWindowController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        MainWindowController aboutWindow = loader.getController();
+        HomeController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
+        stage.show();
+    }
+
+    public void actionAdd(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"));
+        Parent root = loader.load();
+        ScientificWorkController newWindow = loader.getController();
+        stage.setTitle("Add new scientific work");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.show();
+    }
+
+    public void actionDownload(ActionEvent actionEvent) {
+    }
+
+    public void actionRead(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
+        Parent root = loader.load();
+        ScientificWorkController newWindow = loader.getController();
+        stage.setTitle("Add new scientific work");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.show();
     }
 }
