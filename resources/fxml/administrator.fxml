@@ -38,7 +38,7 @@
    <center>
       <VBox prefHeight="411.0" prefWidth="705.0" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
-            <Insets top="30.0" />
+            <Insets />
          </BorderPane.margin>
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="685.0" spacing="10.0">
@@ -56,6 +56,9 @@
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="TOP_CENTER" spacing="10.0">
                <children>
@@ -101,8 +104,11 @@
                 <Button fx:id="btnClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
               </buttons>
                <padding>
-                  <Insets bottom="5.0" left="5.0" top="20.0" />
+                  <Insets bottom="5.0" left="5.0" />
                </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </ButtonBar>
          </children>
          <padding>
