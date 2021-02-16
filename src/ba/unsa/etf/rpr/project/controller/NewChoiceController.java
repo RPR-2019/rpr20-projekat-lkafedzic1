@@ -15,8 +15,8 @@ public class NewChoiceController {
 
 
     public void actionAddNewField(ActionEvent actionEvent) {
-        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-        database.addField(fldTitle.getText());
+/*        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
+        database.addField(fldTitle.getText());*/
     }
 
     public void actionCancel(ActionEvent actionEvent) {

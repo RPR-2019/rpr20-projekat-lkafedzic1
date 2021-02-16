@@ -15,7 +15,7 @@ public class FieldOfStudyModel {
     }
 
     public FieldOfStudyModel() {
-        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-        fields = database.getFields();
+/*        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
+        fields = database.getFields();*/
     }
 }

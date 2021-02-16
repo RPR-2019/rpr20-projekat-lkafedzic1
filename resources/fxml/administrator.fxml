@@ -10,7 +10,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
+              <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionSignOut" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -100,7 +100,7 @@
    <right>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="113.0" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuButton fx:id="btnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#menuBtnAddClick" text="Add new">
+            <MenuButton fx:id="menuBtnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#menuBtnAddClick" text="Add new">
               <items>
                 <MenuItem fx:id="itemNewWork" mnemonicParsing="false" onAction="#actionAddScientificWork" text="Scientific work" />
                 <MenuItem fx:id="itemNewField" mnemonicParsing="false" onAction="#actionAddFieldOfStudy" text="Field of study" />
@@ -116,7 +116,7 @@
             </MenuButton>
             <Button fx:id="btnDownload" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="Download" />
             <Button fx:id="btnRead" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionRead" text="Read" />
-            <Button fx:id="btnClose" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" text="Close" />
+            <Button fx:id="btnClose" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionSignOut" text="Sign out" />
          </children>
          <BorderPane.margin>
             <Insets right="10.0" />

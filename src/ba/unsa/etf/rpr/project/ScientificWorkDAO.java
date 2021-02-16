@@ -13,71 +13,58 @@ import java.util.Scanner;
 public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
+    private ArrayList<User> userList;
 
-    private PreparedStatement getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
         return instance;
     }
 
-    public static void initialize() {
-        instance = new ScientificWorkDAO();
-    }
-
     private ScientificWorkDAO() {
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:scientificWorks.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:scientific.db");
         } catch (SQLException exception) {
+            //Error with connection
             exception.printStackTrace();
         }
         try {
-            getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.mail, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
+            getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
         } catch (SQLException exception) {
+            //If there is no database, make it
             regenerateDatabase();
             try {
-                getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.mail, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
+                //Testing
+                getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
             } catch (SQLException throwables) {
+                //There is a fatal error
                 throwables.printStackTrace();
             }
         }
 
-        try {
+      try {
+          getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?" );
+          getRoleFromIdQuery = conn.prepareStatement("SELECT title FROM role WHERE id=?");
+          /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
+          System.out.println("Evo me evo");
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
             getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
             getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
             addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
             addTypeQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
             maxIdField = conn.prepareStatement("SELECT max(id)+1 FROM field");
-            maxIdType = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");
-
-
+            maxIdType = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");*/
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     public static void removeInstance() {
+        if (instance == null) return;
         instance.close();
+        instance = null;
     }
-
-/*    public static ArrayList<ScientificWork> scientificWorks() {
-        ArrayList<ScientificWork> result = new ArrayList<>();
-        try {
-            ResultSet rs = getWorksQuery.executeQuery();
-            while (rs.next()) {
-                ScientificWork work = new ScientificWork();//dodati iz rs atribute
-                result.add(work);
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return result;
-    }
-
-    public static Object users() {
-
-    }*/
 
     private void close() {
         try {
@@ -87,7 +74,6 @@ public class ScientificWorkDAO {
         }
     }
 
-    //setup
     private void regenerateDatabase() {
         Scanner input = null;
         try {
@@ -111,6 +97,48 @@ public class ScientificWorkDAO {
         }
     }
 
+    public boolean isAccount(String username, String password) {
+        try {
+            getLoginQuery.setString(1, username);
+            getLoginQuery.setString(2, password);
+
+            ResultSet rs = getLoginQuery.executeQuery();
+            if(rs.next()) return true;
+            return false;
+        } catch (SQLException exception) {
+            return false;
+        }
+    }
+
+    private String getRole(int role_id) {
+        try {
+            getRoleFromIdQuery.setInt(1,role_id);
+            ResultSet rs = getRoleFromIdQuery.executeQuery();
+            return rs.getString("title");
+        } catch (SQLException exception) {
+            return null;
+        }
+    }
+
+    public boolean isAdministrator(String username, String password) {
+        try {
+            getLoginQuery.setString(1, username);
+            getLoginQuery.setString(2, password);
+            ResultSet rs = getLoginQuery.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String role = instance.getRole(id);
+                assert role != null;
+                if (role.equals("admin")) {
+                    return true;}
+            }
+        } catch (SQLException exception) {
+            return false;
+        }
+        return false;
+    }
+
+/*
     public String getGender(int id) {
         try {
             getGenderQuery.setInt(1, id);
@@ -120,24 +148,30 @@ public class ScientificWorkDAO {
         }
         return null;
     }
+*/
 
-    public User getUser(String username, String password) throws IllegalUserException {
+    /*public User getUser(String username, String password) throws IllegalUserException {
         try {
+            System.out.println("Ušao u metodu getUser");
             getUserFromLoginQuery.setString(1, username);
             getUserFromLoginQuery.setString(2, password);
 
             ResultSet rs = getUserFromLoginQuery.executeQuery();
+            System.out.println("poslije rs");
             if (!rs.next()) {
-                throw new IllegalUserException("Account not found");
+                System.out.println("kofa nema u rs nista");
+                return null;
             }
+            System.out.println("sve ok");
             return new User(rs.getInt("id"), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5).equals("male") ? Gender.MALE : Gender.FEMALE, rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+        System.out.println("kraj");
         return null;
-    }
+    }*/
 
-    public void addField(String title) {
+/*    public void addField(String title) {
         try {
             ResultSet rs = maxIdField.executeQuery();
             int id = 1;
@@ -150,9 +184,9 @@ public class ScientificWorkDAO {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-    }
+    }*/
 
-    public ObservableList<FieldOfStudy> getFields() {
+/*    public ObservableList<FieldOfStudy> getFields() {
         ObservableList<FieldOfStudy> fields = FXCollections.observableArrayList();
         try {
             ResultSet rs = getFieldsQuery.executeQuery();
@@ -178,24 +212,6 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
         return types;
-    }
+    }*/
 
-    public void addPublicationType(String type) {
-        try {
-            ResultSet rs = maxIdType.executeQuery();
-            int id = 1;
-            if(rs.next()) {
-                id=rs.getInt(1);
-            }
-            addTypeQuery.setInt(1, id);
-            addTypeQuery.setString(2, type);
-            addTypeQuery.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void addScienceWork() {
-    }
 }

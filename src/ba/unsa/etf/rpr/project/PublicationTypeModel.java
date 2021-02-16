@@ -7,8 +7,8 @@ public class PublicationTypeModel {
     private ObservableList<PublicationType> types = FXCollections.observableArrayList();
 
     public PublicationTypeModel() {
-        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
-        types = database.getTypes();
+/*        ScientificWorkDAO database = ScientificWorkDAO.getInstance();
+        types = database.getTypes();*/
     }
 
     public ObservableList<PublicationType> getTypes() {

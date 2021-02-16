@@ -12,6 +12,7 @@ public class User implements Person {
     private SimpleStringProperty password = new SimpleStringProperty();
     private SimpleStringProperty email = new SimpleStringProperty();
     private SimpleStringProperty image = new SimpleStringProperty();
+    private SimpleStringProperty role = new SimpleStringProperty();
 
     public User(int id, String firstname, String lastname, String dateOfBirth, Gender gender, String username, String password, String email, String image) {
         this.id = id;
@@ -37,11 +38,12 @@ public class User implements Person {
         image = new SimpleStringProperty();
     }
 
-    public User(String firstname, String lastname, String dateOfBirth, Gender gender) {
-        this.firstname = new SimpleStringProperty(firstname);
-        this.lastname = new SimpleStringProperty(lastname);
-        this.dateOfBirth = new SimpleStringProperty(dateOfBirth);
-        this.gender = new SimpleObjectProperty<>(gender);
+    public User(int id, String username, String password, String email, String role) {
+        this.id = id;
+        this.username = new SimpleStringProperty(username);
+        this.password = new SimpleStringProperty(password);
+        this.email = new SimpleStringProperty(email);
+        this.role = new SimpleStringProperty(role);
     }
 
     @Override
@@ -152,5 +154,17 @@ public class User implements Person {
 
     public void setImage(String image) {
         this.image.set(image);
+    }
+
+    public String getRole() {
+        return role.get();
+    }
+
+    public SimpleStringProperty roleProperty() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role.set(role);
     }
 }

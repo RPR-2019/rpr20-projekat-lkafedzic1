@@ -1,10 +1,15 @@
 package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,15 +17,33 @@ import java.io.IOException;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeController {
-
     public Label lblStatusBar;
+    public MenuButton menuBtnAdd;
+    public MenuButton menuBtnDelete;
+
+
+    private ScientificWorkDAO instance;
+
+    public HomeController() {
+    }
+
+    @FXML
+    public void initialize() {
+    }
 
     public void actionSearch(ActionEvent actionEvent) {
     }
 
-    public void actionClose(ActionEvent actionEvent) {
-        Stage window = (Stage) lblStatusBar.getScene().getWindow();
-        window.close();
+    public void actionSignOut(ActionEvent actionEvent) throws IOException {
+        lblStatusBar.getScene().getWindow().hide();
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        Parent root = loader.load();
+        LoginController loginWindow = loader.getController();
+        stage.setTitle("Login");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 
     public void actionAbout(ActionEvent actionEvent) throws IOException {

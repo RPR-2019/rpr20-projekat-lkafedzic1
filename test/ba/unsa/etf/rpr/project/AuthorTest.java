@@ -1,3 +1,4 @@
+/*
 package ba.unsa.etf.rpr.project;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -58,3 +59,4 @@ class AuthorTest {
     void compareTo() {
     }
 }
+*/

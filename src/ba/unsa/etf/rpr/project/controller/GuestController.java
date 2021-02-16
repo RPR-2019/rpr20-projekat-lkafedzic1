@@ -27,8 +27,7 @@ public class GuestController {
         stage.setTitle("Login");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
-        Stage window = (Stage) lblWelcome.getScene().getWindow();
-        window.close();
+        lblWelcome.getScene().getWindow().hide();
         stage.show();
     }
 

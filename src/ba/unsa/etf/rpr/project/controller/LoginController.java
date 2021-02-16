@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,80 +24,89 @@ public class LoginController {
     public Button btnLogIn;
     public Button btnSignUp;
     public Button btnContinueAsGuest;
+    public VBox vboxError;
 
-    private ScientificWorkDAO database;
-    private ObservableList<ScientificWork> scientificWorksList;
+    private ScientificWorkDAO instance;
     private ObservableList<User> usersList;
 
-/*    public LoginController() {
-        database = ScientificWorkDAO.getInstance();
-        scientificWorksList = FXCollections.observableArrayList(ScientificWorkDAO.scientificWorks());
-*//*
-        usersList = FXCollections.observableArrayList(ScientificWorkDAO.users());
-*//*
-    }*/
+   public LoginController() {
+    }
 
     @FXML
     public void initialize() {
-/*
-        instance = ScientificWorkDAO.getInstance();
-*/
-
-/*        fldUsername.getStyleClass().add("fieldNotValid");
+       instance = ScientificWorkDAO.getInstance();
+       fldUsername.getStyleClass().add("fieldNotValid");
         fldUsername.textProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observableValue, String o, String n) {
-                        if (fldUsername.getText().trim().isEmpty()) {
-                            fldUsername.getStyleClass().removeAll("fieldValid");
-                            fldUsername.getStyleClass().add("fieldNotValid");
-                        } else {
-                            fldUsername.getStyleClass().removeAll("fieldNotValid");
-                            fldUsername.getStyleClass().add("fieldValid");
-                        }
+                (observableValue, o, n) -> {
+                    if (fldUsername.getText().trim().isEmpty()) {
+                        fldUsername.getStyleClass().removeAll("fieldValid");
+                        fldUsername.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldUsername.getStyleClass().removeAll("fieldNotValid");
+                        fldUsername.getStyleClass().add("fieldValid");
                     }
                 }
-        );*/
+        );
+        fldPassword.getStyleClass().add("fieldNotValid");
+        fldPassword.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (fldPassword.getText().trim().isEmpty() || fldPassword.getText().trim().length() < 8) {
+                        fldPassword.getStyleClass().removeAll("fieldValid");
+                        fldPassword.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldPassword.getStyleClass().removeAll("fieldNotValid");
+                        fldPassword.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {
-        if (fldUsername.getText().isEmpty()) return;
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
-        Parent root = loader.load();
-        HomeController mainWindowController = loader.getController();
-        stage.setTitle("Scientific works database");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-/*        Stage window = (Stage) fldUsername.getScene().getWindow();
-        window.close();*/
-        stage.setMinHeight(600);
-        stage.setMinWidth(400);
-        stage.show();
+       boolean test = instance.isAccount(fldUsername.getText(), fldPassword.getText());
+        if (fldUsername.getStyleClass().contains("fieldNotValid") || fldPassword.getStyleClass().contains("fieldNotValid") || !test) {
+            vboxError.setVisible(true);
+        }
+        else {
+            String path = "/fxml/user.fxml";
+            if (instance.isAdministrator(fldUsername.getText(), fldPassword.getText())) {
+                path ="/fxml/administrator.fxml";
+            }
+            //ako je u listi usera i administrator zabilježi
+            vboxError.setVisible(false);
+            fldUsername.getScene().getWindow().hide();
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            Parent root = loader.load();
+            HomeController homeController = loader.getController();
+            stage.setTitle("Scientific works database");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setMinHeight(600);
+            stage.setMinWidth(400);
+            stage.show();
+        }
     }
 
     public void actionSignUp(ActionEvent actionEvent) throws IOException {
+        fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"));
         Parent root = loader.load();
         SignUpController signupWindow = loader.getController();
         stage.setTitle("Sign up");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-/*        Stage window = (Stage) fldUsername.getScene().getWindow();
-        window.close();*/
         stage.setMinHeight(370);
         stage.setMinWidth(320);
         stage.show();
     }
 
     public void actionContinueAsGuest(ActionEvent actionEvent) throws IOException {
+        fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"));
         Parent root = loader.load();
         GuestController guestController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-/*        Stage window = (Stage) fldUsername.getScene().getWindow();
-        window.close();*/
         stage.setMinHeight(240);
         stage.setMinWidth(480);
         stage.show();
