@@ -14,15 +14,11 @@ import java.io.IOException;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ScientificWorkController {
-    public TextField title;
-    public TextField author;
-    public ComboBox<String> publicationType;
-    public Spinner<Integer> yearOfPublishing;
-    public TextArea tags;
-    public Button btnAdd, btnCancel;
-    public ComboBox<String> fieldOfStudy;
-    public Label lblTitle;
 
+    public Button btnAdd, btnCancel;
+    public Label lblTitle;
+    public TextField fldAuthor;
+    public TextField fldTitle;
 
     @FXML
     private void initialize() {
@@ -30,7 +26,7 @@ public class ScientificWorkController {
     }
 
     public void actionCancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) author.getScene().getWindow();
+        Stage stage = (Stage) fldAuthor.getScene().getWindow();
         stage.close();
     }
 
