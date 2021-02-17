@@ -129,7 +129,7 @@ public class ScientificWorkDAO {
                 int id = rs.getInt("id");
                 String role = instance.getRole(id);
                 assert role != null;
-                if (role.equals("admin")) {
+                if (role.equals("administrator")) {
                     return true;}
             }
         } catch (SQLException exception) {

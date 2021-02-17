@@ -67,23 +67,41 @@ public class LoginController {
             vboxError.setVisible(true);
         }
         else {
-            String path = "/fxml/user.fxml";
-            if (instance.isAdministrator(fldUsername.getText(), fldPassword.getText())) {
-                path ="/fxml/administrator.fxml";
-            }
-            //ako je u listi usera i administrator zabilježi
             vboxError.setVisible(false);
             fldUsername.getScene().getWindow().hide();
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-            Parent root = loader.load();
-            HomeController homeController = loader.getController();
-            stage.setTitle("Scientific works database");
-            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.setMinHeight(600);
-            stage.setMinWidth(400);
-            stage.show();
+            if (instance.isAdministrator(fldUsername.getText(), fldPassword.getText())) {
+                showAdministratorView();
+            }
+            else {
+                showUserView();
+            }
         }
+    }
+
+    private void showUserView() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+        Parent root = loader.load();
+        UserController homeController = loader.getController();
+        stage.setTitle("Scientific works database");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setMaxWidth(1100);
+        stage.setMinHeight(200);
+        stage.setMinWidth(200);
+        stage.show();
+    }
+
+    private void showAdministratorView() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/administrator.fxml"));
+        Parent root = loader.load();
+        AdminController homeController = loader.getController();
+        stage.setTitle("Scientific works database");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setMaxWidth(1100);
+        stage.setMinHeight(240);
+        stage.setMinWidth(480);
+        stage.show();
     }
 
     public void actionSignUp(ActionEvent actionEvent) throws IOException {

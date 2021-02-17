@@ -8,15 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class HomeController {
+public class UserController {
     public Label lblStatusBar;
     public MenuButton menuBtnAdd;
     public MenuButton menuBtnDelete;
@@ -24,7 +22,7 @@ public class HomeController {
 
     private ScientificWorkDAO instance;
 
-    public HomeController() {
+    public UserController() {
     }
 
     @FXML
@@ -50,7 +48,7 @@ public class HomeController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        HomeController aboutWindow = loader.getController();
+        UserController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
