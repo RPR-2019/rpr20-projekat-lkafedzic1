@@ -5,81 +5,103 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.GuestController">
-    <stylesheets>
-        <URL value="@/css/guest.css" />
-    </stylesheets>
-   <top>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar maxWidth="1.7976931348623157E308">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <HBox alignment="TOP_RIGHT" spacing="5.0">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="499.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.GuestController">
+   <content>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+          <stylesheets>
+              <URL value="@/css/guest.css" />
+          </stylesheets>
+         <top>
+            <VBox BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="lblWelcome" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="You are currently using guest access!">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin></Label>
-                  <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="(Log in)" textFill="#2d8bc9" />
+                  <MenuBar maxWidth="1.7976931348623157E308">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                          <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="About" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <HBox alignment="TOP_RIGHT" spacing="5.0">
+                     <children>
+                        <Label fx:id="lblWelcome" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="You are currently using guest access!">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="(Log in)" textFill="#2d8bc9" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="30.0" />
-         </BorderPane.margin>
-      </VBox>
-   </top>
-   <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="TOP_CENTER">
-         <children>
-            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10.0">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" />
+               </BorderPane.margin>
+            </VBox>
+         </top>
+         <center>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="371.0" BorderPane.alignment="TOP_CENTER">
                <children>
-                  <TextField fx:id="fldSearch" prefHeight="26.0" prefWidth="253.0" />
-                  <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#actionSearch" text="Search" />
+                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10.0">
+                     <children>
+                        <TextField fx:id="fldSearch" prefHeight="26.0" prefWidth="253.0" />
+                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#actionSearch" text="Search" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                     <children>
+                        <Label fx:id="lblSearch" alignment="CENTER" contentDisplay="CENTER" text="Search in:" />
+                        <ChoiceBox fx:id="choiceFields" prefWidth="150.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
-               <children>
-                  <Label fx:id="lblSearch" alignment="CENTER" contentDisplay="CENTER" text="Search in:" />
-                  <ChoiceBox fx:id="choiceFields" prefWidth="150.0" />
-               </children>
-               <VBox.margin>
+               <BorderPane.margin>
                   <Insets />
-               </VBox.margin>
+               </BorderPane.margin>
+               <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <content>
+                      <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT">
+                          <columns>
+                              <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="131.0" text="Title" />
+                              <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="122.0" text="Author" />
+                              <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="89.0" text="Year" />
+                              <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="132.0" text="Field of study" />
+                              <TableColumn fx:id="columnType" minWidth="101.0" prefWidth="142.0" text="Publicaton type" />
+                              <TableColumn fx:id="columnJournalConference" maxWidth="187.0" minWidth="143.0" prefWidth="170.0" resizable="false" text="Journal/Conference" />
+                          </columns>
+                      </TableView>
+                  </content>
+                  <VBox.margin>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="25.0" />
+                  </VBox.margin>
+               </ScrollPane>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <Label text="Running in guest mode" />
+               </children>
             </HBox>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </VBox>
-   </center>
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <children>
-            <Label text="Running in guest mode" />
-         </children>
-      </HBox>
-   </bottom>
-   
-</BorderPane>
+         </bottom>
+         
+      </BorderPane>
+   </content>
+</ScrollPane>

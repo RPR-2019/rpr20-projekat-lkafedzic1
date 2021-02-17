@@ -125,6 +125,7 @@ public class LoginController {
         GuestController guestController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setMaxWidth(810);
         stage.setMinHeight(240);
         stage.setMinWidth(480);
         stage.show();
