@@ -34,9 +34,7 @@ CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"year"	INTEGER,
 	"tags"	TEXT,
 	"field"	INTEGER,
-	"content" TEXT,
-	"journal" TEXT,
-	"conference" TEXT,
+	"additional" TEXT,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("field") REFERENCES "field"("id"),
 	FOREIGN KEY("type") REFERENCES "publication_type"("id")
@@ -91,8 +89,8 @@ INSERT INTO "person" VALUES (3,'Lejla','Kafedzic','20/12/1997',2);
 INSERT INTO "person" VALUES (4,'James','Collip','19/07/1965',1);
 INSERT INTO "author" VALUES (1,1);
 INSERT INTO "author" VALUES (2,4);
-INSERT INTO "scientific_work" VALUES (1,'Fuzzy sets',1,1965,'fuzzy, artificial intelligence, mathematics, set',1);
-INSERT INTO "scientific_work" VALUES (2,'Pancreatic extracts in the treatment of diabetes mellitus',1,1992,'medicine, endocrinology',6);
+INSERT INTO "scientific_work" VALUES (1,'Fuzzy sets',1,1965,'fuzzy, artificial intelligence, mathematics, set',1,'');
+INSERT INTO "scientific_work" VALUES (2,'Pancreatic extracts in the treatment of diabetes mellitus',1,1992,'medicine, endocrinology',6,'');
 INSERT INTO "scientific_work_author" VALUES (1,1);
 INSERT INTO "scientific_work_author" VALUES (2,2);
 INSERT INTO "user" VALUES (1,'admin','adminadmin','admin@gmail.com',NULL,2,1);

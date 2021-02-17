@@ -80,9 +80,9 @@ public class LoginController {
 
     private void showUserView() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeMember.fxml"));
         Parent root = loader.load();
-        MemberController homeController = loader.getController();
+        HomeMemberController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setMaxWidth(1100);
@@ -93,9 +93,9 @@ public class LoginController {
 
     private void showAdministratorView() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/administrator.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeAdministrator.fxml"));
         Parent root = loader.load();
-        AdminController homeController = loader.getController();
+        HomeAdminController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMaxWidth(1100);
