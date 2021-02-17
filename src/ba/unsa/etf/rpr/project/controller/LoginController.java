@@ -80,9 +80,9 @@ public class LoginController {
 
     private void showUserView() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeMember.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
         Parent root = loader.load();
-        HomeMemberController homeController = loader.getController();
+        HomeController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setMaxWidth(1100);

@@ -10,18 +10,8 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class HomeAdminController {
-    public void actionSignOut(ActionEvent actionEvent) {
-    }
+public class HomeAdminController extends HomeController {
 
-    public void actionAbout(ActionEvent actionEvent) {
-    }
-
-    public void actionSearch(ActionEvent actionEvent) {
-    }
-
-    public void menuBtnAddClick(ActionEvent actionEvent) {
-    }
 
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -65,9 +55,4 @@ public class HomeAdminController {
     public void actionDeletePublicationType(ActionEvent actionEvent) {
     }
 
-    public void actionDownload(ActionEvent actionEvent) {
-    }
-
-    public void actionRead(ActionEvent actionEvent) {
-    }
 }

@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.project;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ChoiceBox;
 
 import javax.xml.transform.Result;
 import java.io.FileInputStream;
@@ -9,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
@@ -46,11 +49,12 @@ public class ScientificWorkDAO {
       try {
           getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?" );
           getRoleFromIdQuery = conn.prepareStatement("SELECT title FROM role WHERE id=?");
+          getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
+          getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
           /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
           System.out.println("Evo me evo");
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
-            getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
-            getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
+
             addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
             addTypeQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
             maxIdField = conn.prepareStatement("SELECT max(id)+1 FROM field");
@@ -138,6 +142,32 @@ public class ScientificWorkDAO {
         return false;
     }
 
+    public void loadChoices(ChoiceBox<String> choiceFields) {
+        Set<String> res = new TreeSet<>();
+        try {
+            ResultSet rs = getFieldsQuery.executeQuery();
+            while(rs.next()) {
+                res.add(rs.getString("title"));
+            }
+            choiceFields.getItems().addAll(res);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void loadTypeChoices(ChoiceBox<String> choicePublicationType) {
+        Set<String> res = new TreeSet<>();
+        try {
+            ResultSet rs = getTypesQuery.executeQuery();
+            while(rs.next()) {
+                res.add(rs.getString("title"));
+            }
+            choicePublicationType.getItems().addAll(res);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
 /*
     public String getGender(int id) {
         try {
@@ -186,21 +216,7 @@ public class ScientificWorkDAO {
         }
     }*/
 
-/*    public ObservableList<FieldOfStudy> getFields() {
-        ObservableList<FieldOfStudy> fields = FXCollections.observableArrayList();
-        try {
-            ResultSet rs = getFieldsQuery.executeQuery();
-            while(rs.next()) {
-                FieldOfStudy field = new FieldOfStudy(rs.getInt(1), rs.getString(2));
-                fields.add(field);
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return fields;
-    }
-
-    public ObservableList<PublicationType> getTypes() {
+   /* public ObservableList<PublicationType> getTypes() {
         ObservableList<PublicationType> types = FXCollections.observableArrayList();
         try {
             ResultSet rs = getTypesQuery.executeQuery();

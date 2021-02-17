@@ -12,12 +12,12 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionSignOut" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#actionSignOut" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#actionAbout" text="About" />
                   </items>
                 </Menu>
               </menus>
@@ -94,7 +94,7 @@
                         </TableView>
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
-                               <MenuButton fx:id="menuBtnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#menuBtnAddClick" text="Add new">
+                               <MenuButton fx:id="menuBtnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"  text="Add new">
                                    <items>
                                        <MenuItem fx:id="itemNewWork" mnemonicParsing="false" onAction="#actionAddScientificWork" text="Scientific work" />
                                        <MenuItem fx:id="itemNewField" mnemonicParsing="false" onAction="#actionAddFieldOfStudy" text="Field of study" />

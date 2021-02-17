@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Year;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -23,17 +24,22 @@ public class ScientificWorkController {
     public Label lblTitle;
     public TextField fldAuthor;
     public TextField fldTitle;
-    public ComboBox<PublicationType> comboType;
     public Spinner<Integer> spinnerYear;
     public TextArea txtAreaTags;
-    public ComboBox<FieldOfStudy> choiceFieldOfStudy;
+    public ChoiceBox<String> choiceFieldOfStudy;
     public TextField fldPublishedIn;
     public Button btnUpload;
     public Label lblStatusBar;
+    public ChoiceBox<String> choicePublicationType;
     private ScientificWorkDAO instance;
 
     @FXML
     private void initialize() {
+        instance = ScientificWorkDAO.getInstance();
+        instance.loadChoices(choiceFieldOfStudy);
+        instance.loadTypeChoices(choicePublicationType);
+        spinnerYear.getEditor().setText("1900");
+        spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
 
     }
 
@@ -52,7 +58,7 @@ public class ScientificWorkController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        HomeMemberController aboutWindow = loader.getController();
+        HomeController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);

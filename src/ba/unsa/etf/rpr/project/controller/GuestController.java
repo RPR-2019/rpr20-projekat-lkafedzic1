@@ -1,6 +1,10 @@
 package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.FieldOfStudy;
+import ba.unsa.etf.rpr.project.FieldOfStudyModel;
+import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,7 +20,15 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class GuestController {
     public Label lblWelcome;
     public TextField fldSearch;
-    public ChoiceBox choiceFields;
+    public ChoiceBox<String> choiceFields;
+    private ScientificWorkDAO instance = null;
+
+
+    @FXML
+    public void initialize() {
+        instance = ScientificWorkDAO.getInstance();
+        instance.loadChoices(choiceFields);
+    }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {
         /*prikazuje se početna strana*/
@@ -43,7 +55,7 @@ public class GuestController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        HomeMemberController aboutWindow = loader.getController();
+        AboutController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
