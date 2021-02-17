@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"year"	INTEGER,
 	"tags"	TEXT,
 	"field"	INTEGER,
+	"content" TEXT,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("field") REFERENCES "field"("id"),
 	FOREIGN KEY("type") REFERENCES "publication_type"("id")

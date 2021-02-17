@@ -82,7 +82,7 @@ public class LoginController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user.fxml"));
         Parent root = loader.load();
-        UserController homeController = loader.getController();
+        MemberController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setMaxWidth(1100);

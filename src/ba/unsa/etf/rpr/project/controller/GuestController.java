@@ -43,7 +43,7 @@ public class GuestController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        UserController aboutWindow = loader.getController();
+        MemberController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class UserController {
+public class MemberController {
     public Label lblStatusBar;
     public MenuButton menuBtnAdd;
     public MenuButton menuBtnDelete;
@@ -22,7 +22,7 @@ public class UserController {
 
     private ScientificWorkDAO instance;
 
-    public UserController() {
+    public MemberController() {
     }
 
     @FXML
@@ -48,7 +48,7 @@ public class UserController {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
-        UserController aboutWindow = loader.getController();
+        MemberController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
