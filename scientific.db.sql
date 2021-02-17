@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"tags"	TEXT,
 	"field"	INTEGER,
 	"content" TEXT,
+	"journal" TEXT,
+	"conference" TEXT,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("field") REFERENCES "field"("id"),
 	FOREIGN KEY("type") REFERENCES "publication_type"("id")

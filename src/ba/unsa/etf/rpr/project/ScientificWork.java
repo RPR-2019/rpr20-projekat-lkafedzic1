@@ -8,8 +8,22 @@ public class ScientificWork {
     private SimpleStringProperty type, field;
     private SimpleStringProperty content;
     private SimpleStringProperty author;
+    private SimpleStringProperty journal;
+    private SimpleStringProperty conference;
 
     public ScientificWork() {
+    }
+
+    public ScientificWork(int id, int year, String title, String tags, String type, String field, String content, String journal, String conference) {
+        this.id = id;
+        this.year = year;
+        this.title = new SimpleStringProperty(title);
+        this.tags = new SimpleStringProperty(tags);
+        this.type = new SimpleStringProperty(type);
+        this.field = new SimpleStringProperty(field);
+        this.content = new SimpleStringProperty(content);
+        this.journal = new SimpleStringProperty(journal);
+        this.conference = new SimpleStringProperty(conference);
     }
 
     public int getId() {
@@ -98,6 +112,30 @@ public class ScientificWork {
 
     public void setAuthor(String author) {
         this.author.set(author);
+    }
+
+    public String getJournal() {
+        return journal.get();
+    }
+
+    public SimpleStringProperty journalProperty() {
+        return journal;
+    }
+
+    public void setJournal(String journal) {
+        this.journal.set(journal);
+    }
+
+    public String getConference() {
+        return conference.get();
+    }
+
+    public SimpleStringProperty conferenceProperty() {
+        return conference;
+    }
+
+    public void setConference(String conference) {
+        this.conference.set(conference);
     }
 
     @Override
