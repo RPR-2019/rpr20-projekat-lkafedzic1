@@ -20,6 +20,7 @@ public class HomeAdminController extends HomeController {
         ScientificWorkController newWindow = loader.getController();
         stage.setTitle("Add new scientific work");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setMinWidth(470);
         stage.show();
     }
 

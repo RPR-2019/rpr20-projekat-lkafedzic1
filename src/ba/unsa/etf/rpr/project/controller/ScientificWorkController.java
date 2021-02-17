@@ -40,7 +40,6 @@ public class ScientificWorkController {
         instance.loadTypeChoices(choicePublicationType);
         spinnerYear.getEditor().setText("1900");
         spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
-
     }
 
     public void actionCancel(ActionEvent actionEvent) {
