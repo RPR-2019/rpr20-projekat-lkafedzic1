@@ -22,7 +22,7 @@ public class HomeController {
     public Label lblStatusBar;
     public TextField fldSearch;
     public Button btnSearch;
-    public ChoiceBox<String> choiceSearch;
+    public ChoiceBox<String> choiceCategory;
     public TableView tableView;
     public TableColumn columnTitle;
     public TableColumn columnAuthor;
@@ -34,13 +34,22 @@ public class HomeController {
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
-        instance.loadChoices(choiceSearch);
+        loadSearchChoices(choiceCategory);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
         tableView.setItems(instance.getPopulationTableView(tableView));
+    }
+
+    private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+        choiceCategory.getItems().add("Title");
+        choiceCategory.getItems().add("Author");
+        choiceCategory.getItems().add("Year");
+        choiceCategory.getItems().add("Field of study");
+        choiceCategory.getItems().add("Publication type");
+        choiceCategory.getItems().add("Tags");
     }
 
     public void actionSignOut(ActionEvent actionEvent) throws IOException {

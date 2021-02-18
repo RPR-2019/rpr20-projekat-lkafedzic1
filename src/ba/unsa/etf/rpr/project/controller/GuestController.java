@@ -16,13 +16,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GuestController {
     public Label lblWelcome;
     public TextField fldSearch;
-    public ChoiceBox<String> choiceFields;
+    public ChoiceBox<String> choiceCategory;
     public TableView<ScientificWork> tableView;
     public TableColumn columnTitle;
     public TableColumn columnAuthor;
@@ -35,14 +36,23 @@ public class GuestController {
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
-        instance.loadChoices(choiceFields);
+        loadSearchChoices(choiceCategory);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
         tableView.setItems(instance.getPopulationTableView(tableView));
+    }
 
+    private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+        choiceCategory.getItems().add("Title");
+        choiceCategory.getItems().add("Author");
+        choiceCategory.getItems().add("Year");
+        choiceCategory.getItems().add("Field of study");
+        choiceCategory.getItems().add("Publication type");
+        choiceCategory.getItems().add("Tags");
+        //todo može ljepše
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {

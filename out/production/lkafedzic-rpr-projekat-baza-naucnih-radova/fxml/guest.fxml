@@ -62,7 +62,7 @@
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                      <children>
                         <Label fx:id="lblSearch" alignment="CENTER" contentDisplay="CENTER" text="Search in:" />
-                        <ChoiceBox fx:id="choiceFields" prefWidth="150.0" />
+                        <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" />
                      </children>
                      <VBox.margin>
                         <Insets />
