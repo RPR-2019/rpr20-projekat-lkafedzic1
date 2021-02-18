@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.project.controller;
 
 import ba.unsa.etf.rpr.project.PublicationType;
+import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,13 +29,18 @@ public class HomeController {
     public TableColumn columnYear;
     public TableColumn columnFieldOfStudy;
     public TableColumn columnType;
-    public TableColumn columnJournalConference;
     private ScientificWorkDAO instance;
 
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
         instance.loadChoices(choiceSearch);
+        columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
+        columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
+        columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
+        columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
+        columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
+        tableView.setItems(instance.getPopulationTableView(tableView));
     }
 
     public void actionSignOut(ActionEvent actionEvent) throws IOException {

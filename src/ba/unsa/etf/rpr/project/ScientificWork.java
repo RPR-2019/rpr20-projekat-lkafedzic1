@@ -8,13 +8,22 @@ public class ScientificWork {
     private SimpleStringProperty type, field;
     private SimpleStringProperty content;
     private SimpleStringProperty author;
-    private SimpleStringProperty journal;
-    private SimpleStringProperty conference;
+    private SimpleStringProperty additional;
 
     public ScientificWork() {
     }
 
-    public ScientificWork(int id, int year, String title, String tags, String type, String field, String content, String journal, String conference) {
+    public ScientificWork(String title, String author, int year, String field, String type, String additional) {
+        this.title = new SimpleStringProperty(title);
+        this.author = new SimpleStringProperty(author);
+        this.year = year;
+        this.field = new SimpleStringProperty(field);
+        this.type = new SimpleStringProperty(type);
+        this.additional = new SimpleStringProperty(additional);
+        this.tags = new SimpleStringProperty();
+    }
+
+/*    public ScientificWork(int id, int year, String title, String tags, String type, String field, String content, String additional) {
         this.id = id;
         this.year = year;
         this.title = new SimpleStringProperty(title);
@@ -22,9 +31,8 @@ public class ScientificWork {
         this.type = new SimpleStringProperty(type);
         this.field = new SimpleStringProperty(field);
         this.content = new SimpleStringProperty(content);
-        this.journal = new SimpleStringProperty(journal);
-        this.conference = new SimpleStringProperty(conference);
-    }
+        this.additional = new SimpleStringProperty(additional);
+    }*/
 
     public int getId() {
         return id;
@@ -114,28 +122,16 @@ public class ScientificWork {
         this.author.set(author);
     }
 
-    public String getJournal() {
-        return journal.get();
+    public String getAdditional() {
+        return additional.get();
     }
 
-    public SimpleStringProperty journalProperty() {
-        return journal;
+    public SimpleStringProperty additionalProperty() {
+        return additional;
     }
 
-    public void setJournal(String journal) {
-        this.journal.set(journal);
-    }
-
-    public String getConference() {
-        return conference.get();
-    }
-
-    public SimpleStringProperty conferenceProperty() {
-        return conference;
-    }
-
-    public void setConference(String conference) {
-        this.conference.set(conference);
+    public void setAdditional(String additional) {
+        this.additional.set(additional);
     }
 
     @Override

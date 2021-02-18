@@ -89,7 +89,6 @@
                               <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="89.0" text="Year" />
                               <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="132.0" text="Field of study" />
                               <TableColumn fx:id="columnType" minWidth="101.0" prefWidth="131.0" text="Publicaton type" />
-                              <TableColumn fx:id="columnJournalConference" maxWidth="187.0" minWidth="160.0" prefWidth="187.0" resizable="false" text="Journal/Conference" />
                           </columns>
                         </TableView>
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">

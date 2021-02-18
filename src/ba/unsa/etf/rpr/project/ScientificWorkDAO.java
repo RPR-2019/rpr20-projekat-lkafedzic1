@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableView;
 
 import javax.xml.transform.Result;
 import java.io.FileInputStream;
@@ -18,7 +19,7 @@ public class ScientificWorkDAO {
     private Connection conn;
     private ArrayList<User> userList;
 
-    private PreparedStatement getLoginQuery, getRoleFromIdQuery, getUserFromLoginQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, getUserFromLoginQuery, getWorkPopulationInfoQuery, getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -51,6 +52,8 @@ public class ScientificWorkDAO {
           getRoleFromIdQuery = conn.prepareStatement("SELECT title FROM role WHERE id=?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
+          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.first_name || ' ' || person.last_name, sw.year, field.title, publication_type.title, sw.additional FROM scientific_work sw, author, person, scientific_work_author swa, field, publication_type WHERE sw.id=swa.scientific_work_id AND swa.author_id=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id;");
+
           /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
           System.out.println("Evo me evo");
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
@@ -167,6 +170,21 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
     }
+
+    public ObservableList<ScientificWork> getPopulationTableView(TableView tableView) {
+        ObservableList<ScientificWork> scientificWorksList = FXCollections.observableArrayList();
+        try {
+            ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
+            while(rs.next()) {
+                scientificWorksList.add(new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6)));
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return scientificWorksList;
+    }
+
+
 
 /*
     public String getGender(int id) {

@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="499.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.GuestController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="503.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.GuestController">
    <content>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="669.0">
           <stylesheets>
               <URL value="@/css/guest.css" />
           </stylesheets>
@@ -48,7 +48,7 @@
             </VBox>
          </top>
          <center>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="371.0" BorderPane.alignment="TOP_CENTER">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="TOP_CENTER">
                <children>
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10.0">
                      <children>
@@ -72,23 +72,22 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
-               <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
-                  <content>
-                      <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT">
+               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="264.0" prefWidth="611.0">
+                  <children>
+                      <TableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="269.0" prefWidth="649.0">
                           <columns>
-                              <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="131.0" text="Title" />
-                              <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="122.0" text="Author" />
-                              <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="89.0" text="Year" />
-                              <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="132.0" text="Field of study" />
-                              <TableColumn fx:id="columnType" minWidth="101.0" prefWidth="142.0" text="Publicaton type" />
-                              <TableColumn fx:id="columnJournalConference" maxWidth="187.0" minWidth="143.0" prefWidth="170.0" resizable="false" text="Journal/Conference" />
+                              <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="153.0" text="Title" />
+                              <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="137.0" text="Author" />
+                              <TableColumn fx:id="columnYear" minWidth="55.0" prefWidth="76.0" text="Year" />
+                              <TableColumn fx:id="columnFieldOfStudy" minWidth="109.0" prefWidth="140.0" text="Field of study" />
+                              <TableColumn fx:id="columnType" minWidth="101.0" prefWidth="146.0" text="Publicaton type" />
                           </columns>
                       </TableView>
-                  </content>
+                  </children>
                   <VBox.margin>
-                     <Insets bottom="15.0" left="15.0" right="15.0" top="25.0" />
+                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                   </VBox.margin>
-               </ScrollPane>
+               </Pane>
             </VBox>
          </center>
          <bottom>

@@ -2,31 +2,13 @@ package ba.unsa.etf.rpr.project;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
 public class Home {
-    private ObservableList<PublicationType> types = FXCollections.observableArrayList();
-    private SimpleObjectProperty<PublicationType> selectedType = new SimpleObjectProperty<>();
-    //todo iskoristi set
-    //todo table i tablecolumn
+    private ObservableList<String> types = FXCollections.observableArrayList();
+    private SimpleObjectProperty<String> selectedType = new SimpleObjectProperty<>();
 
-    public ObservableList<PublicationType> getTypes() {
-        return types;
-    }
+    private ObservableList<String> works = FXCollections.observableArrayList();
 
-    public void setTypes(ObservableList<PublicationType> types) {
-        this.types = types;
-    }
-
-    public PublicationType getSelectedType() {
-        return selectedType.get();
-    }
-
-    public SimpleObjectProperty<PublicationType> selectedTypeProperty() {
-        return selectedType;
-    }
-
-    public void setSelectedType(PublicationType selectedType) {
-        this.selectedType.set(selectedType);
-    }
 }
