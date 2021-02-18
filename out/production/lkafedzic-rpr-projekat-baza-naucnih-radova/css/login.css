@@ -7,7 +7,7 @@
 .fieldValid {
     -fx-background-color: yellowgreen;
 }
-#btnSignUp, #btnContinueAsGuest {
+#btnSignUp, #btnContinueAsGuest, #btnChangePassword{
     -fx-background-color: transparent;
 }
 
@@ -15,6 +15,6 @@
     -fx-background-color: #5fb2ff;
 }
 
-#btnSignUp:hover, #btnContinueAsGuest:hover {
+#btnSignUp:hover, #btnContinueAsGuest:hover,  #btnChangePassword:hover{
     -fx-text-fill: #5fb2ff;
 }

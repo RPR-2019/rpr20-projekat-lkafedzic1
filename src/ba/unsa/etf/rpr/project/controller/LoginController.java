@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -25,6 +26,7 @@ public class LoginController {
     public Button btnSignUp;
     public Button btnContinueAsGuest;
     public VBox vboxError;
+    public Button btnChangePassword;
 
     private ScientificWorkDAO instance;
     private ObservableList<User> usersList;
@@ -125,9 +127,19 @@ public class LoginController {
         GuestController guestController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        stage.setMaxWidth(820);
+        stage.setMaxWidth(695);
         stage.setMinHeight(240);
         stage.setMinWidth(480);
+        stage.show();
+    }
+
+    public void actionChangePassword(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/password.fxml"));
+        Parent root = loader.load();
+        PasswordController newWindow = loader.getController();
+        stage.setTitle("Password");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.show();
     }
 }

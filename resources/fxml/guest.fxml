@@ -62,7 +62,7 @@
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
                      <children>
                         <Label fx:id="lblSearch" alignment="CENTER" contentDisplay="CENTER" text="Search in:" />
-                        <ChoiceBox fx:id="choiceFields" prefWidth="150.0" />
+                        <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -72,9 +72,9 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
-               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="264.0" prefWidth="611.0">
+               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                   <children>
-                      <TableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="269.0" prefWidth="649.0">
+                      <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="269.0" prefWidth="649.0">
                           <columns>
                               <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="153.0" text="Title" />
                               <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="137.0" text="Author" />
@@ -96,7 +96,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
                <children>
-                  <Label text="Running in guest mode" />
+                  <Label fx:id="lblStatusBar" text="Running in guest mode" />
                </children>
             </HBox>
          </bottom>

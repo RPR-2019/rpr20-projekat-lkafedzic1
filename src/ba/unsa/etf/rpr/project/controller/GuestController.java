@@ -22,7 +22,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GuestController {
     public Label lblWelcome;
-    public TextField fldSearch;
     public ChoiceBox<String> choiceCategory;
     public TableView<ScientificWork> tableView;
     public TableColumn columnTitle;
@@ -30,6 +29,7 @@ public class GuestController {
     public TableColumn columnYear;
     public TableColumn columnFieldOfStudy;
     public TableColumn columnType;
+    public Label lblStatusBar;
     private ScientificWorkDAO instance = null;
 
 
@@ -52,11 +52,11 @@ public class GuestController {
         choiceCategory.getItems().add("Field of study");
         choiceCategory.getItems().add("Publication type");
         choiceCategory.getItems().add("Tags");
+        choiceCategory.setValue("Title");
         //todo može ljepše
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {
-        /*prikazuje se početna strana*/
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
@@ -69,6 +69,8 @@ public class GuestController {
     }
 
     public void actionSearch(ActionEvent actionEvent) {
+        lblStatusBar.setText("Searching finished");
+
     }
 
     public void actionClose(ActionEvent actionEvent) {
