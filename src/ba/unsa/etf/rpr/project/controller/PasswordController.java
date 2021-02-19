@@ -103,7 +103,6 @@ public class PasswordController {
         alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText("You have successfuly changed your password!");
-
         alert.showAndWait();
     }
 
