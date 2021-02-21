@@ -31,7 +31,7 @@ public class ScientificWorkController {
     public Button btnUpload;
     public Label lblStatusBar;
     public ChoiceBox<String> choicePublicationType;
-    private ScientificWorkDAO instance;
+    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();;
 
     @FXML
     private void initialize() {
@@ -40,6 +40,9 @@ public class ScientificWorkController {
         instance.loadTypeChoices(choicePublicationType);
         spinnerYear.getEditor().setText("1900");
         spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
+
+        //validation
+
     }
 
     public void actionCancel(ActionEvent actionEvent) {

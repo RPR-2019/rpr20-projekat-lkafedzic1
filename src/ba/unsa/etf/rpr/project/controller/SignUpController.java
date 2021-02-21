@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class SignUpController {
+public class SignUpController implements Validation{
 
     public TextField fldFirstName;
     public TextField fldLastName;
@@ -181,12 +181,12 @@ public class SignUpController {
         return gender;
     }
 
-    private boolean isValidName(String s) {
+/*    private boolean isValidName(String s) {
         return s.length() >= 2 && s.chars()
                 .allMatch(Character::isLetter);
-    }
+    }*/
 
-    private boolean isValidUsername (String s) {
+/*    private boolean isValidUsername (String s) {
         return s.length() >= 2 && s.chars()
                 .allMatch(Character::isLetterOrDigit) && isValidStart(s);
     }
@@ -194,18 +194,18 @@ public class SignUpController {
     private boolean isValidStart (String s) {
         //username has to begin with letter
         return !Character.isDigit(s.charAt(0));
-    }
+    }*/
 
     private boolean isValidDate (DatePicker datePicker) {
         return datePicker.getValue().isBefore(LocalDate.now());
     }
 
-    private boolean isValidEmail(String s) {
+/*    private boolean isValidEmail(String s) {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\\\.[a-zA-Z0-9-]+)*$";
         Pattern pattern = Pattern.compile(regex);
         if (s == null) return false;
         return pattern.matcher(s).matches();
-    }
+    }*/
 
     public void actionCancel(ActionEvent actionEvent) throws IOException {
         fldFirstName.getScene().getWindow().hide();
