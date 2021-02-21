@@ -128,8 +128,7 @@ public class SignUpController {
     }
 
     private boolean isInputValid(TextField fld) {
-        String validValue = "fieldValid";
-        return fld.getStyleClass().stream().anyMatch(style -> style.equals(validValue));
+        return fld.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"));
     }
 
     private boolean isEveryInputValid() {

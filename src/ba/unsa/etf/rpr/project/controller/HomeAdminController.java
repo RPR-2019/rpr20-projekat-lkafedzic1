@@ -26,9 +26,9 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddFieldOfStudy(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/new.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newFieldOfStudy.fxml"));
         Parent root = loader.load();
-        NewChoiceController newWindow = loader.getController();
+        FieldOfStudyController newWindow = loader.getController();
         stage.setTitle("Add new field of study");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
@@ -37,9 +37,9 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddPublicationType(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/new.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newPublicationType.fxml"));
         Parent root = loader.load();
-        NewChoiceController newWindow = loader.getController();
+        PublicationTypeController newWindow = loader.getController();
         newWindow.lblStatusBar.setText("Add new type of publication");
         stage.setTitle("Add new type of publication");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));

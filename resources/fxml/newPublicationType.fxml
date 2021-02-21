@@ -4,7 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="159.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.NewChoiceController">
+<?import java.net.URL?>
+<VBox alignment="TOP_CENTER" prefHeight="159.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.PublicationTypeController">
+   <stylesheets>
+      <URL value="@/css/login.css"/>
+   </stylesheets>
    <children>
       <GridPane alignment="CENTER" hgap="10.0" prefHeight="132.0" prefWidth="376.0" vgap="10.0">
          <columnConstraints>
@@ -20,8 +24,8 @@
             <TextField fx:id="fldTitle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
               <buttons>
-                <Button fx:id="btnAdd" defaultButton="true" mnemonicParsing="false" onAction="#actionAddNewField" text="Add" />
-                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
+                <Button fx:id="btnAdd" defaultButton="true" mnemonicParsing="false" onAction="#actionAddNewType" text="Add" />
+                  <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Close" />
               </buttons>
                <GridPane.margin>
                   <Insets top="20.0" />

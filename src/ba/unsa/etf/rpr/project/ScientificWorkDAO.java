@@ -19,7 +19,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, getUserQuery, getScientificWork, getUsersQuery, getWorkPopulationInfoQuery, changePasswordQuery, addUserQuery, getFieldsQuery, getTypesQuery;
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, getUserQuery, getScientificWork, getUsersQuery, getWorkPopulationInfoQuery, changePasswordQuery, addUserQuery, addFieldQuery, addTypeQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -56,8 +56,13 @@ public class ScientificWorkDAO {
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
           getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
           maxIdUserQuery = conn.prepareStatement("SELECT max(id)+1 FROM user");
+          maxIdFieldQuery = conn.prepareStatement("SELECT max(id)+1 FROM field");
+          maxIdTypeQuery = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");
           addUserQuery = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?)");
+          addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
           getUsersQuery = conn.prepareStatement("SELECT username FROM user");
+          addTypeQuery = conn.prepareStatement("INSERT INTO publication_type VALUES(?,?)");
+
           /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
           System.out.println("Evo me evo");
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
@@ -225,6 +230,20 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
     }
+    public void addFieldOfStudy(FieldOfStudy fieldOfStudy) {
+        try {
+            ResultSet rs = maxIdFieldQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addFieldQuery.setInt(1, id);
+            addFieldQuery.setString(2, fieldOfStudy.getTitle());
+            addFieldQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
 
     public void getAllUsers() {
         try {
@@ -237,6 +256,23 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
     }
+
+    public void addPublicationType(PublicationType publicationType) {
+        try {
+            ResultSet rs = maxIdTypeQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addTypeQuery.setInt(1, id);
+            addTypeQuery.setString(2, publicationType.getTitle());
+            addTypeQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+
 
 /*
     public String getGender(int id) {

@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.FieldOfStudy;
-import ba.unsa.etf.rpr.project.FieldOfStudyModel;
+
 import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.beans.property.Property;
