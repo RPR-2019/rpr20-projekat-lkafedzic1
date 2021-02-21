@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import javax.xml.transform.Result;
 import java.io.FileInputStream;
@@ -17,9 +18,8 @@ import java.util.TreeSet;
 public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
-    private ArrayList<User> userList;
 
-    private PreparedStatement getLoginQuery, getRoleFromIdQuery, getUserFromLoginQuery, getScientificWork, getWorkPopulationInfoQuery, changePasswordQuery,getWorksQuery, getUsersQuery, getGenderQuery, getFieldsQuery, getTypesQuery, addFieldQuery, addTypeQuery, maxIdField, maxIdType;
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, getUserQuery, getScientificWork, getUsersQuery, getWorkPopulationInfoQuery, changePasswordQuery, addUserQuery, getFieldsQuery, getTypesQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -34,13 +34,13 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
         try {
-            getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
+            getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?" );
         } catch (SQLException exception) {
             //If there is no database, make it
             regenerateDatabase();
             try {
                 //Testing
-                getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
+                getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
             } catch (SQLException throwables) {
                 //There is a fatal error
                 throwables.printStackTrace();
@@ -54,6 +54,10 @@ public class ScientificWorkDAO {
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
           getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.first_name || ' ' || person.last_name, sw.year, field.title, publication_type.title, sw.additional FROM scientific_work sw, author, person, scientific_work_author swa, field, publication_type WHERE sw.id=swa.scientific_work_id AND swa.author_id=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id;");
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
+          getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
+          maxIdUserQuery = conn.prepareStatement("SELECT max(id)+1 FROM user");
+          addUserQuery = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?)");
+          getUsersQuery = conn.prepareStatement("SELECT username FROM user");
           /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
           System.out.println("Evo me evo");
             getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
@@ -109,7 +113,6 @@ public class ScientificWorkDAO {
             getLoginQuery.setString(1, username);
             getLoginQuery.setString(2, password);
             ResultSet rs = getLoginQuery.executeQuery();
-            System.out.println("tu");
             return rs.next();
         } catch (SQLException exception) {
             return false;
@@ -122,7 +125,7 @@ public class ScientificWorkDAO {
             ResultSet rs = getRoleFromIdQuery.executeQuery();
             return rs.getString("title");
         } catch (SQLException exception) {
-            return null;
+            return "user";
         }
     }
 
@@ -193,7 +196,47 @@ public class ScientificWorkDAO {
         }
     }
 
+    public boolean findUser(TextField fldUsername) {
+        try {
+            getUserQuery.setString(1, fldUsername.getText());
+            ResultSet rs = getUserQuery.executeQuery();
+            return rs.next();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
 
+    public void addUser(User user) {
+        try {
+            ResultSet rs = maxIdUserQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addUserQuery.setInt(1, id);
+            addUserQuery.setString(2, user.getUsername());
+            addUserQuery.setString(3,user.getPassword());
+            addUserQuery.setString(4, user.getEmail());
+            addUserQuery.setInt(5, user.getPersonId());
+            addUserQuery.setInt(6, user.getRole().ordinal());
+            addUserQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void getAllUsers() {
+        try {
+            ResultSet rs = getUsersQuery.executeQuery();
+            while(rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
 
 /*
     public String getGender(int id) {

@@ -1,27 +1,61 @@
 package ba.unsa.etf.rpr.project;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-public interface Person {
+public class Person {
+    private int id;
+    private String firstName, lastName;
+    private Gender gender;
+    private LocalDate dateOfBirth;
 
-    public int getId();
+    public Person() {
+    }
 
-    public void setId(int id);
+    public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+    }
 
-    public String getFirstname();
+    public int getId() {
+        return id;
+    }
 
-    public void setFirstname(String firstname);
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getLastname();
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public void setLastname(String lastname);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public Gender getGender();
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setGender(Gender gender);
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public String getDateOfBirth();
+    public Gender getGender() {
+        return gender;
+    }
 
-    public void setDateOfBirth(String dateOfBirth);
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

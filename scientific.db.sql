@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "author" (
 	"id"	INTEGER,
 	"person_id"	INTEGER,
 	PRIMARY KEY("id"),
-	FOREIGN KEY("person_id") REFERENCES "person"
+	FOREIGN KEY("person_id") REFERENCES "person"("id")
 );
 CREATE TABLE IF NOT EXISTS "scientific_work_author" (
 	"author_id"	INTEGER,
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"username"	TEXT,
 	"password"	TEXT,
 	"email"	TEXT,
-	"image"	TEXT,
 	"person_id"	INTEGER,
 	"role_id"	INTEGER,
 	FOREIGN KEY("role_id") REFERENCES "role"("id"),
@@ -93,6 +92,6 @@ INSERT INTO "scientific_work" VALUES (1,'Fuzzy sets',1,1965,'fuzzy, artificial i
 INSERT INTO "scientific_work" VALUES (2,'Pancreatic extracts in the treatment of diabetes mellitus',1,1992,'medicine, endocrinology',6,'');
 INSERT INTO "scientific_work_author" VALUES (1,1);
 INSERT INTO "scientific_work_author" VALUES (2,2);
-INSERT INTO "user" VALUES (1,'admin','adminadmin','admin@gmail.com',NULL,2,1);
-INSERT INTO "user" VALUES (2,'lejla','lejlalejla','lejla@gmail.com',NULL,3,2);
+INSERT INTO "user" VALUES (1,'admin','adminadmin','admin@gmail.com',2,1);
+INSERT INTO "user" VALUES (2,'lejla','lejlalejla','lejla@gmail.com',3,2);
 COMMIT;

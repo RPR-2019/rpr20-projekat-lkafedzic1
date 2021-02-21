@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import ba.unsa.etf.rpr.project.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import javax.swing.text.DateFormatter;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
@@ -30,11 +31,13 @@ public class SignUpController {
     public PasswordField fldPassword;
     public Label lblStatusBar;
 
-
+    private User user;
     private ScientificWorkDAO instance;
 
     @FXML
     public void initialize() {
+        instance = ScientificWorkDAO.getInstance();
+
         fldFirstName.getStyleClass().add("fieldNotValid");
         fldFirstName.textProperty().addListener(
                 (observableValue, o, n) -> {
@@ -66,8 +69,8 @@ public class SignUpController {
                         fldEmail.getStyleClass().removeAll("fieldNotValid");
                         fldEmail.getStyleClass().add("fieldValid");
                     } else {
-                        fldLastName.getStyleClass().removeAll("fieldValid");
-                        fldLastName.getStyleClass().add("fieldNotValid");
+                        fldEmail.getStyleClass().removeAll("fieldValid");
+                        fldEmail.getStyleClass().add("fieldNotValid");
                     }
                 }
         );
@@ -135,8 +138,32 @@ public class SignUpController {
 
     public void actionSave(ActionEvent actionEvent) {
         if (isEveryInputValid()) {
-            lblStatusBar.setText("Successful sign up");
-            //todo dodaj account
+            if(instance.findUser(fldUsername)) {
+                fldUsername.getStyleClass().removeAll("fieldValid");
+                fldUsername.getStyleClass().add("fieldNotValid");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Username is already taken");
+                alert.setContentText("Please, try again!");
+                alert.showAndWait();
+                lblStatusBar.setText("Username is already taken");
+            }
+            else {
+                fldUsername.getStyleClass().removeAll("fieldNotValid");
+                fldUsername.getStyleClass().add("fieldValid");
+                lblStatusBar.setText("Successful sign up");
+            }
+            //adding new account
+            Person person = new Person(fldFirstName.getText(),fldLastName.getText(),dateOfBirth.getValue(), this.getGender());
+            if (user == null) user = new User();
+            user.setUsername(fldUsername.getText());
+            user.setPassword(fldPassword.getText());
+            user.setEmail(fldEmail.getText());
+            user.setPersonId(person.getId());
+            user.setRole(Role.USER);
+            instance.addUser(user);
+            //show users in concole
+            instance.getAllUsers();
         }
         else {
             //if any field on the form is red
@@ -144,8 +171,18 @@ public class SignUpController {
         }
     }
 
+    private Gender getGender() {
+        Gender gender = null;
+        if (toggleGender.getSelectedToggle() == radioMale) {
+            gender = Gender.MALE;
+        }
+        else if (toggleGender.getSelectedToggle() == radioFemale) {
+            gender = Gender.FEMALE;
+        }
+        return gender;
+    }
+
     private boolean isValidName(String s) {
-        System.out.println(s);
         return s.length() >= 2 && s.chars()
                 .allMatch(Character::isLetter);
     }
@@ -156,6 +193,7 @@ public class SignUpController {
     }
 
     private boolean isValidStart (String s) {
+        //username has to begin with letter
         return !Character.isDigit(s.charAt(0));
     }
 

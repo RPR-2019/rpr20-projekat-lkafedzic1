@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.project;
 
 import java.util.Date;
 
-public class Author implements Person, Comparable<Author> {
+public class Author extends Person implements Comparable<Author> {
     private String firstName, lastName;
     private int id;
     private String dateOfBirth;
@@ -22,79 +22,6 @@ public class Author implements Person, Comparable<Author> {
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
-
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getFirstname() {
-        return firstName;
-    }
-
-    @Override
-    public void setFirstname(String firstname) {
-        this.firstName = firstName;
-    }
-
-    @Override
-    public String getLastname() {
-        return lastName;
-    }
-
-    @Override
-    public void setLastname(String lastname) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public Gender getGender() {
-        return gender;
-    }
-
-    @Override
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    @Override
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public String toString() {
-        return getFirstname() + " " + getLastname();
-    }
-
 
     @Override
     public int compareTo(Author a) {

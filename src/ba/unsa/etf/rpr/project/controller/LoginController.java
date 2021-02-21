@@ -29,7 +29,6 @@ public class LoginController {
     public Button btnChangePassword;
 
     private ScientificWorkDAO instance;
-    private ObservableList<User> usersList;
 
    public LoginController() {
     }

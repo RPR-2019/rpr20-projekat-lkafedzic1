@@ -50,7 +50,7 @@ public class HomeController {
         choiceCategory.getItems().add("Field of study");
         choiceCategory.getItems().add("Publication type");
         choiceCategory.getItems().add("Tags");
-        choiceCategory.setValue("Title");
+        choiceCategory.getSelectionModel().selectFirst();
     }
 
     public void actionSignOut(ActionEvent actionEvent) throws IOException {

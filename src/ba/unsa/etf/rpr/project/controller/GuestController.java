@@ -52,8 +52,7 @@ public class GuestController {
         choiceCategory.getItems().add("Field of study");
         choiceCategory.getItems().add("Publication type");
         choiceCategory.getItems().add("Tags");
-        choiceCategory.setValue("Title");
-        //todo može ljepše
+        choiceCategory.getSelectionModel().selectFirst();
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {
