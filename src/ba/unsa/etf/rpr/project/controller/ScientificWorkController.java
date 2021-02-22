@@ -32,7 +32,7 @@ public class ScientificWorkController {
     public Label lblStatusBar;
     public ChoiceBox<String> choicePublicationType;
     public Label lblNothingChosen;
-    public TextField fldAuthor;
+    public ChoiceBox<String> choiceAuthor;
 
     private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
 
@@ -44,6 +44,7 @@ public class ScientificWorkController {
         instance = ScientificWorkDAO.getInstance();
         instance.loadChoices(choiceFieldOfStudy);
         instance.loadTypeChoices(choicePublicationType);
+        instance.loadAuthorChoices(choiceAuthor);
         spinnerYear.getEditor().setText("1900");
         spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
         //validation
@@ -95,15 +96,4 @@ public class ScientificWorkController {
         stage.close();
     }
 
-    public void actionAddAuthor(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"));
-        Parent root = loader.load();
-        AuthorController newWindow = loader.getController();
-        stage.setTitle("Add author");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        stage.show();
-
-    }
 }

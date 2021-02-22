@@ -19,7 +19,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, getUserQuery, getUsersQuery, getAuthorQuery, getPersonsQuery, findAuthorFromPerson, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, getUserQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, findAuthorFromPerson, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -68,6 +68,7 @@ public class ScientificWorkDAO {
           addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
           getUsersQuery = conn.prepareStatement("SELECT username FROM user");
           getPersonsQuery = conn.prepareStatement("SELECT first_name FROM person, author WHERE author.person_id=person.id");
+          getAuthorsQuery = conn.prepareStatement("SELECT p.first_name || ' ' || p.last_name FROM person p, author a WHERE a.person_id=p.id");
           addTypeQuery = conn.prepareStatement("INSERT INTO publication_type VALUES(?,?)");
           addAuthorQuery = conn.prepareStatement("INSERT INTO author VALUES(?,?)");
           /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
@@ -180,6 +181,19 @@ public class ScientificWorkDAO {
                 res.add(rs.getString("title"));
             }
             choicePublicationType.getItems().addAll(res);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void loadAuthorChoices(ChoiceBox<String> choiceAuthor) {
+        Set<String> res = new TreeSet<>();
+        try {
+            ResultSet rs = getAuthorsQuery.executeQuery();
+            while(rs.next()) {
+                res.add(rs.getString(1));
+            }
+            choiceAuthor.getItems().addAll(res);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

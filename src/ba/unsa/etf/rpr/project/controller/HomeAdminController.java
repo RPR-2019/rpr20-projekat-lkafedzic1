@@ -12,7 +12,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeAdminController extends HomeController {
 
-
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"));
@@ -47,6 +46,17 @@ public class HomeAdminController extends HomeController {
         stage.show();
     }
 
+    public void actionAddAuthor(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"));
+        Parent root = loader.load();
+        AuthorController newWindow = loader.getController();
+        stage.setTitle("Add author");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
+    }
+
     public void actionDeleteScientificWork(ActionEvent actionEvent) {
     }
 
@@ -56,4 +66,6 @@ public class HomeAdminController extends HomeController {
     public void actionDeletePublicationType(ActionEvent actionEvent) {
     }
 
+    public void actionDeleteAuthor(ActionEvent actionEvent) {
+    }
 }

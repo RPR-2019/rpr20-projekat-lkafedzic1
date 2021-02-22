@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.ScientificWorkController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="414.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.ScientificWorkController">
    <content>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="393.0" prefWidth="462.0">
          <children>
@@ -12,10 +23,11 @@
                <columnConstraints>
                   <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="19.0" />
                   <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="173.0" />
+                  <ColumnConstraints />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints />
-                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="48.0" prefHeight="52.0" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="52.0" />
                   <RowConstraints maxHeight="1.7976931348623157E308" />
                   <RowConstraints />
                   <RowConstraints />
@@ -29,16 +41,7 @@
                   <Label text="Title:" />
                   <TextField fx:id="fldTitle" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="299.0" GridPane.columnIndex="1" />
                   <Label text="Author:" GridPane.rowIndex="1" />
-                  <HBox prefHeight="55.0" prefWidth="297.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <TextField fx:id="fldAuthor" prefHeight="60.0" prefWidth="200.0" />
-                        <Button  alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionAddAuthor" text="Add" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <ChoiceBox fx:id="choiceAuthor" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Publication type:" GridPane.rowIndex="2" />
                   <Label text="Year of publication:" GridPane.rowIndex="4" />
                   <Spinner fx:id="spinnerYear" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />

@@ -98,6 +98,7 @@
                                        <MenuItem fx:id="itemNewWork" mnemonicParsing="false" onAction="#actionAddScientificWork" text="Scientific work" />
                                        <MenuItem fx:id="itemNewField" mnemonicParsing="false" onAction="#actionAddFieldOfStudy" text="Field of study" />
                                        <MenuItem fx:id="itemNewType" mnemonicParsing="false" onAction="#actionAddPublicationType" text="Publication type" />
+                                    <MenuItem mnemonicParsing="false" onAction="#actionAddAuthor" text="Author" />
                                    </items>
                                </MenuButton>
                                <MenuButton fx:id="menuBtnDelete" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete">
@@ -105,6 +106,7 @@
                                    <MenuItem fx:id="itemWork" mnemonicParsing="false" onAction="#actionDeleteScientificWork" text="Scientific work" />
                                    <MenuItem fx:id="itemFieldOfStudy" mnemonicParsing="false" onAction="#actionDeleteFieldOfStudy" text="Field of study" />
                                    <MenuItem fx:id="itemPublicationType" mnemonicParsing="false" onAction="#actionDeletePublicationType" text="Publication type" />
+                                    <MenuItem mnemonicParsing="false" onAction="#actionDeleteAuthor" text="Author" />
                                </items>
                                </MenuButton>
                               <Button fx:id="btnDownload" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="Download" />
