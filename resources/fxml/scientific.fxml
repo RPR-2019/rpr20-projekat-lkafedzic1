@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.ScientificWorkController">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="429.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.ScientificWorkController">
    <content>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="393.0" prefWidth="462.0">
          <children>
@@ -15,8 +15,8 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="48.0" prefHeight="52.0" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" />
                   <RowConstraints />
                   <RowConstraints />
                   <RowConstraints />
@@ -29,7 +29,16 @@
                   <Label text="Title:" />
                   <TextField fx:id="fldTitle" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="299.0" GridPane.columnIndex="1" />
                   <Label text="Author:" GridPane.rowIndex="1" />
-                  <TextField fx:id="fldAuthor" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <HBox prefHeight="55.0" prefWidth="297.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextArea fx:id="txtAreaAuthors" prefHeight="60.0" prefWidth="200.0" />
+                        <Button  alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionAddAuthor" text="Add" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                   <Label text="Publication type:" GridPane.rowIndex="2" />
                   <Label text="Year of publication:" GridPane.rowIndex="4" />
                   <Spinner fx:id="spinnerYear" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -48,7 +57,16 @@
                   <Label text="Published in:" GridPane.rowIndex="3" />
                   <TextField fx:id="fldPublishedIn" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label text="Scientific work:" GridPane.rowIndex="7" />
-                  <Button fx:id="btnUpload" mnemonicParsing="false" onAction="#actionUpload" text="Upload file" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                        <Button fx:id="btnUpload" mnemonicParsing="false" onAction="#actionUpload" text="Upload file" />
+                        <Label fx:id="lblNothingChosen" text="You haven't chosen any file" textFill="#cd1111" visible="false">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                   <ChoiceBox fx:id="choiceFieldOfStudy" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ChoiceBox fx:id="choicePublicationType" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>

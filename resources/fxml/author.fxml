@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.AuthorController">
+   <stylesheets>
+      <URL value="@/css/login.css" />
+   </stylesheets>
+   <children>
+      <GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="251.0" prefWidth="353.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0" />
+            <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+         <children>
+            <Label text="First name:" GridPane.rowIndex="1" />
+            <TextField fx:id="fldFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Last name:" GridPane.rowIndex="2" />
+            <TextField fx:id="fldLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Date of birth:" GridPane.rowIndex="3" />
+            <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Gender:" GridPane.rowIndex="4" />
+            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGender" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender" />
+               </children>
+            </HBox>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+              <buttons>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok" />
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Close" />
+              </buttons>
+            </ButtonBar>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+         </padding>
+      </GridPane>
+      <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="lblStatusBar" text="Adding new author" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="2.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</VBox>

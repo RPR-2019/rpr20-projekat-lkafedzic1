@@ -23,17 +23,6 @@ public class ScientificWork {
         this.tags = new SimpleStringProperty();
     }
 
-/*    public ScientificWork(int id, int year, String title, String tags, String type, String field, String content, String additional) {
-        this.id = id;
-        this.year = year;
-        this.title = new SimpleStringProperty(title);
-        this.tags = new SimpleStringProperty(tags);
-        this.type = new SimpleStringProperty(type);
-        this.field = new SimpleStringProperty(field);
-        this.content = new SimpleStringProperty(content);
-        this.additional = new SimpleStringProperty(additional);
-    }*/
-
     public int getId() {
         return id;
     }

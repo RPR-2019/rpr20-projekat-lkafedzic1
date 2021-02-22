@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.project;
 
+import ba.unsa.etf.rpr.project.controller.Validation;
+
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Person {
+public class Person implements Validation {
     private int id;
     private String firstName, lastName;
     private Gender gender;
@@ -13,10 +15,10 @@ public class Person {
     }
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        setFirstName(firstName);
+        setLastName(lastName);
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        setDateOfBirth(dateOfBirth);
     }
 
     public int getId() {
@@ -32,7 +34,8 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if (isValidName(firstName))
+            this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -40,7 +43,8 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (isValidName(lastName))
+            this.lastName = lastName;
     }
 
     public Gender getGender() {
@@ -56,6 +60,7 @@ public class Person {
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        if (dateOfBirth.isBefore(LocalDate.now()))
+            this.dateOfBirth = dateOfBirth;
     }
 }

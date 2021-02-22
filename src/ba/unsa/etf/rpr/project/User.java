@@ -15,15 +15,6 @@ public class User implements Validation {
     public User() {
     }
 
-    public User(int id, SimpleStringProperty username, SimpleStringProperty password, SimpleStringProperty email, int personId, Role role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.personId = personId;
-        this.role = role;
-    }
-
     public int getId() {
         return id;
     }
@@ -41,7 +32,9 @@ public class User implements Validation {
     }
 
     public void setUsername(String username) {
-        this.username.set(username);
+        if(isValidUsername(username)) {
+            this.username.set(username);
+        }
     }
 
     public String getPassword() {
@@ -53,7 +46,9 @@ public class User implements Validation {
     }
 
     public void setPassword(String password) {
-        this.password.set(password);
+        if (isValidPassword(password)) {
+            this.password.set(password);
+        }
     }
 
     public String getEmail() {
@@ -65,7 +60,9 @@ public class User implements Validation {
     }
 
     public void setEmail(String email) {
-        this.email.set(email);
+        if(isValidEmail(email)) {
+            this.email.set(email);
+        }
     }
 
     public int getPersonId() {

@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.Year;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -21,7 +24,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class ScientificWorkController {
 
     public Button btnAdd, btnCancel;
-    public Label lblTitle;
     public TextField fldAuthor;
     public TextField fldTitle;
     public Spinner<Integer> spinnerYear;
@@ -31,7 +33,10 @@ public class ScientificWorkController {
     public Button btnUpload;
     public Label lblStatusBar;
     public ChoiceBox<String> choicePublicationType;
+    public Label lblNothingChosen;
+    public TextArea txtAreaAuthors;
     private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();;
+    private File choosenFile = null;
 
     @FXML
     private void initialize() {
@@ -72,10 +77,32 @@ public class ScientificWorkController {
     }
 
     public void actionUpload(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text files", "*.txt"));
+        choosenFile = fileChooser.showOpenDialog(new Stage());
+        if (choosenFile == null) {
+            lblNothingChosen.setVisible(true);
+        }
+        else {
+            lblNothingChosen.setText("Uploaded");
+            lblNothingChosen.setStyle("-fx-text-fill: green;");
+            lblNothingChosen.setVisible(true);
+        }
     }
 
     public void actionClose(ActionEvent actionEvent) {
-        Stage stage = (Stage) lblTitle.getScene().getWindow();
+        Stage stage = (Stage) fldTitle.getScene().getWindow();
         stage.close();
+    }
+
+    public void actionAddAuthor(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"));
+        Parent root = loader.load();
+        AuthorController newWindow = loader.getController();
+        stage.setTitle("Add author");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }

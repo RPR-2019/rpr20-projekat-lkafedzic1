@@ -11,7 +11,7 @@ public interface Validation {
         return s.length() >= 2 && s.chars()
                 .allMatch(Character::isLetterOrDigit) && isValidStart(s);
     }
-    default boolean isValidStart (String s) {
+    private boolean isValidStart (String s) {
         //username has to begin with letter
         return !Character.isDigit(s.charAt(0));
     }
@@ -20,5 +20,8 @@ public interface Validation {
         Pattern pattern = Pattern.compile(regex);
         if (s == null) return false;
         return pattern.matcher(s).matches();
+    }
+    default boolean isValidPassword (String s) {
+        return (s.trim().isEmpty() || s.trim().length() < 8);
     }
 }
