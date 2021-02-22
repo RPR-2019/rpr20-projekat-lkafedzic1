@@ -54,7 +54,7 @@ public class ScientificWorkDAO {
           getAuthorQuery = conn.prepareStatement("SELECT author.* FROM author, person WHERE person.id=author.person_id AND person.first_name=? AND person.last_name=?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
-          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.first_name || ' ' || person.last_name, sw.year, field.title, publication_type.title, sw.additional FROM scientific_work sw, author, person, scientific_work_author swa, field, publication_type WHERE sw.id=swa.scientific_work_id AND swa.author_id=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id;");
+          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.first_name || ' ' || person.last_name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, scientific_work_author swa, field, publication_type WHERE sw.id=swa.scientific_work_id AND swa.author_id=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id;");
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
           getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
           findAuthorFromPerson = conn.prepareStatement("SELECT author.* FROM author, person WHERE author.person_id=person.id AND person.first_name=? AND person.last_name=?");
@@ -190,7 +190,7 @@ public class ScientificWorkDAO {
         try {
             ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
             while(rs.next()) {
-                scientificWorksList.add(new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6)));
+                scientificWorksList.add(new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)));
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -356,69 +356,5 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
     }
-
-
-
-/*
-    public String getGender(int id) {
-        try {
-            getGenderQuery.setInt(1, id);
-            return String.valueOf(getGenderQuery.executeQuery());
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return null;
-    }
-*/
-
-    /*public User getUser(String username, String password) throws IllegalUserException {
-        try {
-            System.out.println("Ušao u metodu getUser");
-            getUserFromLoginQuery.setString(1, username);
-            getUserFromLoginQuery.setString(2, password);
-
-            ResultSet rs = getUserFromLoginQuery.executeQuery();
-            System.out.println("poslije rs");
-            if (!rs.next()) {
-                System.out.println("kofa nema u rs nista");
-                return null;
-            }
-            System.out.println("sve ok");
-            return new User(rs.getInt("id"), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5).equals("male") ? Gender.MALE : Gender.FEMALE, rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        System.out.println("kraj");
-        return null;
-    }*/
-
-/*    public void addField(String title) {
-        try {
-            ResultSet rs = maxIdField.executeQuery();
-            int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-            addFieldQuery.setInt(1, id);
-            addFieldQuery.setString(2, title);
-            addFieldQuery.executeUpdate();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }*/
-
-   /* public ObservableList<PublicationType> getTypes() {
-        ObservableList<PublicationType> types = FXCollections.observableArrayList();
-        try {
-            ResultSet rs = getTypesQuery.executeQuery();
-            while(rs.next()) {
-                PublicationType type = new PublicationType(rs.getInt(1), rs.getString(2));
-                types.add(type);
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return types;
-    }*/
 
 }

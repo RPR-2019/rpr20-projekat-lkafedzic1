@@ -1,8 +1,10 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.FieldOfStudy;
-import ba.unsa.etf.rpr.project.PublicationType;
+import ba.unsa.etf.rpr.project.Author;
+import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.Year;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -24,7 +23,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class ScientificWorkController {
 
     public Button btnAdd, btnCancel;
-    public TextField fldAuthor;
     public TextField fldTitle;
     public Spinner<Integer> spinnerYear;
     public TextArea txtAreaTags;
@@ -34,9 +32,12 @@ public class ScientificWorkController {
     public Label lblStatusBar;
     public ChoiceBox<String> choicePublicationType;
     public Label lblNothingChosen;
-    public TextArea txtAreaAuthors;
-    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();;
-    private File choosenFile = null;
+    public TextField fldAuthor;
+
+    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
+
+    private String tags = null;
+    private ScientificWork work = null;
 
     @FXML
     private void initialize() {
@@ -45,13 +46,12 @@ public class ScientificWorkController {
         instance.loadTypeChoices(choicePublicationType);
         spinnerYear.getEditor().setText("1900");
         spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
-
         //validation
 
     }
 
     public void actionCancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) fldAuthor.getScene().getWindow();
+        Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }
 
@@ -78,9 +78,9 @@ public class ScientificWorkController {
 
     public void actionUpload(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text files", "*.txt"));
-        choosenFile = fileChooser.showOpenDialog(new Stage());
-        if (choosenFile == null) {
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text files", "*.txt")); //can add also xml and pdf extensions
+        File chosenFile = fileChooser.showOpenDialog(new Stage());
+        if (chosenFile == null) { //is any file selected
             lblNothingChosen.setVisible(true);
         }
         else {
@@ -104,5 +104,6 @@ public class ScientificWorkController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
+
     }
 }

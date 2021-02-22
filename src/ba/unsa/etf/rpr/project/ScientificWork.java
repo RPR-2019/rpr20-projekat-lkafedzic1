@@ -1,26 +1,49 @@
 package ba.unsa.etf.rpr.project;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScientificWork {
     private int id, year;
-    private SimpleStringProperty title, tags;
+    private SimpleStringProperty title;
     private SimpleStringProperty type, field;
     private SimpleStringProperty content;
     private SimpleStringProperty author;
     private SimpleStringProperty additional;
+    private SimpleStringProperty tags;
 
-    public ScientificWork() {
+    public ScientificWork(){
+        this.title = new SimpleStringProperty();
+        this.type = new SimpleStringProperty();
+        this.field = new SimpleStringProperty();
+        this.content = new SimpleStringProperty();
+        this.tags = new SimpleStringProperty();
+        this.additional = new SimpleStringProperty();
+        this.author = new SimpleStringProperty();
     }
 
-    public ScientificWork(String title, String author, int year, String field, String type, String additional) {
+    public ScientificWork(int year, String title, String author, String additional, String tags) {
+        this.year = year;
         this.title = new SimpleStringProperty(title);
         this.author = new SimpleStringProperty(author);
-        this.year = year;
-        this.field = new SimpleStringProperty(field);
-        this.type = new SimpleStringProperty(type);
         this.additional = new SimpleStringProperty(additional);
-        this.tags = new SimpleStringProperty();
+        this.tags = new SimpleStringProperty(tags);
+    }
+
+    public ScientificWork(String title, String author, int year, String fieldOfStudy, String publicationType, String additional, String tags) {
+        this.title = new SimpleStringProperty(title);
+        if (year <= LocalDate.now().getYear()) {
+            this.year = year;
+        }
+        this.type = new SimpleStringProperty(publicationType);
+        this.field = new SimpleStringProperty(fieldOfStudy);
+        this.tags = new SimpleStringProperty(tags);
+        this.additional = new SimpleStringProperty(additional);
+        this.author = new SimpleStringProperty(author);
     }
 
     public int getId() {
@@ -49,18 +72,6 @@ public class ScientificWork {
 
     public void setTitle(String title) {
         this.title.set(title);
-    }
-
-    public String getTags() {
-        return tags.get();
-    }
-
-    public SimpleStringProperty tagsProperty() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags.set(tags);
     }
 
     public String getType() {
@@ -123,8 +134,15 @@ public class ScientificWork {
         this.additional.set(additional);
     }
 
-    @Override
-    public String toString() {
-        return title.get() + ", " + author.get() + " " + year;
+    public String getTags() {
+        return tags.get();
+    }
+
+    public SimpleStringProperty tagsProperty() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags.set(tags);
     }
 }

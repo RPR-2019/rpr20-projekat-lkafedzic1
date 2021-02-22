@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"title"	TEXT NOT NULL,
 	"type"	INTEGER,
 	"year"	INTEGER,
-	"tags"	TEXT,
 	"field"	INTEGER,
 	"additional" TEXT,
+	"tags"	TEXT,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("field") REFERENCES "field"("id"),
 	FOREIGN KEY("type") REFERENCES "publication_type"("id")
@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS "author" (
 CREATE TABLE IF NOT EXISTS "scientific_work_author" (
 	"author_id"	INTEGER,
 	"scientific_work_id"	INTEGER,
+	"author_ordinal" INTEGER,
 	FOREIGN KEY("author_id") REFERENCES "author"("id"),
 	FOREIGN KEY("scientific_work_id") REFERENCES "scientific_work"("id")
 );

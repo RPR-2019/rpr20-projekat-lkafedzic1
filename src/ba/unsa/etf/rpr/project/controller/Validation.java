@@ -1,12 +1,18 @@
 package ba.unsa.etf.rpr.project.controller;
 
+import javafx.css.Match;
+
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public interface Validation {
     default boolean isValidName(String s) {
-        return s.length() >= 2 && s.chars()
-                .allMatch(Character::isLetter);
+        Pattern pattern = Pattern.compile(new String ("^[\\p{L} .'-]+$")); //allow letters from any language, space...
+        Matcher matcher = pattern.matcher(s);
+        if (matcher.matches()) return true;
+        return false;
     }
+
     default boolean isValidUsername (String s) {
         return s.length() >= 2 && s.chars()
                 .allMatch(Character::isLetterOrDigit) && isValidStart(s);

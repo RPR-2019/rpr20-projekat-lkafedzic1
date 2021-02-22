@@ -22,6 +22,10 @@ public class AuthorController implements Validation{
 
     private ScientificWorkDAO instance;
 
+    public Author getAuthor() {
+        return author;
+    }
+
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();

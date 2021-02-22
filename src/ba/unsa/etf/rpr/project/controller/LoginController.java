@@ -86,7 +86,7 @@ public class LoginController {
         HomeController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setMaxWidth(1100);
+        stage.setMaxWidth(1000);
         stage.setMinHeight(200);
         stage.setMinWidth(200);
         stage.show();
@@ -99,7 +99,7 @@ public class LoginController {
         HomeAdminController homeController = loader.getController();
         stage.setTitle("Scientific works database");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        stage.setMaxWidth(1100);
+        stage.setMaxWidth(1000);
         stage.setMinHeight(240);
         stage.setMinWidth(480);
         stage.show();

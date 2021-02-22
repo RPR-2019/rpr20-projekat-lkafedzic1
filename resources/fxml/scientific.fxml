@@ -31,7 +31,7 @@
                   <Label text="Author:" GridPane.rowIndex="1" />
                   <HBox prefHeight="55.0" prefWidth="297.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextArea fx:id="txtAreaAuthors" prefHeight="60.0" prefWidth="200.0" />
+                        <TextField fx:id="fldAuthor" prefHeight="60.0" prefWidth="200.0" />
                         <Button  alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionAddAuthor" text="Add" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets top="10.0" />

@@ -1,10 +1,23 @@
 package ba.unsa.etf.rpr.project;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Author extends Person implements Comparable<Author> {
 
+    private List<ScientificWork> works;
+
+    public List<ScientificWork> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<ScientificWork> works) {
+        this.works = works;
+    }
+
     public Author() {
+        works = new ArrayList<>();
     }
 
     public Author(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
@@ -12,6 +25,15 @@ public class Author extends Person implements Comparable<Author> {
         super.setLastName(lastName);
         super.setDateOfBirth(dateOfBirth);
         super.setGender(gender);
+        works = new ArrayList<>();
+    }
+
+    public Author(String firstName, String lastName, LocalDate dateOfBirth, Gender gender, ArrayList<ScientificWork> works) {
+        super.setFirstName(firstName);
+        super.setLastName(lastName);
+        super.setDateOfBirth(dateOfBirth);
+        super.setGender(gender);
+        this.works = works;
     }
 
     @Override

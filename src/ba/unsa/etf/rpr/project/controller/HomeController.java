@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.Author;
 import ba.unsa.etf.rpr.project.PublicationType;
 import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
@@ -14,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -23,13 +25,13 @@ public class HomeController {
     public TextField fldSearch;
     public Button btnSearch;
     public ChoiceBox<String> choiceCategory;
-    public TableView tableView;
-    public TableColumn columnTitle;
-    public TableColumn columnAuthor;
-    public TableColumn columnYear;
-    public TableColumn columnFieldOfStudy;
-    public TableColumn columnType;
-    private ScientificWorkDAO instance;
+    public TableView<ScientificWork> tableView;
+    public TableColumn<ScientificWork,String> columnTitle;
+    public TableColumn<ScientificWork,String> columnAuthor;
+    public TableColumn<ScientificWork,Integer> columnYear;
+    public TableColumn<ScientificWork,String> columnFieldOfStudy;
+    public TableColumn<ScientificWork,String> columnType;
+    private ScientificWorkDAO instance = null;
 
     @FXML
     public void initialize() {
@@ -41,6 +43,7 @@ public class HomeController {
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
         tableView.setItems(instance.getPopulationTableView(tableView));
+        tableView.setPlaceholder(new Label("There is no results"));
     }
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
