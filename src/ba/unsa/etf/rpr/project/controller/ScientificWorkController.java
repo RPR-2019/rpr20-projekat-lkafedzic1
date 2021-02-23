@@ -20,6 +20,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -41,8 +43,7 @@ public class ScientificWorkController implements Validation {
 
     private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
 
-    private String tags = null;
-    private ScientificWork work = null;
+    private ScientificWork scientificWork = null;
     private File chosenFile = null;
 
     @FXML
@@ -71,7 +72,7 @@ public class ScientificWorkController implements Validation {
         fldPublishedIn.getStyleClass().add("fieldNotValid");
         fldPublishedIn.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (fldPublishedIn.getText().trim().isEmpty() || !isValidTitle(fldPublishedIn.getText()) || fldPublishedIn.getText().equals("Journal or Conference")) {
+                    if (fldPublishedIn.getText().trim().isEmpty() || !(isValidTitle(fldPublishedIn.getText()) || fldPublishedIn.getText().equals("")) || fldPublishedIn.getText().equals("Journal or Conference")) {
                         fldPublishedIn.getStyleClass().removeAll("fieldValid");
                         fldPublishedIn.getStyleClass().add("fieldNotValid");
                     } else {
@@ -128,15 +129,22 @@ public class ScientificWorkController implements Validation {
         stage.show();
     }
 
-    public void actionAddScientificWork(ActionEvent actionEvent) {
-        tags = txtAreaTags.getText();
+    public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         if (choiceAuthor.getSelectionModel() == null || choiceFieldOfStudy.getSelectionModel() == null || choicePublicationType.getSelectionModel() == null ) {
             throw new IllegalChoiceException("Nothing selected");
         }
         if (isInputValid(fldTitle) && isInputValid(fldPublishedIn) && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
-            String[] individualTags = txtAreaTags.getText().split(",");
-            //dodaj u bazu
-            work = new ScientificWork();
+            //String[] individualTags = txtAreaTags.getText().split(",");
+            //add to database
+            if (scientificWork == null) scientificWork = new ScientificWork();
+            scientificWork.setTitle(fldTitle.getText());
+            scientificWork.setType(choicePublicationType.getValue());
+            scientificWork.setField(choiceFieldOfStudy.getValue());
+            scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//učitaj file
+            scientificWork.setAuthor(choiceAuthor.getValue());
+            scientificWork.setAdditional(fldPublishedIn.getText());
+            scientificWork.setTags(txtAreaTags.getText());
+
             lblStatusBar.setText("Successfully added");
         }
         else {
@@ -160,7 +168,6 @@ public class ScientificWorkController implements Validation {
         lblNothingChosen.setStyle("-fx-text-fill: green;");
         lblNothingChosen.setVisible(true);
         fldTitle.setText(chosenFile.getName());
-        //todo add in database
     }
 
     public void actionClose(ActionEvent actionEvent) {
