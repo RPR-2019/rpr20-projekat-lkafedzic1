@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class SignUpController implements Validation{

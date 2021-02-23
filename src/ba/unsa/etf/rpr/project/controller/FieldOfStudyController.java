@@ -4,7 +4,6 @@ import ba.unsa.etf.rpr.project.FieldOfStudy;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -37,7 +36,7 @@ public class FieldOfStudyController{
             if (fieldOfStudy == null) fieldOfStudy = new FieldOfStudy();
             fieldOfStudy.setTitle(fldTitle.getText());
             instance.addFieldOfStudy(fieldOfStudy);
-            lblStatusBar.setText("Successfuly added");
+            lblStatusBar.setText("Successfully added");
         }
         else {
             //if any field on the form is red

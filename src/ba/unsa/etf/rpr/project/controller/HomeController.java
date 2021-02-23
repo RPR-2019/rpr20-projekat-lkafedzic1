@@ -1,9 +1,6 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.Author;
-import ba.unsa.etf.rpr.project.PublicationType;
-import ba.unsa.etf.rpr.project.ScientificWork;
-import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import ba.unsa.etf.rpr.project.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -47,12 +43,10 @@ public class HomeController {
     }
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+        //Search: tag, admin, author - clients wishes
         choiceCategory.getItems().add("Title");
-        choiceCategory.getItems().add("Author");
-        choiceCategory.getItems().add("Year");
-        choiceCategory.getItems().add("Field of study");
-        choiceCategory.getItems().add("Publication type");
         choiceCategory.getItems().add("Tags");
+        choiceCategory.getItems().add("Author");
         choiceCategory.getSelectionModel().selectFirst();
     }
 

@@ -1,8 +1,9 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.Author;
+import ba.unsa.etf.rpr.project.IllegalChoiceException;
 import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import ba.unsa.etf.rpr.project.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +12,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.Year;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class ScientificWorkController {
+public class ScientificWorkController implements Validation {
 
     public Button btnAdd, btnCancel;
     public TextField fldTitle;
@@ -38,6 +43,7 @@ public class ScientificWorkController {
 
     private String tags = null;
     private ScientificWork work = null;
+    private File chosenFile = null;
 
     @FXML
     private void initialize() {
@@ -48,7 +54,56 @@ public class ScientificWorkController {
         spinnerYear.getEditor().setText("1900");
         spinnerYear.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1000,Year.now().getValue(),1900,1));
         //validation
-
+        fldTitle.getStyleClass().add("fieldNotValid");
+        fldTitle.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (fldTitle.getText().trim().isEmpty() || !isValidTitle(fldTitle.getText())) {
+                        fldTitle.getStyleClass().removeAll("fieldValid");
+                        fldTitle.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldTitle.getStyleClass().removeAll("fieldNotValid");
+                        fldTitle.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
+        txtAreaTags.setText("tag1, tag2, tag3...");
+        fldPublishedIn.setText("Journal or Conference");
+        fldPublishedIn.getStyleClass().add("fieldNotValid");
+        fldPublishedIn.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (fldPublishedIn.getText().trim().isEmpty() || !isValidTitle(fldPublishedIn.getText()) || fldPublishedIn.getText().equals("Journal or Conference")) {
+                        fldPublishedIn.getStyleClass().removeAll("fieldValid");
+                        fldPublishedIn.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldPublishedIn.getStyleClass().removeAll("fieldNotValid");
+                        fldPublishedIn.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
+        spinnerYear.getStyleClass().add("fieldNotValid");
+        spinnerYear.getEditor().textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (spinnerYear.getEditor().getText().trim().isEmpty() || spinnerYear.getValue() > LocalDate.now().getYear()) {
+                        spinnerYear.getEditor().getStyleClass().removeAll("fieldValid");
+                        spinnerYear.getEditor().getStyleClass().add("fieldNotValid");
+                    } else {
+                        spinnerYear.getEditor().getStyleClass().removeAll("fieldNotValid");
+                        spinnerYear.getEditor().getStyleClass().add("fieldValid");
+                    }
+                }
+        );
+        txtAreaTags.getStyleClass().add("fieldNotValid");
+        txtAreaTags.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (txtAreaTags.getText().trim().isEmpty()) {
+                        txtAreaTags.getStyleClass().removeAll("fieldValid");
+                        txtAreaTags.getStyleClass().add("fieldNotValid");
+                    } else {
+                        txtAreaTags.getStyleClass().removeAll("fieldNotValid");
+                        txtAreaTags.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
     }
 
     public void actionCancel(ActionEvent actionEvent) {
@@ -73,27 +128,43 @@ public class ScientificWorkController {
         stage.show();
     }
 
-    public void actionAddScienceWork(ActionEvent actionEvent) {
+    public void actionAddScientificWork(ActionEvent actionEvent) {
+        tags = txtAreaTags.getText();
+        if (choiceAuthor.getSelectionModel() == null || choiceFieldOfStudy.getSelectionModel() == null || choicePublicationType.getSelectionModel() == null ) {
+            throw new IllegalChoiceException("Nothing selected");
+        }
+        if (isInputValid(fldTitle) && isInputValid(fldPublishedIn) && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
+            String[] individualTags = txtAreaTags.getText().split(",");
+            //dodaj u bazu
+            work = new ScientificWork();
+            lblStatusBar.setText("Successfully added");
+        }
+        else {
+            lblStatusBar.setText("Please, fill the form properly");
+        }
+    }
 
+    private boolean isInputValid(TextField fld) {
+        return fld.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"));
     }
 
     public void actionUpload(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text files", "*.txt")); //can add also xml and pdf extensions
-        File chosenFile = fileChooser.showOpenDialog(new Stage());
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files", "*.txt")); //can add also xml and pdf extensions
+        chosenFile = fileChooser.showOpenDialog(new Stage());
         if (chosenFile == null) { //is any file selected
             lblNothingChosen.setVisible(true);
+            return;
         }
-        else {
-            lblNothingChosen.setText("Uploaded");
-            lblNothingChosen.setStyle("-fx-text-fill: green;");
-            lblNothingChosen.setVisible(true);
-        }
+        lblNothingChosen.setText("Uploaded");
+        lblNothingChosen.setStyle("-fx-text-fill: green;");
+        lblNothingChosen.setVisible(true);
+        fldTitle.setText(chosenFile.getName());
+        //todo add in database
     }
 
     public void actionClose(ActionEvent actionEvent) {
         Stage stage = (Stage) fldTitle.getScene().getWindow();
         stage.close();
     }
-
 }

@@ -1,9 +1,6 @@
 package ba.unsa.etf.rpr.project;
 
-import ba.unsa.etf.rpr.project.controller.Validation;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Person implements Validation {
     private int id;

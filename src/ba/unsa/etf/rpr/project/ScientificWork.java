@@ -1,13 +1,10 @@
 package ba.unsa.etf.rpr.project;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ScientificWork {
+public class ScientificWork implements Validation {
     private int id, year;
     private SimpleStringProperty title;
     private SimpleStringProperty type, field;
@@ -71,7 +68,8 @@ public class ScientificWork {
     }
 
     public void setTitle(String title) {
-        this.title.set(title);
+        if (isValidTitle(title))
+            this.title.set(title);
     }
 
     public String getType() {

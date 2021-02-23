@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.project.controller;
+package ba.unsa.etf.rpr.project;
 
 import javafx.css.Match;
 
@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public interface Validation {
+
     default boolean isValidName(String s) {
         Pattern pattern = Pattern.compile(new String ("^[\\p{L} .'-]+$")); //allow letters from any language, space...
         Matcher matcher = pattern.matcher(s);
@@ -29,5 +30,9 @@ public interface Validation {
     }
     default boolean isValidPassword (String s) {
         return (s.trim().isEmpty() || s.trim().length() < 8);
+    }
+
+    default boolean isValidTitle (String s) {
+        return s.matches("[a-zA-Z .]+$");
     }
 }

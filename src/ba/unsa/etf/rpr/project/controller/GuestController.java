@@ -46,11 +46,8 @@ public class GuestController {
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
         choiceCategory.getItems().add("Title");
-        choiceCategory.getItems().add("Author");
-        choiceCategory.getItems().add("Year");
-        choiceCategory.getItems().add("Field of study");
-        choiceCategory.getItems().add("Publication type");
         choiceCategory.getItems().add("Tags");
+        choiceCategory.getItems().add("Author");
         choiceCategory.getSelectionModel().selectFirst();
     }
 
