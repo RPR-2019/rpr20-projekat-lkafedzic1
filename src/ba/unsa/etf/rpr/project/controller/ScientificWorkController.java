@@ -18,6 +18,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,6 +43,7 @@ public class ScientificWorkController implements Validation {
     public ChoiceBox<String> choicePublicationType;
     public Label lblNothingChosen;
     public ChoiceBox<String> choiceAuthor;
+    public CheckBox checkBoxAdditional;
 
     private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
 
@@ -72,7 +76,7 @@ public class ScientificWorkController implements Validation {
         fldPublishedIn.getStyleClass().add("fieldNotValid");
         fldPublishedIn.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (fldPublishedIn.getText().trim().isEmpty() || !(isValidTitle(fldPublishedIn.getText()) || fldPublishedIn.getText().equals("")) || fldPublishedIn.getText().equals("Journal or Conference")) {
+                    if (checkBoxAdditional.isSelected() && (fldPublishedIn.getText().trim().isEmpty() || !(isValidTitle(fldPublishedIn.getText()) || fldPublishedIn.getText().equals("")) || fldPublishedIn.getText().equals("Journal or Conference"))) {
                         fldPublishedIn.getStyleClass().removeAll("fieldValid");
                         fldPublishedIn.getStyleClass().add("fieldNotValid");
                     } else {
@@ -173,5 +177,9 @@ public class ScientificWorkController implements Validation {
     public void actionClose(ActionEvent actionEvent) {
         Stage stage = (Stage) fldTitle.getScene().getWindow();
         stage.close();
+    }
+
+    public void actionCheckBox(ActionEvent actionEvent) {
+        fldPublishedIn.setVisible(checkBoxAdditional.isSelected());
     }
 }
