@@ -10,16 +10,13 @@ import javax.xml.transform.Result;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getAuthorFromIdQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
+    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -53,6 +50,9 @@ public class ScientificWorkDAO {
           getPersonFromAuthorQuery = conn.prepareStatement("SELECT p.id FROM author a, person p WHERE p.id=a.person_id AND a.id=?");
           getAuthorQuery = conn.prepareStatement("SELECT author.id FROM author, person WHERE person.id=author.person_id AND person.name=?");
           getAuthorFromIdQuery = conn.prepareStatement("SELECT person.name, person.date_of_birth, person.gender_id FROM author, person WHERE person.id=author.person_id AND author.id=?");
+          getWorksFromTitleQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.title LIKE ?");
+          getWorksFromAuthorsNameQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND person.name LIKE ?");
+          getWorksFromTagQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.tags LIKE ?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
           getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
@@ -450,5 +450,50 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<ScientificWork> getWorksByTitle(String title) {
+        ArrayList<ScientificWork> result = new ArrayList<>();
+        try {
+            getWorksFromTitleQuery.setString(1, "%" + title + "%");
+            ResultSet rs = getWorksFromTitleQuery.executeQuery();
+            while (rs.next()) {
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                result.add(scientificWork);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<ScientificWork> getWorksByAuthor(String author) {
+        ArrayList<ScientificWork> result = new ArrayList<>();
+        try {
+            getWorksFromAuthorsNameQuery.setString(1, "%" + author + "%");
+            ResultSet rs = getWorksFromAuthorsNameQuery.executeQuery();
+            while (rs.next()) {
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                result.add(scientificWork);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return result;
+    }
+
+    public ArrayList<ScientificWork> getWorksByTag(String tag) {
+        ArrayList<ScientificWork> result = new ArrayList<>();
+        try {
+            getWorksFromTagQuery.setString(1, "%" + tag + "%");
+            ResultSet rs = getWorksFromTagQuery.executeQuery();
+            while (rs.next()) {
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                result.add(scientificWork);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return result;
     }
 }

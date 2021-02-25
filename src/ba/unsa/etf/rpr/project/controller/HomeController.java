@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -45,6 +46,46 @@ public class HomeController {
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
+
+        fldSearch.getStyleClass().add("fieldNotValid");
+        fldSearch.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (fldSearch.getText().trim().isEmpty() || fldSearch == null) {
+                        fldSearch.getStyleClass().removeAll("fieldValid");
+                        fldSearch.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldSearch.getStyleClass().removeAll("fieldNotValid");
+                        fldSearch.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
+
+        btnSearch.setOnAction(actionEvent -> {
+            if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
+                ArrayList<ScientificWork> result = new ArrayList<>();
+                if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
+                    result = instance.getWorksByTitle(fldSearch.getText());
+                }
+                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
+                    result = instance.getWorksByTag(fldSearch.getText());
+                }
+                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
+                    result = instance.getWorksByAuthor(fldSearch.getText());
+                }
+                ObservableList<ScientificWork> list = FXCollections.observableArrayList();
+                list.setAll(result);
+                tableView.setItems(list);
+                tableView.refresh();
+            }
+            else {
+                lblStatusBar.setText("Please, fill the form properly");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please enter some keywords");
+                alert.show();
+            }
+            lblStatusBar.setText("Searching finished");
+        });
     }
 
     void loadSearchChoices(ChoiceBox<String> choiceCategory) {

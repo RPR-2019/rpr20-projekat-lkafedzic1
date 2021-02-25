@@ -15,11 +15,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GuestController {
     public Label lblWelcome;
-    public ChoiceBox<String> choiceCategory;
     public TableView<ScientificWork> tableView;
     public TableColumn<ScientificWork,String> columnTitle;
     public TableColumn<ScientificWork,String> columnAuthor;
@@ -27,6 +29,10 @@ public class GuestController {
     public TableColumn<ScientificWork,String> columnFieldOfStudy;
     public TableColumn<ScientificWork,String> columnType;
     public Label lblStatusBar;
+    public TextField fldSearch;
+    public ChoiceBox<String> choiceCategory;
+    public Button btnSearch;
+
     private ScientificWorkDAO instance = null;
     private ObservableList<ScientificWork> scientificWorks = null;
 
@@ -42,6 +48,46 @@ public class GuestController {
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
+
+        fldSearch.getStyleClass().add("fieldNotValid");
+        fldSearch.textProperty().addListener(
+                (observableValue, o, n) -> {
+                    if (fldSearch.getText().trim().isEmpty() || fldSearch == null) {
+                        fldSearch.getStyleClass().removeAll("fieldValid");
+                        fldSearch.getStyleClass().add("fieldNotValid");
+                    } else {
+                        fldSearch.getStyleClass().removeAll("fieldNotValid");
+                        fldSearch.getStyleClass().add("fieldValid");
+                    }
+                }
+        );
+
+        btnSearch.setOnAction(actionEvent -> {
+            if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
+                ArrayList<ScientificWork> result = new ArrayList<>();
+                if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
+                    result = instance.getWorksByTitle(fldSearch.getText());
+                }
+            else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
+                result = instance.getWorksByTag(fldSearch.getText());
+            }
+            else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
+                result = instance.getWorksByAuthor(fldSearch.getText());
+            }
+            ObservableList<ScientificWork> list = FXCollections.observableArrayList();
+            list.setAll(result);
+            tableView.setItems(list);
+            tableView.refresh();
+        }
+        else {
+            lblStatusBar.setText("Please, fill the form properly");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter some keywords");
+            alert.show();
+        }
+        lblStatusBar.setText("Searching finished");
+        });
     }
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
@@ -63,8 +109,30 @@ public class GuestController {
         stage.show();
     }
 
-    public void actionSearch(ActionEvent actionEvent) {
-        lblStatusBar.setText("Searching finished");
+   public void actionSearch(ActionEvent actionEvent) {
+/*        if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
+            ArrayList<ScientificWork> result = new ArrayList<>();
+            if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
+                result = instance.getWorksByTitle(fldSearch.getText());
+            }
+            *//*else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
+                result = instance.getWorksByTag(fldSearch.getText());
+            } else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
+                result = instance.getWorksByAuthor(fldSearch.getText());
+            }*//*
+
+            tableView.setItems((ObservableList<ScientificWork>) result);
+
+
+        }
+        else {
+            lblStatusBar.setText("Please, fill the form properly");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter some keywords");
+            alert.show();
+        }
+        lblStatusBar.setText("Searching finished");*/
     }
 
     public void actionClose(ActionEvent actionEvent) {

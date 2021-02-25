@@ -181,7 +181,7 @@ public class ScientificWorkController implements Validation {
             lblStatusBar.setText("Please, fill the form properly");
         }
     }
-    //todo napraviti reference
+    //todo add citations/references
 
     private boolean isAdditionalInfoValid() {
         return checkBoxAdditional.isSelected() && isInputValid(fldPublishedIn) || ! checkBoxAdditional.isSelected();
