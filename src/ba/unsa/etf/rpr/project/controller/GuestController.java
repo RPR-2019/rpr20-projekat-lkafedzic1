@@ -109,32 +109,6 @@ public class GuestController {
         stage.show();
     }
 
-   public void actionSearch(ActionEvent actionEvent) {
-/*        if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
-            ArrayList<ScientificWork> result = new ArrayList<>();
-            if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
-                result = instance.getWorksByTitle(fldSearch.getText());
-            }
-            *//*else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
-                result = instance.getWorksByTag(fldSearch.getText());
-            } else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
-                result = instance.getWorksByAuthor(fldSearch.getText());
-            }*//*
-
-            tableView.setItems((ObservableList<ScientificWork>) result);
-
-
-        }
-        else {
-            lblStatusBar.setText("Please, fill the form properly");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Please enter some keywords");
-            alert.show();
-        }
-        lblStatusBar.setText("Searching finished");*/
-    }
-
     public void actionClose(ActionEvent actionEvent) {
         Stage window = (Stage) lblWelcome.getScene().getWindow();
         window.close();

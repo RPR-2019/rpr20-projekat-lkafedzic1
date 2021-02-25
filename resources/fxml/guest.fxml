@@ -56,7 +56,7 @@
                   <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10.0">
                      <children>
                         <TextField fx:id="fldSearch" prefHeight="26.0" prefWidth="253.0" />
-                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#actionSearch" text="Search" />
+                        <Button fx:id="btnSearch" mnemonicParsing="false" text="Search" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

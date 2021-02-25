@@ -110,9 +110,6 @@ public class HomeController {
         stage.show();
     }
 
-    public void actionSearch(ActionEvent actionEvent) {
-    }
-
     public void actionRead(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));

@@ -63,7 +63,7 @@
                               <Insets top="10.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#actionSearch" prefHeight="26.0" prefWidth="70.0" text="Search">
+                        <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Search">
                            <HBox.margin>
                               <Insets top="10.0" />
                            </HBox.margin>
