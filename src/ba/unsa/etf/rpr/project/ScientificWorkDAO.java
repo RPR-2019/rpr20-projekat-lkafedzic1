@@ -19,7 +19,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getAuthorFromIdQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
+    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getAuthorFromIdQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -56,8 +56,11 @@ public class ScientificWorkDAO {
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
           getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
-          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
-          changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
+          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
+          findDupeWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work, person, author WHERE scientific_work.title=? AND person.name=? AND scientific_work.author=author.id AND author.person_id=person.id");
+          getUsersQuery = conn.prepareStatement("SELECT username FROM user");
+          getPersonsQuery = conn.prepareStatement("SELECT name FROM person, author WHERE author.person_id=person.id");
+          getAuthorsQuery = conn.prepareStatement("SELECT p.name FROM person p, author a WHERE a.person_id=p.id");
           getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
           getTypeIdQuery = conn.prepareStatement("SELECT id FROM publication_type WHERE title=?");
           getFieldIdQuery = conn.prepareStatement("SELECT id FROM field WHERE title=?");
@@ -71,13 +74,11 @@ public class ScientificWorkDAO {
           addUserQuery = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?)");
           addPersonQuery = conn.prepareStatement("INSERT INTO person VALUES(?,?,?,?)");
           addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
-          getUsersQuery = conn.prepareStatement("SELECT username FROM user");
-          getPersonsQuery = conn.prepareStatement("SELECT name FROM person, author WHERE author.person_id=person.id");
-          getAuthorsQuery = conn.prepareStatement("SELECT p.name FROM person p, author a WHERE a.person_id=p.id");
           addTypeQuery = conn.prepareStatement("INSERT INTO publication_type VALUES(?,?)");
           addAuthorQuery = conn.prepareStatement("INSERT INTO author VALUES(?,?)");
           addScientificWorkQuery = conn.prepareStatement("INSERT INTO scientific_work VALUES(?,?,?,?,?,?,?,?,?)");
-        } catch (SQLException e) {
+          changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
+      } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -428,11 +429,9 @@ public class ScientificWorkDAO {
         ArrayList<ScientificWork> result = new ArrayList<>();
         try {
             ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
-            //ne treba mi iz .db.sql baze čitati nego iz liste...
             while (rs.next()) {
                 ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7));
-                instance.addScientificWork(scientificWork);
-                System.out.println("TU sam: " + scientificWork);
+                System.out.println(scientificWork);
                 result.add(scientificWork);
             }
         } catch (SQLException e) {
@@ -441,4 +440,15 @@ public class ScientificWorkDAO {
         return result;
     }
 
+    public boolean isDupe(String title, String author) {
+        try {
+            findDupeWorksQuery.setString(1, title);
+            findDupeWorksQuery.setString(2, author);
+            ResultSet rs = findDupeWorksQuery.executeQuery();
+            return rs.next();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
 }

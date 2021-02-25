@@ -18,19 +18,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeAdminController extends HomeController {
 
-    @FXML
-    public void initialize() {
-        instance = ScientificWorkDAO.getInstance();
-        loadSearchChoices(choiceCategory);
-        scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
-        tableView.setItems(scientificWorksList);
-        columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
-        columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
-        columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
-        columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
-        columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
-    }
-
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"));
@@ -45,7 +32,7 @@ public class HomeAdminController extends HomeController {
             ScientificWork scientificWork = scientificWorkController.getScientificWork();
             if (scientificWork != null) {
                 try {
-                    instance.addScientificWork(scientificWork);
+                    //instance.addScientificWork(scientificWork);
                     scientificWorksList.setAll(instance.scientificWorks());
                     tableView.setItems(scientificWorksList);
                 } catch (Exception e) {

@@ -31,16 +31,14 @@ public class HomeController {
     public TableColumn<ScientificWork,String> columnType;
     protected ScientificWorkDAO instance = null;
 
-    protected ObservableList<ScientificWork> scientificWorksList;
+    protected ObservableList<ScientificWork> scientificWorksList = null;
 
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
         loadSearchChoices(choiceCategory);
-
-        //tableView.setItems(instance.getPopulationTableView()); //BITNO
-        //tableView.setItems(scientificWorksList);
-        scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
+        if (scientificWorksList == null)
+            scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
         tableView.setItems(scientificWorksList);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));

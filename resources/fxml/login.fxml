@@ -33,7 +33,7 @@
             <TextField fx:id="fldUsername" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Password:" GridPane.rowIndex="3" />
             <PasswordField fx:id="fldPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="btnLogIn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionLogin" text="Log in" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <Button fx:id="btnLogIn" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionLogin" text="Log in" GridPane.columnSpan="2" GridPane.rowIndex="5" />
             <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets top="5.0" />

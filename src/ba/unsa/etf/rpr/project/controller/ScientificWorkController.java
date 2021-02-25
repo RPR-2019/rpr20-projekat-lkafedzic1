@@ -113,8 +113,6 @@ public class ScientificWorkController implements Validation {
                     }
                 }
         );
-
-
     }
 
     public void actionCancel(ActionEvent actionEvent) {
@@ -145,26 +143,39 @@ public class ScientificWorkController implements Validation {
         }
         if (isInputValid(fldTitle) && isAdditionalInfoValid() && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
             //String[] individualTags = txtAreaTags.getText().split(",");
-            //add to database
-            if (scientificWork == null) scientificWork = new ScientificWork();
-            scientificWork.setTitle(fldTitle.getText());
-            scientificWork.setType(choicePublicationType.getValue());
-            scientificWork.setField(choiceFieldOfStudy.getValue());
-           // scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//load file
-            scientificWork.setYear(spinnerYear.getValue());
-            scientificWork.setAuthor(choiceAuthor.getValue());
-            scientificWork.setAdditional(fldPublishedIn.getText());
-            scientificWork.setTags(txtAreaTags.getText());
-            instance.addScientificWork(scientificWork);
 
-            lblStatusBar.setText("Successfully added");
+            String title = fldTitle.getText();
+            String author = choiceAuthor.getValue();
+            if (instance.isDupe(title,author)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Scientific work already exists");
+                alert.setContentText(title + " by author " + author + " is already added");
+                lblStatusBar.setText(title + " already exists");
+
+                alert.showAndWait();
+            }
+            else {
+                if (scientificWork == null) scientificWork = new ScientificWork();
+                scientificWork.setTitle(title);
+                scientificWork.setType(choicePublicationType.getValue());
+                scientificWork.setField(choiceFieldOfStudy.getValue());
+                // scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//todo load file
+                scientificWork.setYear(spinnerYear.getValue());
+                scientificWork.setAuthor(author);
+                scientificWork.setAdditional(fldPublishedIn.getText());
+                scientificWork.setTags(txtAreaTags.getText());
+
+                instance.addScientificWork(scientificWork);
+
+                lblStatusBar.setText("Successfully added");
+            }
         }
         else {
             lblStatusBar.setText("Please, fill the form properly");
         }
     }
     //todo napraviti reference
-    //todo napraviti provjeru ako postoji rad u bazi
 
     private boolean isAdditionalInfoValid() {
         return checkBoxAdditional.isSelected() && isInputValid(fldPublishedIn) || ! checkBoxAdditional.isSelected();

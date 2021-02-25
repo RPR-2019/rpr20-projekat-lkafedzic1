@@ -27,15 +27,15 @@ public class GuestController {
     public TableColumn<ScientificWork,String> columnFieldOfStudy;
     public TableColumn<ScientificWork,String> columnType;
     public Label lblStatusBar;
-    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
+    private ScientificWorkDAO instance = null;
     private ObservableList<ScientificWork> scientificWorks = null;
 
     @FXML
     public void initialize() {
+        instance = ScientificWorkDAO.getInstance();
         loadSearchChoices(choiceCategory);
         if (scientificWorks == null)
             scientificWorks = FXCollections.observableArrayList(instance.scientificWorks());
-        //tableView.setItems(instance.getPopulationTableView(tableView));
         tableView.setItems(scientificWorks);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
