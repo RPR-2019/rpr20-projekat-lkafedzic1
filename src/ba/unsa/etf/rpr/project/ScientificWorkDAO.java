@@ -17,7 +17,7 @@ public class ScientificWorkDAO {
     private Connection conn;
 
     private PreparedStatement getAllWorksQuery, getLoginQuery, getFieldTitleQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery,
-            deleteWorkQuery, deleteFieldQuery, deleteTypeQuery;
+            deleteWorkQuery, deleteFieldQuery, deleteTypeQuery, deleteAuthorQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -83,6 +83,7 @@ public class ScientificWorkDAO {
           deleteWorkQuery = conn.prepareStatement("DELETE FROM scientific_work WHERE id=?");
           deleteFieldQuery = conn.prepareStatement("DELETE FROM field WHERE title=?");
           deleteTypeQuery = conn.prepareStatement("DELETE FROM publication_type WHERE title=?");
+          deleteAuthorQuery = conn.prepareStatement("DELETE FROM author WHERE id=?");
       } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -419,8 +420,8 @@ public class ScientificWorkDAO {
             }
             addPersonQuery.setInt(1, id);
             addPersonQuery.setString(2, author.getName());
-            addPersonQuery.setString(4, author.getDateOfBirth().toString());
-            addPersonQuery.setString(5, String.valueOf(author.getGender()));
+            addPersonQuery.setString(3, author.getDateOfBirth().toString());
+            addPersonQuery.setString(4, String.valueOf(author.getGender()));
 
             addPersonQuery.execute();
             return id;
@@ -538,5 +539,16 @@ public class ScientificWorkDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteAuthor(String author) {
+        int id = getAuthorIdFromName(author);
+        try {
+            deleteAuthorQuery.setInt(1, id);
+            deleteAuthorQuery.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
     }
 }

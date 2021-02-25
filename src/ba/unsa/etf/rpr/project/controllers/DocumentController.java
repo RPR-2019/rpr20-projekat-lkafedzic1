@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.project.controller;
+package ba.unsa.etf.rpr.project.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

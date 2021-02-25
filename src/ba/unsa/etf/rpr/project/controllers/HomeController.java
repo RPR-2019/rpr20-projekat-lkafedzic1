@@ -1,13 +1,12 @@
-package ba.unsa.etf.rpr.project.controller;
+package ba.unsa.etf.rpr.project.controllers;
 
-
-import ba.unsa.etf.rpr.project.ScientificWork;
-import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import ba.unsa.etf.rpr.project.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,33 +15,32 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class GuestController {
-    public Label lblWelcome;
+public class HomeController {
+
+    public Label lblStatusBar;
+    public TextField fldSearch;
+    public Button btnSearch;
+    public ChoiceBox<String> choiceCategory;
     public TableView<ScientificWork> tableView;
     public TableColumn<ScientificWork,String> columnTitle;
     public TableColumn<ScientificWork,String> columnAuthor;
     public TableColumn<ScientificWork,Integer> columnYear;
     public TableColumn<ScientificWork,String> columnFieldOfStudy;
     public TableColumn<ScientificWork,String> columnType;
-    public Label lblStatusBar;
-    public TextField fldSearch;
-    public ChoiceBox<String> choiceCategory;
-    public Button btnSearch;
+    protected ScientificWorkDAO instance = null;
 
-    private ScientificWorkDAO instance = null;
-    private ObservableList<ScientificWork> scientificWorks = null;
+    protected ObservableList<ScientificWork> scientificWorksList = null;
 
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
         loadSearchChoices(choiceCategory);
-        if (scientificWorks == null)
-            scientificWorks = FXCollections.observableArrayList(instance.scientificWorks());
-        tableView.setItems(scientificWorks);
+        if (scientificWorksList == null)
+            scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
+        tableView.setItems(scientificWorksList);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
@@ -68,36 +66,40 @@ public class GuestController {
                 if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
                     result = instance.getWorksByTitle(fldSearch.getText());
                 }
-            else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
-                result = instance.getWorksByTag(fldSearch.getText());
+                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
+                    result = instance.getWorksByTag(fldSearch.getText());
+                }
+                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
+                    result = instance.getWorksByAuthor(fldSearch.getText());
+                }
+                ObservableList<ScientificWork> list = FXCollections.observableArrayList();
+                list.setAll(result);
+                tableView.setItems(list);
+                tableView.refresh();
             }
-            else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
-                result = instance.getWorksByAuthor(fldSearch.getText());
+            else {
+                lblStatusBar.setText("Please, fill the form properly");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please enter some keywords");
+                alert.show();
             }
-            ObservableList<ScientificWork> list = FXCollections.observableArrayList();
-            list.setAll(result);
-            tableView.setItems(list);
-            tableView.refresh();
-        }
-        else {
-            lblStatusBar.setText("Please, fill the form properly");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Please enter some keywords");
-            alert.show();
-        }
-        lblStatusBar.setText("Searching finished");
+            lblStatusBar.setText("Searching finished");
         });
     }
 
-    private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+    void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+        //Search: tag, admin, author - clients wishes
         choiceCategory.getItems().add("Title");
         choiceCategory.getItems().add("Tags");
         choiceCategory.getItems().add("Author");
         choiceCategory.getSelectionModel().selectFirst();
     }
 
-    public void actionLogin(ActionEvent actionEvent) throws IOException {
+    public void actionSignOut(ActionEvent actionEvent) throws IOException {
+        Node node = (Node) actionEvent.getSource();
+        Stage st = (Stage) node.getScene().getWindow();
+        st.hide();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();
@@ -105,16 +107,23 @@ public class GuestController {
         stage.setTitle("Login");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
-        lblWelcome.getScene().getWindow().hide();
         stage.show();
     }
 
-    public void actionClose(ActionEvent actionEvent) {
-        Stage window = (Stage) lblWelcome.getScene().getWindow();
-        window.close();
+    public void actionRead(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
+        Parent root = loader.load();
+        ScientificWorkController newWindow = loader.getController();
+        stage.setTitle(String.valueOf(newWindow.fldTitle));
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.show();
     }
 
-    public void actionAbout(ActionEvent actionEvent) throws IOException {
+    public void actionDownload(ActionEvent actionEvent) {
+    }
+
+    public void actionAbout(ActionEvent actionEvent)  throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         Parent root = loader.load();
@@ -123,5 +132,12 @@ public class GuestController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void actionRefresh(ActionEvent actionEvent) {
+        lblStatusBar.setText("Refreshed");
+        tableView.refresh();
+        fldSearch.setText("");
+        choiceCategory.getSelectionModel().clearSelection();
     }
 }

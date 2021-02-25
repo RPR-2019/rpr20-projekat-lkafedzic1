@@ -1,12 +1,12 @@
-package ba.unsa.etf.rpr.project.controller;
+package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.ScientificWork;
+import ba.unsa.etf.rpr.project.exceptions.IllegalDeletionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -76,6 +76,8 @@ public class HomeAdminController extends HomeController {
     }
 
     public void actionDeleteScientificWork(ActionEvent actionEvent) {
+        checkSelection();
+
         ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
         if (scientificWork == null) return;
 
@@ -92,7 +94,22 @@ public class HomeAdminController extends HomeController {
         }
     }
 
+    private void checkSelection() {
+        if (tableView.getSelectionModel().getSelectedItem() == null) {
+            try {
+                throw new IllegalDeletionException("Can not delete if there is no row selected");
+            } catch (IllegalDeletionException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Deletion is forbiden " );
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+        }
+    }
+
     public void actionDeleteFieldOfStudy(ActionEvent actionEvent) {
+        checkSelection();
         String field = tableView.getSelectionModel().getSelectedItem().getField();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -109,6 +126,7 @@ public class HomeAdminController extends HomeController {
     }
 
     public void actionDeletePublicationType(ActionEvent actionEvent) {
+        checkSelection();
         String type = tableView.getSelectionModel().getSelectedItem().getType();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -125,6 +143,20 @@ public class HomeAdminController extends HomeController {
     }
 
     public void actionDeleteAuthor(ActionEvent actionEvent) {
+        checkSelection();
+        String author = tableView.getSelectionModel().getSelectedItem().getAuthor();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm deletion");
+        alert.setHeaderText("Are you sure you want to delete author " + author.toUpperCase() + "?");
+        alert.setContentText("This will delete " + author + " and all scientific works published by " + author);
+        alert.setResizable(true);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            instance.deleteAuthor(author);
+            scientificWorksList.setAll(instance.scientificWorks());
+        }
     }
 
 }

@@ -1,6 +1,7 @@
-package ba.unsa.etf.rpr.project.controller;
+package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.*;
+import ba.unsa.etf.rpr.project.exceptions.IllegalChoiceException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +17,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Year;
-import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
