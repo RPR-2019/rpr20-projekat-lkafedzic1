@@ -1,3 +1,4 @@
+PRAGMA foreign_keys=off;
 BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "field" (
 	"id"	INTEGER,
@@ -37,9 +38,12 @@ CREATE TABLE IF NOT EXISTS "scientific_work" (
 	"content" TEXT,
 	"author" INTEGER,
 	PRIMARY KEY("id"),
-	FOREIGN KEY("field") REFERENCES "field"("id"),
-	FOREIGN KEY("type") REFERENCES "publication_type"("id"),
+	FOREIGN KEY("field") REFERENCES "field"("id")
+	ON DELETE CASCADE,
+	FOREIGN KEY("type") REFERENCES "publication_type"("id")
+	ON DELETE CASCADE,
 	FOREIGN KEY("author") REFERENCES "author"("id")
+	ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "author" (
 	"id"	INTEGER,
@@ -88,4 +92,6 @@ INSERT INTO "scientific_work" VALUES (1,'Fuzzy sets',1,1965,1,'','fuzzy, artific
 INSERT INTO "scientific_work" VALUES (2,'Pancreatic extracts in the treatment of diabetes mellitus',1,1992,6,'','medicine, endocrinology','',2);
 INSERT INTO "user" VALUES (1,'admin','adminadmin','admin@gmail.com',2,1);
 INSERT INTO "user" VALUES (2,'lejla','lejlalejla','lejla@gmail.com',3,1);
+
 COMMIT;
+PRAGMA foreign_keys=on;

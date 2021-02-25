@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -92,9 +93,35 @@ public class HomeAdminController extends HomeController {
     }
 
     public void actionDeleteFieldOfStudy(ActionEvent actionEvent) {
+        String field = tableView.getSelectionModel().getSelectedItem().getField();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm deletion");
+        alert.setHeaderText("Are you sure you want to delete field " + field.toUpperCase() + "?");
+        alert.setContentText("Deleting \"" + field + "\" will delete works in that field");
+        alert.setResizable(true);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            instance.deleteField(field);
+            scientificWorksList.setAll(instance.scientificWorks());
+        }
     }
 
     public void actionDeletePublicationType(ActionEvent actionEvent) {
+        String type = tableView.getSelectionModel().getSelectedItem().getType();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm deletion");
+        alert.setHeaderText("Are you sure you want to delete field " + type.toUpperCase() + "?");
+        alert.setContentText("Deleting \"" + type + "\" will delete works that are published in books");
+        alert.setResizable(true);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            instance.deleteType(type);
+            scientificWorksList.setAll(instance.scientificWorks());
+        }
     }
 
     public void actionDeleteAuthor(ActionEvent actionEvent) {

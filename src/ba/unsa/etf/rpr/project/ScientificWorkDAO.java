@@ -16,7 +16,8 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery, deleteWorkQuery;
+    private PreparedStatement getAllWorksQuery, getLoginQuery, getFieldTitleQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery,
+            deleteWorkQuery, deleteFieldQuery, deleteTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -54,6 +55,7 @@ public class ScientificWorkDAO {
           getWorksFromAuthorsNameQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND person.name LIKE ?");
           getWorksFromTagQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.tags LIKE ?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
+          getFieldTitleQuery = conn.prepareStatement("SELECT title FROM field WHERE id=?");
           getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
           getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
@@ -79,6 +81,8 @@ public class ScientificWorkDAO {
           addScientificWorkQuery = conn.prepareStatement("INSERT INTO scientific_work VALUES(?,?,?,?,?,?,?,?,?)");
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
           deleteWorkQuery = conn.prepareStatement("DELETE FROM scientific_work WHERE id=?");
+          deleteFieldQuery = conn.prepareStatement("DELETE FROM field WHERE title=?");
+          deleteTypeQuery = conn.prepareStatement("DELETE FROM publication_type WHERE title=?");
       } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -502,6 +506,35 @@ public class ScientificWorkDAO {
         try {
             deleteWorkQuery.setInt(1, scientificWork.getId());
             deleteWorkQuery.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+/*    public String getField(int fieldId) {
+        try {
+            getFieldTitleQuery.setInt(1, fieldId);
+            ResultSet rs = getFieldTitleQuery.executeQuery();
+            return rs.getString("title");
+        } catch (SQLException exception) {
+            exception.getMessage();
+            return "";
+        }
+    }*/
+
+    public void deleteField(String field) {
+        try {
+            deleteFieldQuery.setString(1, field);
+            deleteFieldQuery.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteType(String type) {
+        try {
+            deleteTypeQuery.setString(1, type);
+            deleteTypeQuery.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
