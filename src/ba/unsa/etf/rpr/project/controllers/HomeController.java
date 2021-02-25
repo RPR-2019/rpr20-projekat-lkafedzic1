@@ -139,5 +139,6 @@ public class HomeController {
         tableView.refresh();
         fldSearch.setText("");
         choiceCategory.getSelectionModel().clearSelection();
+        tableView.setItems(scientificWorksList);
     }
 }
