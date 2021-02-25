@@ -1,10 +1,6 @@
 package ba.unsa.etf.rpr.project.controller;
 
-import ba.unsa.etf.rpr.project.IllegalChoiceException;
-import ba.unsa.etf.rpr.project.ScientificWork;
-import ba.unsa.etf.rpr.project.ScientificWorkDAO;
-import ba.unsa.etf.rpr.project.Validation;
-import javafx.collections.FXCollections;
+import ba.unsa.etf.rpr.project.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,10 +38,20 @@ public class ScientificWorkController implements Validation {
     public ChoiceBox<String> choiceAuthor;
     public CheckBox checkBoxAdditional;
 
-    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
+    private ScientificWorkDAO instance = null;
 
-    private ScientificWork scientificWork = null;
+    private ScientificWork scientificWork;
     private File chosenFile = null;
+    private ObservableList<ScientificWork> scientificWorksList;
+
+
+    public ScientificWork getScientificWork() {
+        return scientificWork;
+    }
+
+    public void setScientificWork(ScientificWork scientificWork) {
+        this.scientificWork = scientificWork;
+    }
 
     @FXML
     private void initialize() {
@@ -88,7 +91,8 @@ public class ScientificWorkController implements Validation {
         spinnerYear.getStyleClass().add("fieldNotValid");
         spinnerYear.getEditor().textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (spinnerYear.getEditor().getText().trim().isEmpty() || spinnerYear.getValue() > LocalDate.now().getYear()) {
+                    if (spinnerYear.getValue() > LocalDate.now().getYear()) throw new IllegalChoiceException("Date can't be in the future");
+                    else if (spinnerYear.getEditor().getText().trim().isEmpty() || spinnerYear.getValue() > LocalDate.now().getYear()) {
                         spinnerYear.getEditor().getStyleClass().removeAll("fieldValid");
                         spinnerYear.getEditor().getStyleClass().add("fieldNotValid");
                     } else {
@@ -109,6 +113,8 @@ public class ScientificWorkController implements Validation {
                     }
                 }
         );
+
+
     }
 
     public void actionCancel(ActionEvent actionEvent) {
@@ -137,23 +143,31 @@ public class ScientificWorkController implements Validation {
         if (choiceAuthor.getSelectionModel() == null || choiceFieldOfStudy.getSelectionModel() == null || choicePublicationType.getSelectionModel() == null ) {
             throw new IllegalChoiceException("Nothing selected");
         }
-        if (isInputValid(fldTitle) && isInputValid(fldPublishedIn) && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
+        if (isInputValid(fldTitle) && isAdditionalInfoValid() && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
             //String[] individualTags = txtAreaTags.getText().split(",");
             //add to database
             if (scientificWork == null) scientificWork = new ScientificWork();
             scientificWork.setTitle(fldTitle.getText());
             scientificWork.setType(choicePublicationType.getValue());
             scientificWork.setField(choiceFieldOfStudy.getValue());
-            scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//učitaj file
+           // scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//load file
+            scientificWork.setYear(spinnerYear.getValue());
             scientificWork.setAuthor(choiceAuthor.getValue());
             scientificWork.setAdditional(fldPublishedIn.getText());
             scientificWork.setTags(txtAreaTags.getText());
+            instance.addScientificWork(scientificWork);
 
             lblStatusBar.setText("Successfully added");
         }
         else {
             lblStatusBar.setText("Please, fill the form properly");
         }
+    }
+    //todo napraviti reference
+    //todo napraviti provjeru ako postoji rad u bazi
+
+    private boolean isAdditionalInfoValid() {
+        return checkBoxAdditional.isSelected() && isInputValid(fldPublishedIn) || ! checkBoxAdditional.isSelected();
     }
 
     private boolean isInputValid(TextField fld) {
@@ -175,11 +189,11 @@ public class ScientificWorkController implements Validation {
     }
 
     public void actionClose(ActionEvent actionEvent) {
-        Stage stage = (Stage) fldTitle.getScene().getWindow();
-        stage.close();
+        fldTitle.getScene().getWindow().hide();
     }
 
     public void actionCheckBox(ActionEvent actionEvent) {
         fldPublishedIn.setVisible(checkBoxAdditional.isSelected());
+        if (!checkBoxAdditional.isSelected()) fldPublishedIn.setText("");
     }
 }

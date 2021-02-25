@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.project.controller;
 
 import ba.unsa.etf.rpr.project.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
-import javafx.beans.property.Property;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,33 +15,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class GuestController {
     public Label lblWelcome;
     public ChoiceBox<String> choiceCategory;
     public TableView<ScientificWork> tableView;
-    public TableColumn columnTitle;
-    public TableColumn columnAuthor;
-    public TableColumn columnYear;
-    public TableColumn columnFieldOfStudy;
-    public TableColumn columnType;
+    public TableColumn<ScientificWork,String> columnTitle;
+    public TableColumn<ScientificWork,String> columnAuthor;
+    public TableColumn<ScientificWork,Integer> columnYear;
+    public TableColumn<ScientificWork,String> columnFieldOfStudy;
+    public TableColumn<ScientificWork,String> columnType;
     public Label lblStatusBar;
-    private ScientificWorkDAO instance = null;
-
+    private ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
+    private ObservableList<ScientificWork> scientificWorks = null;
 
     @FXML
     public void initialize() {
-        instance = ScientificWorkDAO.getInstance();
         loadSearchChoices(choiceCategory);
+        if (scientificWorks == null)
+            scientificWorks = FXCollections.observableArrayList(instance.scientificWorks());
+        //tableView.setItems(instance.getPopulationTableView(tableView));
+        tableView.setItems(scientificWorks);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
-        tableView.setItems(instance.getPopulationTableView(tableView));
     }
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
@@ -65,7 +65,6 @@ public class GuestController {
 
     public void actionSearch(ActionEvent actionEvent) {
         lblStatusBar.setText("Searching finished");
-
     }
 
     public void actionClose(ActionEvent actionEvent) {

@@ -4,18 +4,25 @@ import java.time.LocalDate;
 
 public class Person implements Validation {
     private int id;
-    private String firstName, lastName;
+    private String name;
     private Gender gender;
     private LocalDate dateOfBirth;
 
     public Person() {
     }
 
-    public Person(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
-        setFirstName(firstName);
-        setLastName(lastName);
+    public Person(String name, LocalDate dateOfBirth, Gender gender) {
+        setName(name);
         this.gender = gender;
         setDateOfBirth(dateOfBirth);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -24,24 +31,6 @@ public class Person implements Validation {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        if (isValidName(firstName))
-            this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        if (isValidName(lastName))
-            this.lastName = lastName;
     }
 
     public Gender getGender() {

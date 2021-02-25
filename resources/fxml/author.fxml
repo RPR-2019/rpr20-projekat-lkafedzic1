@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.AuthorController">
+<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="240.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controller.AuthorController">
    <stylesheets>
       <URL value="@/css/login.css" />
    </stylesheets>
@@ -23,17 +23,14 @@
             <RowConstraints />
             <RowConstraints />
             <RowConstraints />
-            <RowConstraints />
          </rowConstraints>
          <children>
-            <Label text="First name:" GridPane.rowIndex="1" />
-            <TextField fx:id="fldFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Last name:" GridPane.rowIndex="2" />
-            <TextField fx:id="fldLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Date of birth:" GridPane.rowIndex="3" />
-            <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Gender:" GridPane.rowIndex="4" />
-            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label text="Name:" GridPane.rowIndex="1" />
+            <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Date of birth:" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Gender:" GridPane.rowIndex="3" />
+            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
                      <toggleGroup>
@@ -43,7 +40,7 @@
                   <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender" />
                </children>
             </HBox>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
               <buttons>
                 <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok" />
                   <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Close" />

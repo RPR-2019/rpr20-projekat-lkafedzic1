@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.project.controller;
 
 import ba.unsa.etf.rpr.project.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,22 +29,27 @@ public class HomeController {
     public TableColumn<ScientificWork,Integer> columnYear;
     public TableColumn<ScientificWork,String> columnFieldOfStudy;
     public TableColumn<ScientificWork,String> columnType;
-    private ScientificWorkDAO instance = null;
+    protected ScientificWorkDAO instance = null;
+
+    protected ObservableList<ScientificWork> scientificWorksList;
 
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
         loadSearchChoices(choiceCategory);
+
+        //tableView.setItems(instance.getPopulationTableView()); //BITNO
+        //tableView.setItems(scientificWorksList);
+        scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
+        tableView.setItems(scientificWorksList);
         columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
         columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
         columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
         columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
         columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
-        tableView.setItems(instance.getPopulationTableView(tableView));
-        tableView.setPlaceholder(new Label("There is no results"));
     }
 
-    private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
+    void loadSearchChoices(ChoiceBox<String> choiceCategory) {
         //Search: tag, admin, author - clients wishes
         choiceCategory.getItems().add("Title");
         choiceCategory.getItems().add("Tags");
@@ -89,5 +96,12 @@ public class HomeController {
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void actionRefresh(ActionEvent actionEvent) {
+        lblStatusBar.setText("Refreshed");
+        tableView.refresh();
+        fldSearch.setText("");
+        choiceCategory.getSelectionModel().clearSelection();
     }
 }

@@ -9,14 +9,13 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 
 public class AuthorController implements Validation{
-
-    public TextField fldFirstName;
-    public TextField fldLastName;
+    
     public DatePicker dateOfBirth;
     public RadioButton radioMale;
     public RadioButton radioFemale;
     public ToggleGroup toggleGender;
     public Label lblStatusBar;
+    public TextField fldName;
     private Author author = null;
     String authorName = null;
 
@@ -29,27 +28,15 @@ public class AuthorController implements Validation{
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
-        fldFirstName.getStyleClass().add("fieldNotValid");
-        fldFirstName.textProperty().addListener(
+        fldName.getStyleClass().add("fieldNotValid");
+        fldName.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (isValidName(fldFirstName.getText())) {
-                        fldFirstName.getStyleClass().removeAll("fieldNotValid");
-                        fldFirstName.getStyleClass().add("fieldValid");
+                    if (isValidName(fldName.getText())) {
+                        fldName.getStyleClass().removeAll("fieldNotValid");
+                        fldName.getStyleClass().add("fieldValid");
                     } else {
-                        fldFirstName.getStyleClass().removeAll("fieldValid");
-                        fldFirstName.getStyleClass().add("fieldNotValid");
-                    }
-                }
-        );
-        fldLastName.getStyleClass().add("fieldNotValid");
-        fldLastName.textProperty().addListener(
-                (observableValue, o, n) -> {
-                    if (isValidName(fldLastName.getText())) {
-                        fldLastName.getStyleClass().removeAll("fieldNotValid");
-                        fldLastName.getStyleClass().add("fieldValid");
-                    } else {
-                        fldLastName.getStyleClass().removeAll("fieldValid");
-                        fldLastName.getStyleClass().add("fieldNotValid");
+                        fldName.getStyleClass().removeAll("fieldValid");
+                        fldName.getStyleClass().add("fieldNotValid");
                     }
                 }
         );
@@ -91,12 +78,12 @@ public class AuthorController implements Validation{
     }
 
     private boolean isEveryInputValid() {
-        return (isInputValid(fldFirstName) && isInputValid(fldLastName) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
+        return (isInputValid(fldName) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
     }
 
     public void actionSave(ActionEvent actionEvent) {
         if (isEveryInputValid()) {
-            if(instance.findAuthorFromPerson(fldFirstName.getText(), fldLastName.getText())) {
+            if(instance.findAuthorFromPerson(fldName.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Author already exists");
@@ -108,8 +95,7 @@ public class AuthorController implements Validation{
             }
             //adding new account
             if (author == null) author = new Author();
-            author.setFirstName(fldFirstName.getText());
-            author.setLastName(fldLastName.getText());
+            author.setName(fldName.getText());
             author.setDateOfBirth(dateOfBirth.getValue());
             author.setGender(getGender());
             instance.addAuthor(author);

@@ -1,20 +1,29 @@
 package ba.unsa.etf.rpr.project;
 
 import javafx.beans.property.SimpleStringProperty;
-
 import java.time.LocalDate;
 
 public class ScientificWork implements Validation {
     private int id, year;
     private SimpleStringProperty title;
-    private SimpleStringProperty type, field;
+    private SimpleStringProperty type, field; //id,id
     private SimpleStringProperty content;
-    private SimpleStringProperty author;
+    private SimpleStringProperty author; //id
     private SimpleStringProperty additional;
     private SimpleStringProperty tags;
 
     public ScientificWork(){
         this.title = new SimpleStringProperty();
+        this.type = new SimpleStringProperty();
+        this.field = new SimpleStringProperty();
+        this.content = new SimpleStringProperty();
+        this.tags = new SimpleStringProperty();
+        this.additional = new SimpleStringProperty();
+        this.author = new SimpleStringProperty();
+    }
+
+/*    public ScientificWork(String title){
+        this.title = new SimpleStringProperty(title);
         this.type = new SimpleStringProperty();
         this.field = new SimpleStringProperty();
         this.content = new SimpleStringProperty();
@@ -29,7 +38,10 @@ public class ScientificWork implements Validation {
         this.author = new SimpleStringProperty(author);
         this.additional = new SimpleStringProperty(additional);
         this.tags = new SimpleStringProperty(tags);
-    }
+        this.content = new SimpleStringProperty();
+        this.type = new SimpleStringProperty();
+        this.field = new SimpleStringProperty();
+    }*/
 
     public ScientificWork(String title, String author, int year, String fieldOfStudy, String publicationType, String additional, String tags) {
         this.title = new SimpleStringProperty(title);
@@ -41,6 +53,7 @@ public class ScientificWork implements Validation {
         this.tags = new SimpleStringProperty(tags);
         this.additional = new SimpleStringProperty(additional);
         this.author = new SimpleStringProperty(author);
+        this.content = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -108,18 +121,6 @@ public class ScientificWork implements Validation {
         this.content.set(content);
     }
 
-    public String getAuthor() {
-        return author.get();
-    }
-
-    public SimpleStringProperty authorProperty() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author.set(author);
-    }
-
     public String getAdditional() {
         return additional.get();
     }
@@ -142,5 +143,22 @@ public class ScientificWork implements Validation {
 
     public void setTags(String tags) {
         this.tags.set(tags);
+    }
+
+    public String getAuthor() {
+        return author.get();
+    }
+
+    public SimpleStringProperty authorProperty() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author.set(author);
+    }
+
+    @Override
+    public String toString() {
+        return title.get();
     }
 }

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author extends Person implements Comparable<Author> {
-
-    private List<ScientificWork> works;
+        private List<ScientificWork> works;
 
     public List<ScientificWork> getWorks() {
         return works;
@@ -20,17 +19,15 @@ public class Author extends Person implements Comparable<Author> {
         works = new ArrayList<>();
     }
 
-    public Author(String firstName, String lastName, LocalDate dateOfBirth, Gender gender) {
-        super.setFirstName(firstName);
-        super.setLastName(lastName);
+    public Author(String name, LocalDate dateOfBirth, Gender gender) {
+        super.setName(name);
         super.setDateOfBirth(dateOfBirth);
         super.setGender(gender);
         works = new ArrayList<>();
     }
 
-    public Author(String firstName, String lastName, LocalDate dateOfBirth, Gender gender, ArrayList<ScientificWork> works) {
-        super.setFirstName(firstName);
-        super.setLastName(lastName);
+    public Author(String name, LocalDate dateOfBirth, Gender gender, ArrayList<ScientificWork> works) {
+        super.setName(name);
         super.setDateOfBirth(dateOfBirth);
         super.setGender(gender);
         this.works = works;

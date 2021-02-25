@@ -19,7 +19,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getLoginQuery, getRoleFromIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, getUserQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, findAuthorFromPerson, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
+    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getAuthorFromIdQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -51,35 +51,32 @@ public class ScientificWorkDAO {
           getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?" );
           getRoleFromIdQuery = conn.prepareStatement("SELECT title FROM role WHERE id=?");
           getPersonFromAuthorQuery = conn.prepareStatement("SELECT p.id FROM author a, person p WHERE p.id=a.person_id AND a.id=?");
-          getAuthorQuery = conn.prepareStatement("SELECT author.* FROM author, person WHERE person.id=author.person_id AND person.first_name=? AND person.last_name=?");
+          getAuthorQuery = conn.prepareStatement("SELECT author.id FROM author, person WHERE person.id=author.person_id AND person.name=?");
+          getAuthorFromIdQuery = conn.prepareStatement("SELECT person.name, person.date_of_birth, person.gender_id FROM author, person WHERE person.id=author.person_id AND author.id=?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
+          getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
-          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.first_name || ' ' || person.last_name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, scientific_work_author swa, field, publication_type WHERE sw.id=swa.scientific_work_id AND swa.author_id=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id;");
+          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
           getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
-          findAuthorFromPerson = conn.prepareStatement("SELECT author.* FROM author, person WHERE author.person_id=person.id AND person.first_name=? AND person.last_name=?");
+          getTypeIdQuery = conn.prepareStatement("SELECT id FROM publication_type WHERE title=?");
+          getFieldIdQuery = conn.prepareStatement("SELECT id FROM field WHERE title=?");
+          findAuthorFromPerson = conn.prepareStatement("SELECT author.* FROM author, person WHERE author.person_id=person.id AND person.name=?");
           maxIdUserQuery = conn.prepareStatement("SELECT max(id)+1 FROM user");
           maxIdFieldQuery = conn.prepareStatement("SELECT max(id)+1 FROM field");
           maxIdTypeQuery = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");
           maxIdPersonQuery = conn.prepareStatement("SELECT max(id)+1 FROM person");
           maxIdAuthorQuery = conn.prepareStatement("SELECT max(id)+1 FROM author");
+          maxIdWorkQuery = conn.prepareStatement("SELECT max(id)+1 FROM scientific_work"); //Scientific work
           addUserQuery = conn.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?)");
-          addPersonQuery = conn.prepareStatement("INSERT INTO person VALUES(?,?,?,?,?)");
+          addPersonQuery = conn.prepareStatement("INSERT INTO person VALUES(?,?,?,?)");
           addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
           getUsersQuery = conn.prepareStatement("SELECT username FROM user");
-          getPersonsQuery = conn.prepareStatement("SELECT first_name FROM person, author WHERE author.person_id=person.id");
-          getAuthorsQuery = conn.prepareStatement("SELECT p.first_name || ' ' || p.last_name FROM person p, author a WHERE a.person_id=p.id");
+          getPersonsQuery = conn.prepareStatement("SELECT name FROM person, author WHERE author.person_id=person.id");
+          getAuthorsQuery = conn.prepareStatement("SELECT p.name FROM person p, author a WHERE a.person_id=p.id");
           addTypeQuery = conn.prepareStatement("INSERT INTO publication_type VALUES(?,?)");
           addAuthorQuery = conn.prepareStatement("INSERT INTO author VALUES(?,?)");
-          /* getUserFromLoginQuery = conn.prepareStatement("SELECT person.*, u.username, u.password, u.email, u.image FROM user u, person WHERE u.id=person.id AND u.username=? AND u.password=?");
-          System.out.println("Evo me evo");
-            getGenderQuery = conn.prepareStatement("SELECT gender.title FROM user, gender WHERE gender.user_id=user.id AND user.id=?");
-
-            addFieldQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
-            addTypeQuery = conn.prepareStatement("INSERT INTO field VALUES(?,?)");
-            maxIdField = conn.prepareStatement("SELECT max(id)+1 FROM field");
-            maxIdType = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");*/
-
+          addScientificWorkQuery = conn.prepareStatement("INSERT INTO scientific_work VALUES(?,?,?,?,?,?,?,?,?)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -199,19 +196,6 @@ public class ScientificWorkDAO {
         }
     }
 
-    public ObservableList<ScientificWork> getPopulationTableView(TableView tableView) {
-        ObservableList<ScientificWork> scientificWorksList = FXCollections.observableArrayList();
-        try {
-            ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
-            while(rs.next()) {
-                scientificWorksList.add(new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)));
-            }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-        return scientificWorksList;
-    }
-
     public void updatePassword(String username, String newPassword) {
         try {
             changePasswordQuery.setString(1, newPassword);
@@ -233,39 +217,6 @@ public class ScientificWorkDAO {
         }
     }
 
-    public void addUser(User user) {
-        try {
-            ResultSet rs = maxIdUserQuery.executeQuery();
-            int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-            addUserQuery.setInt(1, id);
-            addUserQuery.setString(2, user.getUsername());
-            addUserQuery.setString(3,user.getPassword());
-            addUserQuery.setString(4, user.getEmail());
-            addUserQuery.setInt(5, user.getPersonId());
-            addUserQuery.setInt(6, user.getRole().ordinal());
-            addUserQuery.execute();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-    public void addFieldOfStudy(FieldOfStudy fieldOfStudy) {
-        try {
-            ResultSet rs = maxIdFieldQuery.executeQuery();
-            int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-            addFieldQuery.setInt(1, id);
-            addFieldQuery.setString(2, fieldOfStudy.getTitle());
-            addFieldQuery.execute();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
     public void getAllUsers() {
         try {
             ResultSet rs = getUsersQuery.executeQuery();
@@ -273,50 +224,6 @@ public class ScientificWorkDAO {
                 System.out.println(rs.getString(1));
             }
 
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-    public void addPublicationType(PublicationType publicationType) {
-        try {
-            ResultSet rs = maxIdTypeQuery.executeQuery();
-            int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-            addTypeQuery.setInt(1, id);
-            addTypeQuery.setString(2, publicationType.getTitle());
-            addTypeQuery.execute();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-    public boolean findAuthorFromPerson(String firstName, String lastName) {
-        try {
-            getAuthorQuery.setString(1, firstName);
-            getAuthorQuery.setString(2, lastName);
-            ResultSet rs = getAuthorQuery.executeQuery();
-            return rs.next();
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-            return false;
-        }
-    }
-
-    public void addAuthor(Author author) {
-        try {
-            ResultSet rs = maxIdAuthorQuery.executeQuery();
-            int id = 1;
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-            addAuthorQuery.setInt(1, id);
-            int personId = getPersonIdFromAuthor(author, id);
-            addAuthorQuery.setInt(2, personId );
-
-            addAuthorQuery.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -338,6 +245,165 @@ public class ScientificWorkDAO {
         }
     }
 
+    public void getAllAuthors() {
+        try {
+            ResultSet rs = getPersonsQuery.executeQuery();
+            while(rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void getAllWorks() {
+        try {
+            ResultSet rs = getAllWorksQuery.executeQuery();
+            while(rs.next()) {
+                System.out.println(rs.getString(2));
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public boolean findAuthorFromPerson(String name) {
+        try {
+            getAuthorQuery.setString(1, name);
+            ResultSet rs = getAuthorQuery.executeQuery();
+            return rs.next();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return false;
+        }
+    }
+
+    public int getAuthorIdFromName(String author) {
+        try {
+            getAuthorQuery.setString(1, author);
+            ResultSet rs = getAuthorQuery.executeQuery();
+            return rs.getInt(1);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return -1;
+        }
+    }
+
+    public void addUser(User user) {
+        try {
+            ResultSet rs = maxIdUserQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addUserQuery.setInt(1, id);
+            addUserQuery.setString(2, user.getUsername());
+            addUserQuery.setString(3,user.getPassword());
+            addUserQuery.setString(4, user.getEmail());
+            addUserQuery.setInt(5, user.getPersonId());
+            addUserQuery.setInt(6, user.getRole().ordinal());
+            addUserQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void addFieldOfStudy(FieldOfStudy fieldOfStudy) {
+        try {
+            ResultSet rs = maxIdFieldQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addFieldQuery.setInt(1, id);
+            addFieldQuery.setString(2, fieldOfStudy.getTitle());
+            addFieldQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void addAuthor(Author author) {
+        try {
+            ResultSet rs = maxIdAuthorQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addAuthorQuery.setInt(1, id);
+            int personId = getPersonIdFromAuthor(author, id);
+            addAuthorQuery.setInt(2, personId );
+
+            addAuthorQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void addPublicationType(PublicationType publicationType) {
+        try {
+            ResultSet rs = maxIdTypeQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addTypeQuery.setInt(1, id);
+            addTypeQuery.setString(2, publicationType.getTitle());
+            addTypeQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void addScientificWork(ScientificWork scientificWork) {
+        try {
+            ResultSet rs = maxIdWorkQuery.executeQuery();
+            int id = 1;
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            addScientificWorkQuery.setInt(1, id);
+            addScientificWorkQuery.setString(2, scientificWork.getTitle());
+            int typeId = getTypeId(scientificWork.getType());
+            addScientificWorkQuery.setInt(3, typeId); //treba id
+            addScientificWorkQuery.setInt(4,scientificWork.getYear());
+            int fieldId = getFieldId(scientificWork.getField());
+            addScientificWorkQuery.setInt(5,fieldId); //treba id
+            addScientificWorkQuery.setString(6,scientificWork.getAdditional());
+            addScientificWorkQuery.setString(7, scientificWork.getTags());
+            addScientificWorkQuery.setString(8, scientificWork.getContent());
+            int authorId = getAuthorIdFromName(scientificWork.getAuthor());
+            addScientificWorkQuery.setInt(9, authorId);
+            addScientificWorkQuery.execute();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private int getTypeId(String title) {
+        try {
+            getTypeIdQuery.setString(1, title);
+            ResultSet rs = getTypeIdQuery.executeQuery();
+            return rs.getInt(1);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return -1;
+        }
+    }
+
+    private int getFieldId(String title) {
+        try {
+            getFieldIdQuery.setString(1, title);
+            ResultSet rs = getFieldIdQuery.executeQuery();
+            return rs.getInt(1);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return -1;
+        }
+    }
+
     private int addPersonFromAuthor(Author author) {
         try {
             ResultSet rs = maxIdPersonQuery.executeQuery();
@@ -346,8 +412,7 @@ public class ScientificWorkDAO {
                 id = rs.getInt(1);
             }
             addPersonQuery.setInt(1, id);
-            addPersonQuery.setString(2, author.getFirstName());
-            addPersonQuery.setString(3, author.getLastName());
+            addPersonQuery.setString(2, author.getName());
             addPersonQuery.setString(4, author.getDateOfBirth().toString());
             addPersonQuery.setString(5, String.valueOf(author.getGender()));
 
@@ -359,16 +424,21 @@ public class ScientificWorkDAO {
         }
     }
 
-    public void getAllAuthors() {
+    public ArrayList<ScientificWork> scientificWorks() {
+        ArrayList<ScientificWork> result = new ArrayList<>();
         try {
-            ResultSet rs = getPersonsQuery.executeQuery();
-            while(rs.next()) {
-                System.out.println(rs.getString(1));
+            ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
+            //ne treba mi iz .db.sql baze čitati nego iz liste...
+            while (rs.next()) {
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7));
+                instance.addScientificWork(scientificWork);
+                System.out.println("TU sam: " + scientificWork);
+                result.add(scientificWork);
             }
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return result;
     }
 
 }

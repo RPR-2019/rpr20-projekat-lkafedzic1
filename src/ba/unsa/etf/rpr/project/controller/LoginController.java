@@ -79,7 +79,7 @@ public class LoginController {
         }
     }
 
-    private void showUserView() throws IOException {
+    public void showUserView() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
         Parent root = loader.load();
@@ -92,7 +92,7 @@ public class LoginController {
         stage.show();
     }
 
-    private void showAdministratorView() throws IOException {
+    public void showAdministratorView() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeAdministrator.fxml"));
         Parent root = loader.load();

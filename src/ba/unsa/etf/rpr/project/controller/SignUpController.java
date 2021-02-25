@@ -15,8 +15,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class SignUpController implements Validation{
 
-    public TextField fldFirstName;
-    public TextField fldLastName;
+
     public DatePicker dateOfBirth;
     public TextField fldEmail;
     public TextField fldUsername;
@@ -25,6 +24,7 @@ public class SignUpController implements Validation{
     public RadioButton radioFemale;
     public PasswordField fldPassword;
     public Label lblStatusBar;
+    public TextField fldName;
 
     private User user;
     private ScientificWorkDAO instance;
@@ -33,30 +33,19 @@ public class SignUpController implements Validation{
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
 
-        fldFirstName.getStyleClass().add("fieldNotValid");
-        fldFirstName.textProperty().addListener(
+        fldName.getStyleClass().add("fieldNotValid");
+        fldName.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (isValidName(fldFirstName.getText())) {
-                        fldFirstName.getStyleClass().removeAll("fieldNotValid");
-                        fldFirstName.getStyleClass().add("fieldValid");
+                    if (isValidName(fldName.getText())) {
+                        fldName.getStyleClass().removeAll("fieldNotValid");
+                        fldName.getStyleClass().add("fieldValid");
                     } else {
-                        fldFirstName.getStyleClass().removeAll("fieldValid");
-                        fldFirstName.getStyleClass().add("fieldNotValid");
+                        fldName.getStyleClass().removeAll("fieldValid");
+                        fldName.getStyleClass().add("fieldNotValid");
                     }
                 }
         );
-        fldLastName.getStyleClass().add("fieldNotValid");
-        fldLastName.textProperty().addListener(
-                (observableValue, o, n) -> {
-                    if (isValidName(fldLastName.getText())) {
-                        fldLastName.getStyleClass().removeAll("fieldNotValid");
-                        fldLastName.getStyleClass().add("fieldValid");
-                    } else {
-                        fldLastName.getStyleClass().removeAll("fieldValid");
-                        fldLastName.getStyleClass().add("fieldNotValid");
-                    }
-                }
-        );
+
         fldEmail.getStyleClass().add("fieldNotValid");
         fldEmail.textProperty().addListener(
                 (observableValue, o, n) -> {
@@ -127,7 +116,7 @@ public class SignUpController implements Validation{
     }
 
     private boolean isEveryInputValid() {
-        return (isInputValid(fldFirstName) && isInputValid(fldLastName) && isInputValid(fldEmail) &&  isInputValid(fldUsername) && isInputValid(fldPassword) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
+        return (isInputValid(fldName) && isInputValid(fldEmail) &&  isInputValid(fldUsername) && isInputValid(fldPassword) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
     }
 
     public void actionSave(ActionEvent actionEvent) {
@@ -148,7 +137,7 @@ public class SignUpController implements Validation{
                 lblStatusBar.setText("Successful sign up");
             }
             //adding new account
-            Person person = new Person(fldFirstName.getText(),fldLastName.getText(),dateOfBirth.getValue(), this.getGender());
+            Person person = new Person(fldName.getText() ,dateOfBirth.getValue(), this.getGender());
             if (user == null) user = new User();
             user.setUsername(fldUsername.getText());
             user.setPassword(fldPassword.getText());
@@ -181,7 +170,7 @@ public class SignUpController implements Validation{
     }
 
     public void actionCancel(ActionEvent actionEvent) throws IOException {
-        fldFirstName.getScene().getWindow().hide();
+        fldName.getScene().getWindow().hide();
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         Parent root = loader.load();

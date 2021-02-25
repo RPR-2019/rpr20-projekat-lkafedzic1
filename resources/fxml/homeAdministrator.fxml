@@ -15,6 +15,11 @@
                     <MenuItem mnemonicParsing="false" onAction="#actionSignOut" text="Close" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Edit">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#actionRefresh" text="Refresh" />
+                     </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#actionAbout" text="About" />
@@ -82,7 +87,7 @@
                   </HBox>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TableView fx:id="tableView" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT">
+                        <TableView fx:id="tableView" editable="true" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT">
                           <columns>
                             <TableColumn fx:id="columnTitle" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="131.0" text="Title" />
                             <TableColumn fx:id="columnAuthor" minWidth="50.0" prefWidth="122.0" text="Author" />

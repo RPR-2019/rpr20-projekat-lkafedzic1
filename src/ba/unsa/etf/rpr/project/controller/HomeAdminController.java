@@ -1,9 +1,15 @@
 package ba.unsa.etf.rpr.project.controller;
 
+import ba.unsa.etf.rpr.project.ScientificWork;
+import ba.unsa.etf.rpr.project.ScientificWorkDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,15 +18,41 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class HomeAdminController extends HomeController {
 
+    @FXML
+    public void initialize() {
+        instance = ScientificWorkDAO.getInstance();
+        loadSearchChoices(choiceCategory);
+        scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
+        tableView.setItems(scientificWorksList);
+        columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
+        columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
+        columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
+        columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
+        columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
+    }
+
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"));
         Parent root = loader.load();
-        ScientificWorkController newWindow = loader.getController();
+        ScientificWorkController scientificWorkController = loader.getController();
         stage.setTitle("Add new scientific work");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMinWidth(470);
         stage.show();
+
+        stage.setOnHiding(windowEvent -> {
+            ScientificWork scientificWork = scientificWorkController.getScientificWork();
+            if (scientificWork != null) {
+                try {
+                    instance.addScientificWork(scientificWork);
+                    scientificWorksList.setAll(instance.scientificWorks());
+                    tableView.setItems(scientificWorksList);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        });
     }
 
     public void actionAddFieldOfStudy(ActionEvent actionEvent) throws IOException {
@@ -68,4 +100,5 @@ public class HomeAdminController extends HomeController {
 
     public void actionDeleteAuthor(ActionEvent actionEvent) {
     }
+
 }
