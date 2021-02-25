@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -143,7 +144,6 @@ public class ScientificWorkController implements Validation {
         }
         if (isInputValid(fldTitle) && isAdditionalInfoValid() && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
             //String[] individualTags = txtAreaTags.getText().split(",");
-
             String title = fldTitle.getText();
             String author = choiceAuthor.getValue();
             if (instance.isDupe(title,author)) {
@@ -168,6 +168,12 @@ public class ScientificWorkController implements Validation {
 
                 instance.addScientificWork(scientificWork);
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Scientific work successfully added");
+
+                alert.showAndWait();
                 lblStatusBar.setText("Successfully added");
             }
         }
