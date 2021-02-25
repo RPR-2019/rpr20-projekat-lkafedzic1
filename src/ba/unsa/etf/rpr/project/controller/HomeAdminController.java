@@ -5,9 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -72,6 +75,20 @@ public class HomeAdminController extends HomeController {
     }
 
     public void actionDeleteScientificWork(ActionEvent actionEvent) {
+        ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
+        if (scientificWork == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm deletion");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("Deleting \"" + scientificWork.getTitle()+"\"");
+        alert.setResizable(true);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            instance.deleteScientificWork(scientificWork);
+            scientificWorksList.setAll(instance.scientificWorks());
+        }
     }
 
     public void actionDeleteFieldOfStudy(ActionEvent actionEvent) {

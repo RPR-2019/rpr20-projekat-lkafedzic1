@@ -16,7 +16,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery;
+    private PreparedStatement getAllWorksQuery, getLoginQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery, deleteWorkQuery;
 
     public static ScientificWorkDAO getInstance() {
         if (instance == null) instance = new ScientificWorkDAO();
@@ -78,6 +78,7 @@ public class ScientificWorkDAO {
           addAuthorQuery = conn.prepareStatement("INSERT INTO author VALUES(?,?)");
           addScientificWorkQuery = conn.prepareStatement("INSERT INTO scientific_work VALUES(?,?,?,?,?,?,?,?,?)");
           changePasswordQuery = conn.prepareStatement("UPDATE user SET password=? WHERE username=?");
+          deleteWorkQuery = conn.prepareStatement("DELETE FROM scientific_work WHERE id=?");
       } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -495,5 +496,14 @@ public class ScientificWorkDAO {
             exception.printStackTrace();
         }
         return result;
+    }
+
+    public void deleteScientificWork(ScientificWork scientificWork) {
+        try {
+            deleteWorkQuery.setInt(1, scientificWork.getId());
+            deleteWorkQuery.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
