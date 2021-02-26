@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
 
 public class ChoiceField {
     private int id;

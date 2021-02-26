@@ -1,4 +1,6 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
+
+import ba.unsa.etf.rpr.project.enums.Gender;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

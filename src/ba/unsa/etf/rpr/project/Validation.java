@@ -1,7 +1,4 @@
 package ba.unsa.etf.rpr.project;
-
-import javafx.css.Match;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +7,7 @@ public interface Validation {
     default boolean isValidName(String s) {
         Pattern pattern = Pattern.compile(new String ("^[\\p{L} .'-]+$")); //allow letters from any language, space...
         Matcher matcher = pattern.matcher(s);
-        if (matcher.matches()) return true;
-        return false;
+        return matcher.matches();
     }
 
     default boolean isValidUsername (String s) {

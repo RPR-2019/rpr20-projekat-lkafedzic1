@@ -1,14 +1,15 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
 
+import ba.unsa.etf.rpr.project.Validation;
 import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
 public class ScientificWork implements Validation {
     private int id, year;
     private SimpleStringProperty title;
-    private SimpleStringProperty type, field; //id,id
+    private SimpleStringProperty type, field; //type id and field id are foreign keys in database
     private SimpleStringProperty content;
-    private SimpleStringProperty author; //id
+    private SimpleStringProperty author; //author id is foreign key in database table
     private SimpleStringProperty additional;
     private SimpleStringProperty tags;
 
@@ -21,27 +22,6 @@ public class ScientificWork implements Validation {
         this.additional = new SimpleStringProperty();
         this.author = new SimpleStringProperty();
     }
-
-/*    public ScientificWork(String title){
-        this.title = new SimpleStringProperty(title);
-        this.type = new SimpleStringProperty();
-        this.field = new SimpleStringProperty();
-        this.content = new SimpleStringProperty();
-        this.tags = new SimpleStringProperty();
-        this.additional = new SimpleStringProperty();
-        this.author = new SimpleStringProperty();
-    }
-
-    public ScientificWork(int year, String title, String author, String additional, String tags) {
-        this.year = year;
-        this.title = new SimpleStringProperty(title);
-        this.author = new SimpleStringProperty(author);
-        this.additional = new SimpleStringProperty(additional);
-        this.tags = new SimpleStringProperty(tags);
-        this.content = new SimpleStringProperty();
-        this.type = new SimpleStringProperty();
-        this.field = new SimpleStringProperty();
-    }*/
 
     public ScientificWork(String title, String author, int year, String fieldOfStudy, String publicationType, String additional, String tags, String content) {
         this.title = new SimpleStringProperty(title);

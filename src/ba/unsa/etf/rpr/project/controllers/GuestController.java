@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.project.controllers;
 
 
-import ba.unsa.etf.rpr.project.ScientificWork;
+import ba.unsa.etf.rpr.project.models.ScientificWork;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

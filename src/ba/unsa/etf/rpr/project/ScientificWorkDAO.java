@@ -1,12 +1,9 @@
 package ba.unsa.etf.rpr.project;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import ba.unsa.etf.rpr.project.models.*;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import javax.xml.transform.Result;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -511,17 +508,6 @@ public class ScientificWorkDAO {
             e.printStackTrace();
         }
     }
-
-/*    public String getField(int fieldId) {
-        try {
-            getFieldTitleQuery.setInt(1, fieldId);
-            ResultSet rs = getFieldTitleQuery.executeQuery();
-            return rs.getString("title");
-        } catch (SQLException exception) {
-            exception.getMessage();
-            return "";
-        }
-    }*/
 
     public void deleteField(String field) {
         try {

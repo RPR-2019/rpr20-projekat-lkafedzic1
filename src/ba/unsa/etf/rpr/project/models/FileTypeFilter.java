@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;

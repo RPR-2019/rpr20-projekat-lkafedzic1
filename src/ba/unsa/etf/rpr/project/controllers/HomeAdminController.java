@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.project.controllers;
 
-import ba.unsa.etf.rpr.project.ScientificWork;
-import ba.unsa.etf.rpr.project.exceptions.IllegalDeletionException;
+import ba.unsa.etf.rpr.project.models.ScientificWork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

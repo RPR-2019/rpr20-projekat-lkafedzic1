@@ -1,5 +1,7 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
 
+import ba.unsa.etf.rpr.project.enums.Role;
+import ba.unsa.etf.rpr.project.Validation;
 import javafx.beans.property.SimpleStringProperty;
 
 public class User implements Validation {

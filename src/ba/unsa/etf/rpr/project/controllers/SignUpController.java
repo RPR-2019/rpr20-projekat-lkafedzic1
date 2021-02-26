@@ -1,6 +1,10 @@
 package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.*;
+import ba.unsa.etf.rpr.project.enums.Gender;
+import ba.unsa.etf.rpr.project.enums.Role;
+import ba.unsa.etf.rpr.project.models.Person;
+import ba.unsa.etf.rpr.project.models.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

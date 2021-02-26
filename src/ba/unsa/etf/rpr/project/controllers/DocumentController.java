@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.project.controllers;
 
-import ba.unsa.etf.rpr.project.FileTypeFilter;
-import ba.unsa.etf.rpr.project.ScientificWork;
+import ba.unsa.etf.rpr.project.models.FileTypeFilter;
+import ba.unsa.etf.rpr.project.models.ScientificWork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

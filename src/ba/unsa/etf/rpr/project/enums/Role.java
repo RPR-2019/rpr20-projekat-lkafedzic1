@@ -1,6 +1,7 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.enums;
 
 public enum Role {
+    //full view can only be accessed by these roles
     ADMIN(1),
     USER(2);
 

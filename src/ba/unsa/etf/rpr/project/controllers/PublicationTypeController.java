@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.project.controllers;
 
 
-import ba.unsa.etf.rpr.project.PublicationType;
+import ba.unsa.etf.rpr.project.models.PublicationType;
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

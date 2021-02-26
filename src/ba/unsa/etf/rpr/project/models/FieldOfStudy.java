@@ -1,6 +1,6 @@
-package ba.unsa.etf.rpr.project;
+package ba.unsa.etf.rpr.project.models;
 
-import java.io.Serializable;
+import ba.unsa.etf.rpr.project.models.ChoiceField;
 
 public class FieldOfStudy extends ChoiceField {
 

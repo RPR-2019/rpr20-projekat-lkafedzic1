@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.*;
 import ba.unsa.etf.rpr.project.exceptions.IllegalDeletionException;
+import ba.unsa.etf.rpr.project.models.ScientificWork;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,12 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
