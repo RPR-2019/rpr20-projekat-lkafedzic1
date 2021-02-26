@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.Year;
 
@@ -158,7 +159,7 @@ public class ScientificWorkController implements Validation {
                 scientificWork.setTitle(title);
                 scientificWork.setType(choicePublicationType.getValue());
                 scientificWork.setField(choiceFieldOfStudy.getValue());
-                // scientificWork.setContent(Files.readString(Path.of(chosenFile.toURI())));//todo load file
+                scientificWork.setContent(new String(Files.readAllBytes(chosenFile.toPath())));
                 scientificWork.setYear(spinnerYear.getValue());
                 scientificWork.setAuthor(author);
                 scientificWork.setAdditional(fldPublishedIn.getText());
@@ -179,7 +180,6 @@ public class ScientificWorkController implements Validation {
             lblStatusBar.setText("Please, fill the form properly");
         }
     }
-    //todo add citations/references
 
     private boolean isAdditionalInfoValid() {
         return checkBoxAdditional.isSelected() && isInputValid(fldPublishedIn) || ! checkBoxAdditional.isSelected();

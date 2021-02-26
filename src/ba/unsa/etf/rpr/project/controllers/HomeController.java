@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.*;
+import ba.unsa.etf.rpr.project.exceptions.IllegalDeletionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -110,17 +111,53 @@ public class HomeController {
         stage.show();
     }
 
-    public void actionRead(ActionEvent actionEvent) throws IOException {
+/*    public void actionRead(ActionEvent actionEvent) throws IOException {
+        checkSelection();
+        ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
+
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
         Parent root = loader.load();
-        ScientificWorkController newWindow = loader.getController();
-        stage.setTitle(String.valueOf(newWindow.fldTitle));
+        DocumentController newWindow = loader.getController();
+        newWindow.setScientificWork(scientificWork);
+        stage.setTitle("Scientific work " + "\"" + scientificWork.getTitle() + "\"");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.show();
+    }*/
+public void actionRead(ActionEvent actionEvent) throws IOException {
+    checkSelection();
+    ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
+
+    Stage stage = new Stage();
+    Parent root = null;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
+    DocumentController documentController = new DocumentController(scientificWork);
+    loader.setController(documentController);
+    root = loader.load();
+
+    stage.setTitle("Scientific work " + "\"" + scientificWork.getTitle() + "\"");
+    stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+    stage.show();
+}
+
+
+    protected void checkSelection() {
+        if (tableView.getSelectionModel().getSelectedItem() == null) {
+            try {
+                throw new IllegalDeletionException("Can not operate if there is no row selected");
+            } catch (IllegalDeletionException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Nothing selected" );
+                alert.setContentText("Please, select row from table");
+                alert.showAndWait();
+            }
+        }
     }
 
     public void actionDownload(ActionEvent actionEvent) {
+        checkSelection();
+
     }
 
     public void actionAbout(ActionEvent actionEvent)  throws IOException {

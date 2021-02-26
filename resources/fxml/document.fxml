@@ -16,10 +16,10 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <children>
-                  <GridPane hgap="10.0" prefHeight="96.0" prefWidth="562.0" vgap="10.0">
+                  <GridPane hgap="10.0" prefHeight="96.0" prefWidth="600.0" vgap="10.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="86.0" prefWidth="86.0" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="466.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="86.0" prefWidth="88.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="502.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
@@ -29,7 +29,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="583.0" text="Title:" />
+                        <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="89.0" text="Title:" />
                         <Label text="Year:" GridPane.rowIndex="2" />
                         <Label text="Tags:" GridPane.rowIndex="3" />
                         <Label text="Author:" GridPane.rowIndex="1" />
@@ -44,15 +44,15 @@
                         <Insets />
                      </HBox.margin>
                   </GridPane>
-                  <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="5.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="96.0" prefWidth="50.0" spacing="5.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Button fx:id="btnDownload" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="Download" />
-                        <Button fx:id="btnCancel" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" text="Close" />
+                        <Button fx:id="btnCancel" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" prefHeight="26.0" prefWidth="118.0" text="Close" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <TextArea fx:id="txtArea" prefHeight="505.0" prefWidth="722.0">
+            <TextArea fx:id="txtArea" prefHeight="481.0" prefWidth="722.0">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>

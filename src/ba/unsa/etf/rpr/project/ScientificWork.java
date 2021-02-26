@@ -43,7 +43,7 @@ public class ScientificWork implements Validation {
         this.field = new SimpleStringProperty();
     }*/
 
-    public ScientificWork(String title, String author, int year, String fieldOfStudy, String publicationType, String additional, String tags) {
+    public ScientificWork(String title, String author, int year, String fieldOfStudy, String publicationType, String additional, String tags, String content) {
         this.title = new SimpleStringProperty(title);
         if (year <= LocalDate.now().getYear()) {
             this.year = year;
@@ -53,7 +53,7 @@ public class ScientificWork implements Validation {
         this.tags = new SimpleStringProperty(tags);
         this.additional = new SimpleStringProperty(additional);
         this.author = new SimpleStringProperty(author);
-        this.content = new SimpleStringProperty();
+        this.content = new SimpleStringProperty(content);
     }
 
     public int getId() {

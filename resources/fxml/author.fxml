@@ -25,7 +25,7 @@
             <RowConstraints />
          </rowConstraints>
          <children>
-            <Label text="Name:" GridPane.rowIndex="1" />
+            <Label text="Full name:" GridPane.rowIndex="1" />
             <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Date of birth:" GridPane.rowIndex="2" />
             <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2" />

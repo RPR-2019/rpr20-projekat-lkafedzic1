@@ -51,14 +51,14 @@ public class ScientificWorkDAO {
           getPersonFromAuthorQuery = conn.prepareStatement("SELECT p.id FROM author a, person p WHERE p.id=a.person_id AND a.id=?");
           getAuthorQuery = conn.prepareStatement("SELECT author.id FROM author, person WHERE person.id=author.person_id AND person.name=?");
           getAuthorFromIdQuery = conn.prepareStatement("SELECT person.name, person.date_of_birth, person.gender_id FROM author, person WHERE person.id=author.person_id AND author.id=?");
-          getWorksFromTitleQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.title LIKE ?");
-          getWorksFromAuthorsNameQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND person.name LIKE ?");
-          getWorksFromTagQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.tags LIKE ?");
+          getWorksFromTitleQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.title LIKE ?");
+          getWorksFromAuthorsNameQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND person.name LIKE ?");
+          getWorksFromTagQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.tags LIKE ?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
           getFieldTitleQuery = conn.prepareStatement("SELECT title FROM field WHERE id=?");
           getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
-          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
+          getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
           findDupeWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work, person, author WHERE scientific_work.title=? AND person.name=? AND scientific_work.author=author.id AND author.person_id=person.id");
           getUsersQuery = conn.prepareStatement("SELECT username FROM user");
           getPersonsQuery = conn.prepareStatement("SELECT name FROM person, author WHERE author.person_id=person.id");
@@ -436,7 +436,7 @@ public class ScientificWorkDAO {
         try {
             ResultSet rs = getWorkPopulationInfoQuery.executeQuery();
             while (rs.next()) {
-                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7));
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8));
                 System.out.println(scientificWork);
                 result.add(scientificWork);
             }
@@ -464,7 +464,7 @@ public class ScientificWorkDAO {
             getWorksFromTitleQuery.setString(1, "%" + title + "%");
             ResultSet rs = getWorksFromTitleQuery.executeQuery();
             while (rs.next()) {
-                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8)); //get ovo ono rs
                 result.add(scientificWork);
             }
         } catch (SQLException exception) {
@@ -479,7 +479,7 @@ public class ScientificWorkDAO {
             getWorksFromAuthorsNameQuery.setString(1, "%" + author + "%");
             ResultSet rs = getWorksFromAuthorsNameQuery.executeQuery();
             while (rs.next()) {
-                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8)); //get ovo ono rs
                 result.add(scientificWork);
             }
         } catch (SQLException exception) {
@@ -494,7 +494,7 @@ public class ScientificWorkDAO {
             getWorksFromTagQuery.setString(1, "%" + tag + "%");
             ResultSet rs = getWorksFromTagQuery.executeQuery();
             while (rs.next()) {
-                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7)); //get ovo ono rs
+                ScientificWork scientificWork = new ScientificWork(rs.getString(1), rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8)); //get ovo ono rs
                 result.add(scientificWork);
             }
         } catch (SQLException exception) {

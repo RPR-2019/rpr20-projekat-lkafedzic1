@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.project.controllers;
 
+import ba.unsa.etf.rpr.project.ScientificWork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,17 +16,42 @@ public class DocumentController {
     public TextArea txtArea;
     public Label lblStatusBar;
 
+    ScientificWork scientificWork = null;
+
+    public DocumentController(ScientificWork scientificWork) {
+        setScientificWork(scientificWork);
+    }
+
+    public ScientificWork getScientificWork() {
+        return scientificWork;
+    }
+
+    public void setScientificWork(ScientificWork scientificWork) {
+        this.scientificWork = scientificWork;
+    }
+
     @FXML
     public void initialize() {
-/*        String name = "James Cizui";
-        String lastName = "";
-        String firstName= "";
-        if(name.split("\\w+").length>1){
+        if (scientificWork!= null) {
+            String name = scientificWork.getAuthor();
+            String lastName = "";
+            String firstName = "";
+            if (name.split("\\w+").length > 1) {
+                lastName = name.substring(name.lastIndexOf(" ") + 1);
+                firstName = name.substring(0, name.lastIndexOf(' '));
 
-            lastName = name.substring(name.lastIndexOf(" ")+1);
-            firstName = name.substring(0, name.lastIndexOf(' '));
+            }
+            String titleSentenceCase = Character.toUpperCase(scientificWork.getTitle().charAt(0)) + scientificWork.getTitle().substring(1);
+            titleSentenceCase = lastName + ", " + firstName.charAt(0) + "." + "(" + scientificWork.getYear() + "). " + titleSentenceCase + ". " + scientificWork.getAdditional();
+
+            lblTitle.setText(scientificWork.getTitle());
+            lblAuthor.setText(name);
+            lblYear.setText(scientificWork.getYear()+".");
+            lblTags.setText(scientificWork.getTags());
+            lblReference.setText(titleSentenceCase);
+            lblStatusBar.setText("Reading " + lblTitle.getText());
+            txtArea.setText(scientificWork.getContent());
         }
-        System.out.println(lastName + ", " + firstName.charAt(0) + "." + "(" + year + "). " + titleSentenceCase + ". " + nameOfJorunal );*/
     }
 
     public void actionDownload(ActionEvent actionEvent) {

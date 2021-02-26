@@ -94,20 +94,6 @@ public class HomeAdminController extends HomeController {
         }
     }
 
-    private void checkSelection() {
-        if (tableView.getSelectionModel().getSelectedItem() == null) {
-            try {
-                throw new IllegalDeletionException("Can not delete if there is no row selected");
-            } catch (IllegalDeletionException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Deletion is forbiden " );
-                alert.setContentText(e.getMessage());
-                alert.showAndWait();
-            }
-        }
-    }
-
     public void actionDeleteFieldOfStudy(ActionEvent actionEvent) {
         checkSelection();
         String field = tableView.getSelectionModel().getSelectedItem().getField();
