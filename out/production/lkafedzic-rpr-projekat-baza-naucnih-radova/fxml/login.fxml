@@ -59,13 +59,13 @@
             </HBox>
          </VBox>
          <VBox fx:id="vboxError" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="4">
-            <Label fx:id="lblError" prefHeight="35.0" prefWidth="307.0"
+            <Label prefHeight="35.0" prefWidth="307.0"
                    text="The username or password you entered is" textFill="#cd1111">
                <padding>
                   <Insets top="-7.0"/>
                </padding>
             </Label>
-            <Label fx:id="lblError1" text="incorrect." textFill="#cd1111"/>
+            <Label text="incorrect." textFill="#cd1111"/>
          </VBox>
       </GridPane>
    </center>
