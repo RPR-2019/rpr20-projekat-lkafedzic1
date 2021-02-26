@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
-public class AuthorController implements Validation{
+public class AuthorController implements Validation {
     
     public DatePicker dateOfBirth;
     public RadioButton radioMale;
@@ -19,7 +19,6 @@ public class AuthorController implements Validation{
     public Label lblStatusBar;
     public TextField fldName;
     private Author author = null;
-    String authorName = null;
 
     private ScientificWorkDAO instance;
 

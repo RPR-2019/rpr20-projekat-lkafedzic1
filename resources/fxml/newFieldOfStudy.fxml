@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
 <VBox alignment="TOP_CENTER" prefHeight="159.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controllers.FieldOfStudyController">
    <stylesheets>
-      <URL value="@/css/login.css"/>
+      <URL value="@/css/login.css" />
    </stylesheets>
    <children>
       <GridPane alignment="CENTER" hgap="10.0" prefHeight="132.0" prefWidth="376.0" vgap="10.0">
@@ -38,7 +38,7 @@
       </GridPane>
       <HBox alignment="BOTTOM_LEFT" prefWidth="336.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="lblStatusBar" text="Adding a new field of study">
+            <Label fx:id="lblStatusBar" text="Adding new field of study">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>

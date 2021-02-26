@@ -1,4 +1,4 @@
 package ba.unsa.etf.rpr.project.controllers;
 
-public class AboutController {
+public class HelpController {
 }

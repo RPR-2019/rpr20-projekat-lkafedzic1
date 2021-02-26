@@ -4,7 +4,7 @@ import ba.unsa.etf.rpr.project.Validation;
 import javafx.beans.property.SimpleStringProperty;
 import java.time.LocalDate;
 
-public class ScientificWork implements Validation {
+public class ScientificWork implements Validation, Comparable<ScientificWork> {
     private int id, year;
     private SimpleStringProperty title;
     private SimpleStringProperty type, field; //type id and field id are foreign keys in database
@@ -139,6 +139,12 @@ public class ScientificWork implements Validation {
 
     @Override
     public String toString() {
-        return title.get();
+        return getTitle() + getAuthor();
+    }
+
+    @Override
+    public int compareTo(ScientificWork scW) {
+        /*0 if equal, -1 if this is less than a, 1 if this is greater then a*/
+        return this.toString().compareTo(scW.toString());
     }
 }

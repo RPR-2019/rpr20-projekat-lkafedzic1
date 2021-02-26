@@ -149,9 +149,12 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
 
     public void actionAbout(ActionEvent actionEvent)  throws IOException {
         Stage stage = new Stage();
+        Parent root = null;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
-        Parent root = loader.load();
-        AboutController aboutWindow = loader.getController();
+        HelpController aboutController = new HelpController();
+        loader.setController(aboutController);
+        root = loader.load();
+
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
@@ -164,5 +167,19 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         fldSearch.setText("");
         choiceCategory.getSelectionModel().clearSelection();
         tableView.setItems(scientificWorksList);
+    }
+
+    public void onActionHelp(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/help.fxml"));
+        HelpController aboutController = new HelpController();
+        loader.setController(aboutController);
+        root = loader.load();
+
+        stage.setTitle("About");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
     }
 }

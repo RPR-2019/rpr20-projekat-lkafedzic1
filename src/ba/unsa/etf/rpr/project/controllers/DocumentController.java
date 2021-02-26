@@ -4,6 +4,9 @@ import ba.unsa.etf.rpr.project.models.FileTypeFilter;
 import ba.unsa.etf.rpr.project.models.ScientificWork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -11,6 +14,9 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class DocumentController {
     public Label lblTitle;
@@ -25,6 +31,10 @@ public class DocumentController {
 
     public DocumentController(ScientificWork scientificWork) {
         setScientificWork(scientificWork);
+    }
+
+    public DocumentController() {
+
     }
 
     public ScientificWork getScientificWork() {
@@ -89,9 +99,17 @@ public class DocumentController {
         stage.close();
     }
 
-    public void actionDelete(ActionEvent actionEvent) {
-    }
+    public void actionAbout(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Parent root = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        HelpController aboutController = new HelpController();
+        loader.setController(aboutController);
+        root = loader.load();
 
-    public void actionAbout(ActionEvent actionEvent) {
+        stage.setTitle("About");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 }

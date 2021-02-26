@@ -7,32 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author extends Person implements Comparable<Author> {
-    private List<ScientificWork> works;
-
-    public List<ScientificWork> getWorks() {
-        return works;
-    }
-
-    public void setWorks(List<ScientificWork> works) {
-        this.works = works;
-    }
 
     public Author() {
-        works = new ArrayList<>();
     }
 
     public Author(String name, LocalDate dateOfBirth, Gender gender) {
         super.setName(name);
         super.setDateOfBirth(dateOfBirth);
         super.setGender(gender);
-        works = new ArrayList<>();
     }
 
     public Author(String name, LocalDate dateOfBirth, Gender gender, ArrayList<ScientificWork> works) {
         super.setName(name);
         super.setDateOfBirth(dateOfBirth);
         super.setGender(gender);
-        this.works = works;
     }
 
     @Override

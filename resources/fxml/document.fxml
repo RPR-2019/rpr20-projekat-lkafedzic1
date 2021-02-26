@@ -68,11 +68,6 @@
               <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem fx:id="actionDelete" mnemonicParsing="false" onAction="#actionDelete" text="Delete" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="About" />
