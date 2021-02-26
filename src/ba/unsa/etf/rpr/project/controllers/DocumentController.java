@@ -1,11 +1,16 @@
 package ba.unsa.etf.rpr.project.controllers;
 
+import ba.unsa.etf.rpr.project.FileTypeFilter;
 import ba.unsa.etf.rpr.project.ScientificWork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 
 public class DocumentController {
     public Label lblTitle;
@@ -55,7 +60,28 @@ public class DocumentController {
     }
 
     public void actionDownload(ActionEvent actionEvent) {
+        if (scientificWork!= null) {
+            JFileChooser chooser = new JFileChooser(new File("c::\\"));
+            chooser.setDialogTitle("Save document");
 
+            chooser.setFileFilter(new FileTypeFilter(".txt", "Tekstualna datoteka"));
+            int result = chooser.showSaveDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                String content = scientificWork.getContent();
+                File file = chooser.getSelectedFile();
+
+                try {
+                    FileWriter fw = new FileWriter(file.getPath());
+                    fw.write(content);
+                    fw.flush();
+                    fw.close();
+                    lblStatusBar.setText("File successfully downloaded!");
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            }
+        }
     }
 
     public void actionClose(ActionEvent actionEvent) {

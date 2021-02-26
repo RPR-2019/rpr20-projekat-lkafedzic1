@@ -12,8 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -111,19 +115,6 @@ public class HomeController {
         stage.show();
     }
 
-/*    public void actionRead(ActionEvent actionEvent) throws IOException {
-        checkSelection();
-        ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
-
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
-        Parent root = loader.load();
-        DocumentController newWindow = loader.getController();
-        newWindow.setScientificWork(scientificWork);
-        stage.setTitle("Scientific work " + "\"" + scientificWork.getTitle() + "\"");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
-        stage.show();
-    }*/
 public void actionRead(ActionEvent actionEvent) throws IOException {
     checkSelection();
     ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
@@ -156,7 +147,6 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
     }
 
     public void actionDownload(ActionEvent actionEvent) {
-        checkSelection();
 
     }
 
