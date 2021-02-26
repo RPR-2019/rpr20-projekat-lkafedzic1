@@ -76,12 +76,8 @@ public class PasswordController {
     public void actionSave(ActionEvent actionEvent) {
         String username = fldUsername.getText();
         String oldPassword = fldCurrentPassword.getText();
-        if (isInvalidLength(fldCurrentPassword) || !instance.isAccount(username,oldPassword)) { //ili ako ne postoji u bazi
-            lblIncorrect.setVisible(true);
-        }
-        else {
-            lblIncorrect.setVisible(false);
-        }
+        //doesn't exist in database
+        lblIncorrect.setVisible(isInvalidLength(fldCurrentPassword) || ! instance.isAccount(username, oldPassword));
         if (isInvalidLength(fldNewPassword)) {
             lblNewPasswordError.setVisible(true);
         }
@@ -102,7 +98,7 @@ public class PasswordController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Success");
         alert.setHeaderText(null);
-        alert.setContentText("You have successfuly changed your password!");
+        alert.setContentText("You have successfully changed your password!");
         alert.showAndWait();
     }
 

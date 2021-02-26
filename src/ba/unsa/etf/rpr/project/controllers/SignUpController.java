@@ -53,7 +53,7 @@ public class SignUpController implements Validation{
         fldEmail.getStyleClass().add("fieldNotValid");
         fldEmail.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (isValidEmail(fldEmail.getText())) { //koristi li se
+                    if (isValidEmail(fldEmail.getText())) { //is it in use already
                         fldEmail.getStyleClass().removeAll("fieldNotValid");
                         fldEmail.getStyleClass().add("fieldValid");
                     } else {
@@ -77,7 +77,7 @@ public class SignUpController implements Validation{
         fldUsername.getStyleClass().add("fieldNotValid");
         fldUsername.textProperty().addListener(
                 (observableValue, o, n) -> {
-                    if (isValidUsername(fldUsername.getText())) { //koristi li se
+                    if (isValidUsername(fldUsername.getText())) { //is it in use already
                         fldUsername.getStyleClass().removeAll("fieldNotValid");
                         fldUsername.getStyleClass().add("fieldValid");
                     } else {
@@ -149,7 +149,7 @@ public class SignUpController implements Validation{
             user.setPersonId(person.getId());
             user.setRole(Role.USER);
             instance.addUser(user);
-            //show users in concole
+            //show users in console
             instance.getAllUsers();
         }
         else {

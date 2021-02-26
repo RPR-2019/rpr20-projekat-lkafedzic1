@@ -87,7 +87,7 @@ public class HomeAdminController extends HomeController {
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.orElse(null) == ButtonType.OK){
             instance.deleteScientificWork(scientificWork);
             scientificWorksList.setAll(instance.scientificWorks());
         }
@@ -104,7 +104,7 @@ public class HomeAdminController extends HomeController {
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.orElse(null) == ButtonType.OK){
             instance.deleteField(field);
             scientificWorksList.setAll(instance.scientificWorks());
         }
@@ -121,7 +121,7 @@ public class HomeAdminController extends HomeController {
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.orElse(null) == ButtonType.OK){
             instance.deleteType(type);
             scientificWorksList.setAll(instance.scientificWorks());
         }
@@ -138,7 +138,7 @@ public class HomeAdminController extends HomeController {
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.orElse(null) == ButtonType.OK){
             instance.deleteAuthor(author);
             scientificWorksList.setAll(instance.scientificWorks());
         }

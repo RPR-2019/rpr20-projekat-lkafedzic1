@@ -13,7 +13,7 @@ public class ScientificWorkDAO {
     private static ScientificWorkDAO instance = null;
     private Connection conn;
 
-    private PreparedStatement getAllWorksQuery, getLoginQuery, getFieldTitleQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getAuthorFromIdQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getAuthorFromNameQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, getAuthorIdQuery, findAuthorFromPerson, findDupeWorksQuery, bindWorkToAuthorQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery,
+    private PreparedStatement getLoginQuery, getRoleFromIdQuery, getWorksFromTitleQuery, getWorksFromTagQuery, getWorksFromAuthorsNameQuery, getTypeIdQuery, getFieldIdQuery, maxIdUserQuery, maxIdPersonQuery, maxIdAuthorQuery, maxIdWorkQuery, getUserQuery, getUsersQuery, getAuthorsQuery, getAuthorQuery, getPersonsQuery, findDupeWorksQuery, getWorkPopulationInfoQuery, getPersonFromAuthorQuery, changePasswordQuery, addUserQuery,addPersonQuery, addFieldQuery, addTypeQuery, addAuthorQuery, addScientificWorkQuery, getFieldsQuery, getTypesQuery, maxIdFieldQuery, maxIdTypeQuery,
             deleteWorkQuery, deleteFieldQuery, deleteTypeQuery, deleteAuthorQuery;
 
     public static ScientificWorkDAO getInstance() {
@@ -36,9 +36,9 @@ public class ScientificWorkDAO {
             try {
                 //Testing
                 getLoginQuery = conn.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
-            } catch (SQLException throwables) {
+            } catch (SQLException e) {
                 //There is a fatal error
-                throwables.printStackTrace();
+                e.printStackTrace();
             }
         }
 
@@ -47,13 +47,10 @@ public class ScientificWorkDAO {
           getRoleFromIdQuery = conn.prepareStatement("SELECT title FROM role WHERE id=?");
           getPersonFromAuthorQuery = conn.prepareStatement("SELECT p.id FROM author a, person p WHERE p.id=a.person_id AND a.id=?");
           getAuthorQuery = conn.prepareStatement("SELECT author.id FROM author, person WHERE person.id=author.person_id AND person.name=?");
-          getAuthorFromIdQuery = conn.prepareStatement("SELECT person.name, person.date_of_birth, person.gender_id FROM author, person WHERE person.id=author.person_id AND author.id=?");
           getWorksFromTitleQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.title LIKE ?");
           getWorksFromAuthorsNameQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND person.name LIKE ?");
           getWorksFromTagQuery = conn.prepareStatement("SELECT DISTINCT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id AND sw.tags LIKE ?");
           getFieldsQuery = conn.prepareStatement("SELECT * FROM field");
-          getFieldTitleQuery = conn.prepareStatement("SELECT title FROM field WHERE id=?");
-          getAllWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work");
           getTypesQuery = conn.prepareStatement("SELECT * FROM publication_type");
           getWorkPopulationInfoQuery = conn.prepareStatement("SELECT sw.title, person.name, sw.year, field.title, publication_type.title, sw.additional, sw.tags, sw.content FROM scientific_work sw, author, person, field, publication_type WHERE sw.author=author.id AND author.person_id=person.id AND sw.field=field.id AND sw.type=publication_type.id");
           findDupeWorksQuery = conn.prepareStatement("SELECT * FROM scientific_work, person, author WHERE scientific_work.title=? AND person.name=? AND scientific_work.author=author.id AND author.person_id=person.id");
@@ -63,7 +60,6 @@ public class ScientificWorkDAO {
           getUserQuery = conn.prepareStatement("SELECT * FROM user WHERE username=?");
           getTypeIdQuery = conn.prepareStatement("SELECT id FROM publication_type WHERE title=?");
           getFieldIdQuery = conn.prepareStatement("SELECT id FROM field WHERE title=?");
-          findAuthorFromPerson = conn.prepareStatement("SELECT author.* FROM author, person WHERE author.person_id=person.id AND person.name=?");
           maxIdUserQuery = conn.prepareStatement("SELECT max(id)+1 FROM user");
           maxIdFieldQuery = conn.prepareStatement("SELECT max(id)+1 FROM field");
           maxIdTypeQuery = conn.prepareStatement("SELECT max(id)+1 FROM publication_type");
@@ -100,7 +96,7 @@ public class ScientificWorkDAO {
     }
 
     private void regenerateDatabase() {
-        Scanner input = null;
+        Scanner input;
         try {
             input = new Scanner(new FileInputStream("scientific.db.sql"));
             StringBuilder sqlQuery = new StringBuilder();
@@ -261,18 +257,6 @@ public class ScientificWorkDAO {
         }
     }
 
-    public void getAllWorks() {
-        try {
-            ResultSet rs = getAllWorksQuery.executeQuery();
-            while(rs.next()) {
-                System.out.println(rs.getString(2));
-            }
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
     public boolean findAuthorFromPerson(String name) {
         try {
             getAuthorQuery.setString(1, name);
@@ -371,10 +355,10 @@ public class ScientificWorkDAO {
             addScientificWorkQuery.setInt(1, id);
             addScientificWorkQuery.setString(2, scientificWork.getTitle());
             int typeId = getTypeId(scientificWork.getType());
-            addScientificWorkQuery.setInt(3, typeId); //treba id
+            addScientificWorkQuery.setInt(3, typeId);
             addScientificWorkQuery.setInt(4,scientificWork.getYear());
             int fieldId = getFieldId(scientificWork.getField());
-            addScientificWorkQuery.setInt(5,fieldId); //treba id
+            addScientificWorkQuery.setInt(5,fieldId);
             addScientificWorkQuery.setString(6,scientificWork.getAdditional());
             addScientificWorkQuery.setString(7, scientificWork.getTags());
             addScientificWorkQuery.setString(8, scientificWork.getContent());

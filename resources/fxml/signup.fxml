@@ -5,73 +5,73 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="389.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controllers.SignUpController">
+<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="389.0"
+      prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ba.unsa.etf.rpr.project.controllers.SignUpController">
    <stylesheets>
-      <URL value="@/css/login.css" />
+      <URL value="@/css/login.css"/>
    </stylesheets>
-   <children>
-      <GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="334.0" vgap="10.0">
-         <columnConstraints>
-            <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0" />
-            <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
+   <GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+             prefHeight="420.0" prefWidth="334.0" vgap="10.0">
+      <columnConstraints>
+         <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0"/>
+         <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0"/>
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+         <RowConstraints/>
+      </rowConstraints>
+      <padding>
+         <Insets bottom="20.0" left="10.0" right="10.0" top="20.0"/>
+      </padding>
+      <Label text="Name:" GridPane.rowIndex="1"/>
+      <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+      <Label text="Date of birth:" GridPane.rowIndex="2"/>
+      <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+      <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+      <Label text="E-mail:" GridPane.rowIndex="5"/>
+      <TextField fx:id="fldEmail" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+      <Label text="Username:" GridPane.rowIndex="6"/>
+      <TextField fx:id="fldUsername" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+      <Label text="Password:" GridPane.rowIndex="7"/>
+      <Label text="Gender:" GridPane.rowIndex="3"/>
+      <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Label text="Name:" GridPane.rowIndex="1" />
-            <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Date of birth:" GridPane.rowIndex="2" />
-            <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <Label text="E-mail:" GridPane.rowIndex="5" />
-            <TextField fx:id="fldEmail" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Username:" GridPane.rowIndex="6" />
-            <TextField fx:id="fldUsername" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="Password:" GridPane.rowIndex="7" />
-            <Label text="Gender:" GridPane.rowIndex="3" />
-            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="toggleGender" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender" />
-               </children>
-            </HBox>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="9">
-              <buttons>
-                <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok" />
-                  <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
-              </buttons>
-            </ButtonBar>
-            <PasswordField fx:id="fldPassword" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-         </padding>
-      </GridPane>
-      <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0" VBox.vgrow="ALWAYS">
-         <children>
-            <Label fx:id="lblStatusBar" text="Making a new user account" HBox.hgrow="ALWAYS">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="2.0" />
-               </HBox.margin>
-            </Label>
+            <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
+               <toggleGroup>
+                  <ToggleGroup fx:id="toggleGender"/>
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender"/>
          </children>
       </HBox>
-   </children>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="9">
+         <buttons>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok"/>
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Cancel"/>
+         </buttons>
+      </ButtonBar>
+      <PasswordField fx:id="fldPassword" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+   </GridPane>
+   <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0"
+         VBox.vgrow="ALWAYS">
+      <children>
+         <Label fx:id="lblStatusBar" text="Making a new user account" HBox.hgrow="ALWAYS">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <HBox.margin>
+               <Insets bottom="2.0"/>
+            </HBox.margin>
+         </Label>
+      </children>
+   </HBox>
 </VBox>

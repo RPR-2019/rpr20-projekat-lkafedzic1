@@ -22,10 +22,6 @@ public class AuthorController implements Validation {
 
     private ScientificWorkDAO instance;
 
-    public Author getAuthor() {
-        return author;
-    }
-
     @FXML
     public void initialize() {
         instance = ScientificWorkDAO.getInstance();
@@ -100,7 +96,7 @@ public class AuthorController implements Validation {
             author.setDateOfBirth(dateOfBirth.getValue());
             author.setGender(getGender());
             instance.addAuthor(author);
-            //show users in concole
+            //show users in console
             instance.getAllAuthors();
         }
         else {
@@ -123,5 +119,4 @@ public class AuthorController implements Validation {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }
-
 }

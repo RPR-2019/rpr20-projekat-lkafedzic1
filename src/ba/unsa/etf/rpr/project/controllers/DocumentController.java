@@ -33,14 +33,6 @@ public class DocumentController {
         setScientificWork(scientificWork);
     }
 
-    public DocumentController() {
-
-    }
-
-    public ScientificWork getScientificWork() {
-        return scientificWork;
-    }
-
     public void setScientificWork(ScientificWork scientificWork) {
         this.scientificWork = scientificWork;
     }
@@ -74,7 +66,7 @@ public class DocumentController {
             JFileChooser chooser = new JFileChooser(new File("c::\\"));
             chooser.setDialogTitle("Save document");
 
-            chooser.setFileFilter(new FileTypeFilter(".txt", "Tekstualna datoteka"));
+            chooser.setFileFilter(new FileTypeFilter(".txt", "Text file"));
             int result = chooser.showSaveDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
                 String content = scientificWork.getContent();
@@ -101,7 +93,7 @@ public class DocumentController {
 
     public void actionAbout(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        Parent root = null;
+        Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         HelpController aboutController = new HelpController();
         loader.setController(aboutController);

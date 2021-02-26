@@ -5,30 +5,17 @@ import ba.unsa.etf.rpr.project.Validation;
 import javafx.beans.property.SimpleStringProperty;
 
 public class User implements Validation {
-    private int id = - 1;
-    private SimpleStringProperty username = new SimpleStringProperty();
-    private SimpleStringProperty password = new SimpleStringProperty();
-    private SimpleStringProperty email = new SimpleStringProperty();
+    private final SimpleStringProperty username = new SimpleStringProperty();
+    private final SimpleStringProperty password = new SimpleStringProperty();
+    private final SimpleStringProperty email = new SimpleStringProperty();
     private int personId;
     private Role role;
 
     public User() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getUsername() {
         return username.get();
-    }
-
-    public SimpleStringProperty usernameProperty() {
-        return username;
     }
 
     public void setUsername(String username) {
@@ -41,10 +28,6 @@ public class User implements Validation {
         return password.get();
     }
 
-    public SimpleStringProperty passwordProperty() {
-        return password;
-    }
-
     public void setPassword(String password) {
         if (isValidPassword(password)) {
             this.password.set(password);
@@ -53,10 +36,6 @@ public class User implements Validation {
 
     public String getEmail() {
         return email.get();
-    }
-
-    public SimpleStringProperty emailProperty() {
-        return email;
     }
 
     public void setEmail(String email) {

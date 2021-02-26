@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -43,17 +44,17 @@ public class HomeController {
         if (scientificWorksList == null)
             scientificWorksList = FXCollections.observableArrayList(instance.scientificWorks());
         tableView.setItems(scientificWorksList);
-        columnTitle.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("title"));
-        columnAuthor.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("author"));
-        columnYear.setCellValueFactory(new PropertyValueFactory<ScientificWork,Integer>("year"));
-        columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("field"));
-        columnType.setCellValueFactory(new PropertyValueFactory<ScientificWork,String>("type"));
+        columnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        columnAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        columnYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        columnFieldOfStudy.setCellValueFactory(new PropertyValueFactory<>("field"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
 
         fldSearch.getStyleClass().add("fieldNotValid");
         fldSearch.textProperty().addListener(
                 (observableValue, o, n) -> {
                     if (fldSearch.getText().trim().isEmpty() || fldSearch == null) {
-                        fldSearch.getStyleClass().removeAll("fieldValid");
+                        Objects.requireNonNull(fldSearch).getStyleClass().removeAll("fieldValid");
                         fldSearch.getStyleClass().add("fieldNotValid");
                     } else {
                         fldSearch.getStyleClass().removeAll("fieldNotValid");
@@ -64,16 +65,12 @@ public class HomeController {
 
         btnSearch.setOnAction(actionEvent -> {
             if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
-                ArrayList<ScientificWork> result = new ArrayList<>();
-                if (choiceCategory.getSelectionModel().getSelectedItem().equals("Title")) {
-                    result = instance.getWorksByTitle(fldSearch.getText());
-                }
-                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Tags")) {
-                    result = instance.getWorksByTag(fldSearch.getText());
-                }
-                else if (choiceCategory.getSelectionModel().getSelectedItem().equals("Author")) {
-                    result = instance.getWorksByAuthor(fldSearch.getText());
-                }
+                ArrayList<ScientificWork> result = switch (choiceCategory.getSelectionModel().getSelectedItem()) {
+                    case "Title" -> instance.getWorksByTitle(fldSearch.getText());
+                    case "Tags" -> instance.getWorksByTag(fldSearch.getText());
+                    case "Author" -> instance.getWorksByAuthor(fldSearch.getText());
+                    default -> new ArrayList<>();
+                };
                 ObservableList<ScientificWork> list = FXCollections.observableArrayList();
                 list.setAll(result);
                 tableView.setItems(list);
@@ -117,7 +114,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
     ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
 
     Stage stage = new Stage();
-    Parent root = null;
+    Parent root;
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
     DocumentController documentController = new DocumentController(scientificWork);
     loader.setController(documentController);
@@ -143,13 +140,9 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         }
     }
 
-    public void actionDownload(ActionEvent actionEvent) {
-
-    }
-
     public void actionAbout(ActionEvent actionEvent)  throws IOException {
         Stage stage = new Stage();
-        Parent root = null;
+        Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
         HelpController aboutController = new HelpController();
         loader.setController(aboutController);
@@ -171,7 +164,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
 
     public void onActionHelp(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        Parent root = null;
+        Parent root;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/help.fxml"));
         HelpController aboutController = new HelpController();
         loader.setController(aboutController);

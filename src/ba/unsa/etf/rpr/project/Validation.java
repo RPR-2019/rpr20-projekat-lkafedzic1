@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public interface Validation {
 
     default boolean isValidName(String s) {
-        Pattern pattern = Pattern.compile(new String ("^[\\p{L} .'-]+$")); //allow letters from any language, space...
+        Pattern pattern = Pattern.compile("^[\\p{L} .'-]+$"); //allow letters from any language, space...
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }

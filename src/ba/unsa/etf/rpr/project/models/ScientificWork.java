@@ -6,12 +6,13 @@ import java.time.LocalDate;
 
 public class ScientificWork implements Validation, Comparable<ScientificWork> {
     private int id, year;
-    private SimpleStringProperty title;
-    private SimpleStringProperty type, field; //type id and field id are foreign keys in database
-    private SimpleStringProperty content;
-    private SimpleStringProperty author; //author id is foreign key in database table
-    private SimpleStringProperty additional;
-    private SimpleStringProperty tags;
+    private final SimpleStringProperty title;
+    private final SimpleStringProperty type;
+    private final SimpleStringProperty field; //type id and field id are foreign keys in database
+    private final SimpleStringProperty content;
+    private final SimpleStringProperty author; //author id is foreign key in database table
+    private final SimpleStringProperty additional;
+    private final SimpleStringProperty tags;
 
     public ScientificWork(){
         this.title = new SimpleStringProperty();
@@ -56,10 +57,6 @@ public class ScientificWork implements Validation, Comparable<ScientificWork> {
         return title.get();
     }
 
-    public SimpleStringProperty titleProperty() {
-        return title;
-    }
-
     public void setTitle(String title) {
         if (isValidTitle(title))
             this.title.set(title);
@@ -67,10 +64,6 @@ public class ScientificWork implements Validation, Comparable<ScientificWork> {
 
     public String getType() {
         return type.get();
-    }
-
-    public SimpleStringProperty typeProperty() {
-        return type;
     }
 
     public void setType(String type) {
@@ -81,20 +74,12 @@ public class ScientificWork implements Validation, Comparable<ScientificWork> {
         return field.get();
     }
 
-    public SimpleStringProperty fieldProperty() {
-        return field;
-    }
-
     public void setField(String field) {
         this.field.set(field);
     }
 
     public String getContent() {
         return content.get();
-    }
-
-    public SimpleStringProperty contentProperty() {
-        return content;
     }
 
     public void setContent(String content) {
@@ -105,10 +90,6 @@ public class ScientificWork implements Validation, Comparable<ScientificWork> {
         return additional.get();
     }
 
-    public SimpleStringProperty additionalProperty() {
-        return additional;
-    }
-
     public void setAdditional(String additional) {
         this.additional.set(additional);
     }
@@ -117,20 +98,12 @@ public class ScientificWork implements Validation, Comparable<ScientificWork> {
         return tags.get();
     }
 
-    public SimpleStringProperty tagsProperty() {
-        return tags;
-    }
-
     public void setTags(String tags) {
         this.tags.set(tags);
     }
 
     public String getAuthor() {
         return author.get();
-    }
-
-    public SimpleStringProperty authorProperty() {
-        return author;
     }
 
     public void setAuthor(String author) {
