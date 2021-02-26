@@ -114,9 +114,6 @@
                         <VBox alignment="CENTER" maxHeight="1.7976931348623157E308"
                               maxWidth="1.7976931348623157E308" spacing="10.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <Button fx:id="btnDownload" disable="true" maxWidth="1.7976931348623157E308"
-                                        mnemonicParsing="false" onAction="#actionDownload" text="Download"
-                                        visible="false"/>
                                 <MenuButton fx:id="menuBtnAdd" alignment="CENTER" maxWidth="1.7976931348623157E308"
                                             mnemonicParsing="false" text="Add new">
                                     <items>
