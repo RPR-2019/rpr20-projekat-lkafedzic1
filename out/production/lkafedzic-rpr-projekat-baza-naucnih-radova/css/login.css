@@ -20,7 +20,7 @@
 }
 
 #mniHelp > .label{
-    -fx-graphic: url("/images/icons-help-fifteen.png");
+    -fx-graphic: url("/images/icons-help-twenty.png");
 }
 #mniHelp .accelerator-text{
     -fx-graphic: none;
