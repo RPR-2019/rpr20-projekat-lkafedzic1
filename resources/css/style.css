@@ -1,0 +1,39 @@
+#btnLogIn {
+    -fx-background-color: lightskyblue;
+}
+.fieldNotValid {
+    -fx-background-color: lightpink;
+}
+.fieldValid {
+    -fx-background-color: yellowgreen;
+}
+#btnSignUp, #btnContinueAsGuest, #btnChangePassword{
+    -fx-background-color: transparent;
+}
+
+#btnLogIn:hover {
+    -fx-background-color: #5fb2ff;
+}
+
+#btnSignUp:hover, #btnContinueAsGuest:hover,  #btnChangePassword:hover{
+    -fx-text-fill: #5fb2ff;
+}
+
+#mniHelp > .label{
+    -fx-graphic: url("/images/icons-help-twenty.png");
+}
+#mniHelp .accelerator-text{
+    -fx-graphic: none;
+ }
+#btnSearch{
+    -fx-graphic: url("/images/icons-search-thirty.png");
+}
+#pane{
+    -fx-background-color: #eef8f9;
+}
+#helpPane {
+    -fx-background-color: #e6f8fc;
+}
+#formPane {
+    -fx-background-color: #e6fafc;
+}

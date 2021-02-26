@@ -13,8 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -62,7 +65,6 @@ public class HomeController {
                     }
                 }
         );
-
         btnSearch.setOnAction(actionEvent -> {
             if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
                 ArrayList<ScientificWork> result = switch (choiceCategory.getSelectionModel().getSelectedItem()) {

@@ -21,12 +21,9 @@
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="503.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controllers.GuestController">
     <stylesheets>
-        <URL value="@/css/login.css" />
+        <URL value="@/css/style.css" />
     </stylesheets>
-    <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="669.0">
-        <stylesheets>
-            <URL value="@/css/guest.css" />
-        </stylesheets>
+    <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="669.0">
         <top>
             <VBox BorderPane.alignment="CENTER">
                 <BorderPane.margin>

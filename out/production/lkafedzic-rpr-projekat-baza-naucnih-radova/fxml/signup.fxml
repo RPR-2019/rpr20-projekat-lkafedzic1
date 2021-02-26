@@ -11,7 +11,7 @@
    <stylesheets>
       <URL value="@/css/login.css"/>
    </stylesheets>
-   <GridPane alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+   <GridPane fx:id="formPane" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
              prefHeight="420.0" prefWidth="334.0" vgap="10.0">
       <columnConstraints>
          <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0"/>

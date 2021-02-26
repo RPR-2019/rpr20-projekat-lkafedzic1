@@ -23,10 +23,7 @@
     <stylesheets>
         <URL value="@/css/login.css" />
     </stylesheets>
-    <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="669.0">
-        <stylesheets>
-            <URL value="@/css/guest.css" />
-        </stylesheets>
+    <BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="482.0" prefWidth="669.0">
         <top>
             <VBox BorderPane.alignment="CENTER">
                 <BorderPane.margin>

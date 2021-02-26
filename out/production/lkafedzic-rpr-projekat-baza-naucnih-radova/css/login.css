@@ -25,3 +25,15 @@
 #mniHelp .accelerator-text{
     -fx-graphic: none;
  }
+#btnSearch{
+    -fx-graphic: url("/images/icons-search-thirty.png");
+}
+#pane{
+    -fx-background-color: #eef8f9;
+}
+#helpPane {
+    -fx-background-color: #e6f8fc;
+}
+#formPane {
+    -fx-background-color: #e6fafc;
+}
