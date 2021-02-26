@@ -18,3 +18,10 @@
 #btnSignUp:hover, #btnContinueAsGuest:hover,  #btnChangePassword:hover{
     -fx-text-fill: #5fb2ff;
 }
+
+#mniHelp > .label{
+    -fx-graphic: url("/images/icons-help-twenty.png");
+}
+#mniHelp .accelerator-text{
+    -fx-graphic: none;
+ }

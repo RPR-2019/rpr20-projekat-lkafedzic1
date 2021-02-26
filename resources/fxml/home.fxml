@@ -31,7 +31,7 @@
             </Menu>
             <Menu text="_Help">
                <items>
-                  <MenuItem onAction="#onActionHelp" text="_Help" />
+                  <MenuItem fx:id="mniHelp" onAction="#onActionHelp" text="_Help" />
                   <MenuItem onAction="#actionAbout" text="_About" />
                </items>
             </Menu>

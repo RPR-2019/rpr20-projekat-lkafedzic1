@@ -17,13 +17,13 @@
         <top>
             <VBox BorderPane.alignment="CENTER">
                 <BorderPane.margin>
-                    <Insets bottom="30.0" />
+                    <Insets />
                 </BorderPane.margin>
                 <MenuBar maxWidth="1.7976931348623157E308">
                     <menus>
                         <Menu text="_File">
                             <items>
-                                <MenuItem onAction="#actionClose" text="_Close">
+                                <MenuItem onAction="#actionClose" text="E_xit">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
@@ -39,7 +39,7 @@
                         </Menu>
                         <Menu text="_Help">
                             <items>
-                                <MenuItem onAction="#onActionHelp" text="_Help" />
+                                <MenuItem fx:id="mniHelp" onAction="#onActionHelp" text="_Help" />
                                 <MenuItem onAction="#actionAbout" text="_About" />
                             </items>
                         </Menu>
