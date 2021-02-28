@@ -28,13 +28,13 @@ public class LoginController {
 
     private ScientificWorkDAO instance;
 
-   public LoginController() {
+    public LoginController() {
     }
 
     @FXML
     public void initialize() {
-       instance = ScientificWorkDAO.getInstance();
-       fldUsername.getStyleClass().add("fieldNotValid");
+        instance = ScientificWorkDAO.getInstance();
+        fldUsername.getStyleClass().add("fieldNotValid");
         fldUsername.textProperty().addListener(
                 (observableValue, o, n) -> {
                     if (fldUsername.getText().trim().isEmpty()) {
@@ -61,7 +61,7 @@ public class LoginController {
     }
 
     public void actionLogin(ActionEvent actionEvent) throws IOException {
-       boolean test = instance.isAccount(fldUsername.getText(), fldPassword.getText());
+        boolean test = instance.isAccount(fldUsername.getText(), fldPassword.getText());
         if (fldUsername.getStyleClass().contains("fieldNotValid") || fldPassword.getStyleClass().contains("fieldNotValid") || !test) {
             vboxError.setVisible(true);
         }

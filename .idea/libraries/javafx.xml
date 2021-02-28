@@ -53,6 +53,8 @@
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
+      <root url="file:///usr/share/openjfx15/lib" />
+      <root url="file:///usr/share/openjfx15/lib" />
     </CLASSES>
     <JAVADOC />
     <NATIVE>
@@ -82,8 +84,11 @@
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
+      <root url="file:///usr/share/openjfx15/lib" />
     </NATIVE>
     <SOURCES>
+      <root url="file:///usr/share/openjfx15/lib" />
+      <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
       <root url="file:///usr/share/openjfx15/lib" />
@@ -188,6 +193,10 @@
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" />
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" />
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" />
+    <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" />
+    <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" />
+    <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" type="SOURCES" />
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" type="SOURCES" />
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" type="SOURCES" />
     <jarDirectory url="file:///usr/share/openjfx15/lib" recursive="false" type="SOURCES" />

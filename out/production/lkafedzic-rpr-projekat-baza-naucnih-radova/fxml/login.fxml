@@ -7,7 +7,7 @@
 
 <BorderPane fx:id="pane" prefHeight="294.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controllers.LoginController">
    <stylesheets>
-      <URL value="@/css/login.css" />
+      <URL value="@/css/style.css" />
    </stylesheets>
    <center>
       <GridPane alignment="center" hgap="10" prefHeight="276.0" prefWidth="380.0" vgap="10">
