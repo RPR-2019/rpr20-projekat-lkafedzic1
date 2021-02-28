@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class AuthorController implements Validation {
     
@@ -79,16 +80,17 @@ public class AuthorController implements Validation {
     }
 
     public void actionSave(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (isEveryInputValid()) {
             if(instance.findAuthorFromPerson(fldName.getText())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Author already exists");
+                alert.setTitle(bundle.getString("Error"));
+                alert.setHeaderText(bundle.getString("authorError"));
                 alert.showAndWait();
-                lblStatusBar.setText("Couldn't add author");
+                lblStatusBar.setText(bundle.getString("authorError"));
             }
             else {
-                lblStatusBar.setText("Successfully added author");
+                lblStatusBar.setText(bundle.getString("successAuthor"));
             }
             //adding new account
             if (author == null) author = new Author();
@@ -100,7 +102,7 @@ public class AuthorController implements Validation {
             instance.getAllAuthors();
         }
         else {
-            lblStatusBar.setText("Please, fill the form properly");
+            lblStatusBar.setText(bundle.getString("notFilled"));
         }
     }
 

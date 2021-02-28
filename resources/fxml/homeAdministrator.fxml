@@ -9,6 +9,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -28,6 +29,12 @@
             <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                 <Menu text="%file">
                     <items>
+                        <Menu mnemonicParsing="false" text="%language">
+                            <items>
+                                <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english" />
+                                <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian" />
+                            </items>
+                        </Menu>
                         <MenuItem onAction="#actionSignOut" text="%exit">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -84,7 +91,7 @@
                         <Tooltip text="%enterKeywords" />
                      </tooltip>
                         </TextField>
-                        <Button fx:id="btnSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
+                        <Button fx:id="btnSearch" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -149,7 +156,7 @@
                            <tooltip>
                               <Tooltip text="%clickRead" />
                            </tooltip></Button>
-                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionSignOut" text="%signOut">
+                                <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionSignOut" text="%signOut">
                            <tooltip>
                               <Tooltip text="%clickSignOut" />
                            </tooltip></Button>

@@ -125,21 +125,22 @@ public class SignUpController implements Validation{
     }
 
     public void actionSave(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (isEveryInputValid()) {
             if(instance.findUser(fldUsername)) {
                 fldUsername.getStyleClass().removeAll("fieldValid");
                 fldUsername.getStyleClass().add("fieldNotValid");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Username is already taken");
-                alert.setContentText("Please, try again!");
+                alert.setTitle(bundle.getString("Error"));
+                alert.setHeaderText(bundle.getString("usernameErr"));
+                alert.setContentText(bundle.getString("tryAgain"));
                 alert.showAndWait();
-                lblStatusBar.setText("Username is already taken");
+                lblStatusBar.setText(bundle.getString("usernameErr"));
             }
             else {
                 fldUsername.getStyleClass().removeAll("fieldNotValid");
                 fldUsername.getStyleClass().add("fieldValid");
-                lblStatusBar.setText("Successful sign up");
+                lblStatusBar.setText(bundle.getString("successful"));
             }
             //adding new account
             Person person = new Person(fldName.getText() ,dateOfBirth.getValue(), this.getGender());
@@ -155,7 +156,7 @@ public class SignUpController implements Validation{
         }
         else {
             //if any field on the form is red
-            lblStatusBar.setText("Please, fill the form properly");
+            lblStatusBar.setText(bundle.getString("notFilled"));
         }
     }
 
@@ -181,7 +182,7 @@ public class SignUpController implements Validation{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
         LoginController loginWindow = loader.getController();
-        stage.setTitle("Login");
+        stage.setTitle(bundle.getString("login"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();

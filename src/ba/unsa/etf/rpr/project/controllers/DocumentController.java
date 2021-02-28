@@ -8,13 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-
 import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -27,6 +28,9 @@ public class DocumentController {
     public Label lblReference;
     public TextArea txtArea;
     public Label lblStatusBar;
+
+    public RadioMenuItem itemEnglish;
+    public RadioMenuItem itemBosnian;
 
     ScientificWork scientificWork = null;
 
@@ -41,6 +45,7 @@ public class DocumentController {
     @FXML
     public void initialize() {
         if (scientificWork!= null) {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             String name = scientificWork.getAuthor();
             String lastName = "";
             String firstName = "";
@@ -57,17 +62,55 @@ public class DocumentController {
             lblYear.setText(scientificWork.getYear()+".");
             lblTags.setText(scientificWork.getTags());
             lblReference.setText(titleSentenceCase);
-            lblStatusBar.setText("Reading " + lblTitle.getText());
+            lblStatusBar.setText(bundle.getString("reading") + lblTitle.getText());
             txtArea.setText(scientificWork.getContent());
         }
+
+        itemEnglish.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemBosnian.setSelected(false);
+                Locale.setDefault(new Locale("en", "US"));
+                Scene scene = lblTitle.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"), bundle);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemEnglish.setSelected(true);
+            }
+        });
+
+        itemBosnian.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemEnglish.setSelected(false);
+                Locale.setDefault(new Locale("bs", "BA"));
+                Scene scene = lblTitle.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"), bundle);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemBosnian.setSelected(true);
+            }
+        });
     }
 
     public void actionDownload(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (scientificWork!= null) {
             JFileChooser chooser = new JFileChooser(new File("c::\\"));
-            chooser.setDialogTitle("Save document");
-
-            chooser.setFileFilter(new FileTypeFilter(".txt", "Text file"));
+            chooser.setDialogTitle(bundle.getString("saveDocument"));
+            chooser.setFileFilter(new FileTypeFilter(".txt", bundle.getString("extension")));
             int result = chooser.showSaveDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
                 String content = scientificWork.getContent();
@@ -78,7 +121,7 @@ public class DocumentController {
                     fw.write(content);
                     fw.flush();
                     fw.close();
-                    lblStatusBar.setText("File successfully downloaded!");
+                    lblStatusBar.setText(bundle.getString("downloaded"));
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
@@ -101,7 +144,7 @@ public class DocumentController {
         loader.setController(aboutController);
         root = loader.load();
 
-        stage.setTitle("About");
+        stage.setTitle(bundle.getString("about"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();

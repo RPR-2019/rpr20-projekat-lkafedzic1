@@ -84,7 +84,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"), bundle);
         Parent root = loader.load();
         HomeController homeController = loader.getController();
-        stage.setTitle("Scientific works database");
+        stage.setTitle(bundle.getString("appName"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setMaxWidth(1000);
         stage.setMinHeight(200);
@@ -98,7 +98,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeAdministrator.fxml"), bundle);
         Parent root = loader.load();
         HomeAdminController homeController = loader.getController();
-        stage.setTitle("Scientific works database");
+        stage.setTitle(bundle.getString("appName"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMaxWidth(1000);
         stage.setMinHeight(240);
@@ -113,7 +113,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"), bundle);
         Parent root = loader.load();
         SignUpController signupWindow = loader.getController();
-        stage.setTitle("Sign up");
+        stage.setTitle(bundle.getString("signup"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMinHeight(370);
         stage.setMinWidth(320);
@@ -127,7 +127,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"), bundle);
         Parent root = loader.load();
         GuestController guestController = loader.getController();
-        stage.setTitle("Scientific works database");
+        stage.setTitle(bundle.getString("appName"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMaxWidth(695);
         stage.setMinHeight(240);
@@ -141,7 +141,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/password.fxml"), bundle);
         Parent root = loader.load();
         PasswordController newWindow = loader.getController();
-        stage.setTitle("Password");
+        stage.setTitle(bundle.getString("password"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.show();
     }

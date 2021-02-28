@@ -8,18 +8,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -38,6 +35,9 @@ public class HomeController {
     public TableColumn<ScientificWork,String> columnFieldOfStudy;
     public TableColumn<ScientificWork,String> columnType;
     protected ScientificWorkDAO instance = null;
+
+    public RadioMenuItem itemEnglish;
+    public RadioMenuItem itemBosnian;
 
     protected ObservableList<ScientificWork> scientificWorksList = null;
 
@@ -67,11 +67,13 @@ public class HomeController {
                 }
         );
         btnSearch.setOnAction(actionEvent -> {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
+                System.out.println(choiceCategory.getSelectionModel().getSelectedItem());
                 ArrayList<ScientificWork> result = switch (choiceCategory.getSelectionModel().getSelectedItem()) {
-                    case "Title" -> instance.getWorksByTitle(fldSearch.getText());
-                    case "Tags" -> instance.getWorksByTag(fldSearch.getText());
-                    case "Author" -> instance.getWorksByAuthor(fldSearch.getText());
+                    case "Title","Naziv" -> instance.getWorksByTitle(fldSearch.getText());
+                    case "Tags","Oznake" -> instance.getWorksByTag(fldSearch.getText());
+                    case "Author","Autor" -> instance.getWorksByAuthor(fldSearch.getText());
                     default -> new ArrayList<>();
                 };
                 ObservableList<ScientificWork> list = FXCollections.observableArrayList();
@@ -80,21 +82,60 @@ public class HomeController {
                 tableView.refresh();
             }
             else {
-                lblStatusBar.setText("Please, fill the form properly");
+                lblStatusBar.setText(bundle.getString("notFilled"));
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Please enter some keywords");
+                alert.setTitle(bundle.getString("Error"));
+                alert.setHeaderText(bundle.getString("notFilled"));
                 alert.show();
             }
-            lblStatusBar.setText("Searching finished");
+            lblStatusBar.setText(bundle.getString("searched"));
+        });
+
+        itemEnglish.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemBosnian.setSelected(false);
+                Locale.setDefault(new Locale("en", "US"));
+                Scene scene = btnSearch.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"), bundle);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemEnglish.setSelected(true);
+            }
+        });
+
+        itemBosnian.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemEnglish.setSelected(false);
+                Locale.setDefault(new Locale("bs", "BA"));
+                Scene scene = btnSearch.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"), bundle);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemBosnian.setSelected(true);
+            }
         });
     }
 
     void loadSearchChoices(ChoiceBox<String> choiceCategory) {
         //Search: tag, admin, author - clients wishes
-        choiceCategory.getItems().add("Title");
-        choiceCategory.getItems().add("Tags");
-        choiceCategory.getItems().add("Author");
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        choiceCategory.getItems().add(bundle.getString("titleColumn"));
+        choiceCategory.getItems().add(bundle.getString("tagsChoice"));
+        choiceCategory.getItems().add(bundle.getString("itemAuthor"));
         choiceCategory.getSelectionModel().selectFirst();
     }
 
@@ -106,7 +147,7 @@ public class HomeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
         LoginController loginWindow = loader.getController();
-        stage.setTitle("Login");
+        stage.setTitle(bundle.getString("login"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
@@ -124,21 +165,22 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
     loader.setController(documentController);
     root = loader.load();
 
-    stage.setTitle("Scientific work " + "\"" + scientificWork.getTitle() + "\"");
+    stage.setTitle(bundle.getString("work") + "\"" + scientificWork.getTitle() + "\"");
     stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
     stage.show();
 }
 
 
     protected void checkSelection() {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (tableView.getSelectionModel().getSelectedItem() == null) {
             try {
                 throw new IllegalDeletionException("Can not operate if there is no row selected");
             } catch (IllegalDeletionException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Nothing selected" );
-                alert.setContentText("Please, select row from table");
+                alert.setTitle(bundle.getString("Error"));
+                alert.setHeaderText(bundle.getString("nothingSelected") );
+                alert.setContentText(bundle.getString("select"));
                 alert.showAndWait();
             }
         }
@@ -153,14 +195,15 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         loader.setController(aboutController);
         root = loader.load();
 
-        stage.setTitle("About");
+        stage.setTitle(bundle.getString("about"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
     }
 
     public void actionRefresh(ActionEvent actionEvent) {
-        lblStatusBar.setText("Refreshed");
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        lblStatusBar.setText(bundle.getString("refreshed"));
         tableView.refresh();
         fldSearch.setText("");
         choiceCategory.getSelectionModel().clearSelection();
@@ -176,7 +219,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         loader.setController(aboutController);
         root = loader.load();
 
-        stage.setTitle("About");
+        stage.setTitle(bundle.getString("help"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(true);
         stage.show();

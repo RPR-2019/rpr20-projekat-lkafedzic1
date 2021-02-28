@@ -9,6 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.ResourceBundle;
+
 public class PasswordController {
 
     public TextField fldUsername;
@@ -74,6 +76,7 @@ public class PasswordController {
     }
     
     public void actionSave(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         String username = fldUsername.getText();
         String oldPassword = fldCurrentPassword.getText();
         //doesn't exist in database
@@ -82,28 +85,33 @@ public class PasswordController {
             lblNewPasswordError.setVisible(true);
         }
         else if(fldCurrentPassword.getText().equals(fldNewPassword.getText())) {
-            lblNewPasswordError.setText("New password matches current");
+            lblNewPasswordError.setText(bundle.getString("newCurrent"));
             lblNewPasswordError.setVisible(true);
         }
         else if (isInvalidLength(fldConfirmPassword) || !fldConfirmPassword.getText().equals(fldNewPassword.getText())) {
-            lblNewPasswordError.setText("Passwords do not match");
+            lblNewPasswordError.setText(bundle.getString("notMatch"));
             lblNewPasswordError.setVisible(true);
         }
-        else {
+        else if (isInputValid(fldUsername) && isInputValid(fldCurrentPassword) && isInputValid(fldNewPassword) && isInputValid(fldConfirmPassword)) {
             lblNewPasswordError.setVisible(false);
+
+            String newPassword = fldNewPassword.getText();
+            instance.updatePassword(username, newPassword);
+            fldUsername.getScene().getWindow().hide();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(bundle.getString("success"));
+            alert.setHeaderText(null);
+            alert.setContentText(bundle.getString("passwordChanged"));
+            alert.showAndWait();
         }
-        String newPassword = fldNewPassword.getText();
-        instance.updatePassword(username, newPassword);
-        fldUsername.getScene().getWindow().hide();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText("You have successfully changed your password!");
-        alert.showAndWait();
+    }
+
+    private boolean isInputValid(TextField fld) {
+        return fld.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"));
     }
 
     private boolean isInvalidLength(PasswordField field) {
-        return field.getText().trim().length() < 8;
+        return field==null || field.getText().trim().length() < 8;
     }
 
     public void actionCancel(ActionEvent actionEvent) {

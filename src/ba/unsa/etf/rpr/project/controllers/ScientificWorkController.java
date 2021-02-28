@@ -65,8 +65,9 @@ public class ScientificWorkController implements Validation {
                     }
                 }
         );
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         txtAreaTags.setText("tag1, tag2, tag3...");
-        fldPublishedIn.setText("Journal or Conference");
+        fldPublishedIn.setText(bundle.getString("journalOr"));
         fldPublishedIn.getStyleClass().add("fieldNotValid");
         fldPublishedIn.textProperty().addListener(
                 (observableValue, o, n) -> {
@@ -112,30 +113,30 @@ public class ScientificWorkController implements Validation {
     }
 
     public void actionAbout(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        Stage stage = new Stage();
+        stage.setTitle(bundle.getString("about"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
         Parent root = loader.load();
         AboutController aboutWindow = loader.getController();
-        stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
     }
 
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (choiceAuthor.getSelectionModel() == null || choiceFieldOfStudy.getSelectionModel() == null || choicePublicationType.getSelectionModel() == null ) {
             throw new IllegalChoiceException("Nothing selected");
         }
         if (isInputValid(fldTitle) && isAdditionalInfoValid() && isInputValid(spinnerYear.getEditor()) && (txtAreaTags.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid")))) {
-            //String[] individualTags = txtAreaTags.getText().split(",");
             String title = fldTitle.getText();
             String author = choiceAuthor.getValue();
             if (instance.isDupe(title,author)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Scientific work already exists");
-                alert.setContentText(title + " by author " + author + " is already added");
+                alert.setTitle(bundle.getString("Error"));
+                alert.setHeaderText(bundle.getString("workExists"));
+                alert.setContentText(title + bundle.getString("byAuthor") + author + bundle.getString("isAdded"));
                 lblStatusBar.setText(title + " already exists");
 
                 alert.showAndWait();
@@ -154,16 +155,16 @@ public class ScientificWorkController implements Validation {
                 instance.addScientificWork(scientificWork);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
+                alert.setTitle(bundle.getString("success"));
                 alert.setHeaderText(null);
-                alert.setContentText("Scientific work successfully added");
+                alert.setContentText(bundle.getString("workAdded"));
 
                 alert.showAndWait();
-                lblStatusBar.setText("Successfully added");
+                lblStatusBar.setText(bundle.getString("successfullyAdded"));
             }
         }
         else {
-            lblStatusBar.setText("Please, fill the form properly");
+            lblStatusBar.setText(bundle.getString("notFilled"));
         }
     }
 
@@ -176,14 +177,15 @@ public class ScientificWorkController implements Validation {
     }
 
     public void actionUpload(ActionEvent actionEvent) {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files", "*.txt")); //can add also xml and pdf extensions
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(bundle.getString("extension"), "*.txt")); //can add also xml and pdf extensions
         chosenFile = fileChooser.showOpenDialog(new Stage());
         if (chosenFile == null) { //is any file selected
             lblNothingChosen.setVisible(true);
             return;
         }
-        lblNothingChosen.setText("Uploaded");
+        lblNothingChosen.setText(bundle.getString("uploaded"));
         lblNothingChosen.setStyle("-fx-text-fill: green;");
         lblNothingChosen.setVisible(true);
         fldTitle.setText(chosenFile.getName());

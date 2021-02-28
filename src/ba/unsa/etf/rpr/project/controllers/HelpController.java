@@ -10,9 +10,9 @@ public class HelpController {
     public TextArea txtAreaInstructions;
 
     @FXML
-            public void initialize() {
-        ResourceBundle paragraph = ResourceBundle.getBundle("Translation");
-        txtAreaInstructions.setText(paragraph.getString("instructionsText"));
+    public void initialize() {
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        txtAreaInstructions.setText(bundle.getString("instructionsText"));
     }
 
 

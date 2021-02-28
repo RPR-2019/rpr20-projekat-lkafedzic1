@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -33,6 +34,12 @@
                     <menus>
                         <Menu text="%file">
                             <items>
+                                <Menu mnemonicParsing="false" text="%language">
+                                    <items>
+                                        <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english" />
+                                        <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian" />
+                                    </items>
+                                </Menu>
                                 <MenuItem onAction="#actionClose" text="%exit">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -41,7 +48,7 @@
                         </Menu>
                         <Menu text="%edit">
                             <items>
-                                <MenuItem onAction="#actionRefresh" text="_Refresh">
+                                <MenuItem onAction="#actionRefresh" text="%refresh">
                            <accelerator>
                               <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                            </accelerator></MenuItem>
@@ -50,7 +57,7 @@
                         <Menu text="%help">
                             <items>
                                 <MenuItem fx:id="mniHelp" onAction="#onActionHelp" text="%help" />
-                                <MenuItem onAction="#actionAbout" text="_About" />
+                                <MenuItem onAction="#actionAbout" text="%about" />
                             </items>
                         </Menu>
                     </menus>
@@ -95,7 +102,7 @@
                      <tooltip>
                         <Tooltip text="%enterKeywords" />
                      </tooltip></TextField>
-                        <Button fx:id="btnSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
+                        <Button fx:id="btnSearch" defaultButton="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
                      <tooltip>
                         <Tooltip text="%clickSearch" />
                      </tooltip></Button>

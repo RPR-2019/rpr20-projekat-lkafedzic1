@@ -163,6 +163,7 @@ public class ScientificWorkDAO {
             ResultSet rs = getFieldsQuery.executeQuery();
             while(rs.next()) {
                 res.add(rs.getString("title"));
+                System.out.println(rs.getString("title"));
             }
             choiceFields.getItems().addAll(res);
         } catch (SQLException exception) {
@@ -176,6 +177,7 @@ public class ScientificWorkDAO {
             ResultSet rs = getTypesQuery.executeQuery();
             while(rs.next()) {
                 res.add(rs.getString("title"));
+                System.out.println(rs.getString("title"));
             }
             choicePublicationType.getItems().addAll(res);
         } catch (SQLException exception) {

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
@@ -32,6 +33,9 @@ public class GuestController {
     public TextField fldSearch;
     public ChoiceBox<String> choiceCategory;
     public Button btnSearch;
+
+    public RadioMenuItem itemEnglish;
+    public RadioMenuItem itemBosnian;
 
     private ScientificWorkDAO instance = null;
     private ObservableList<ScientificWork> scientificWorks = null;
@@ -63,11 +67,13 @@ public class GuestController {
         );
 
         btnSearch.setOnAction(actionEvent -> {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             if (fldSearch.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
+                System.out.println(choiceCategory.getSelectionModel().getSelectedItem());
                 ArrayList<ScientificWork> result = switch (choiceCategory.getSelectionModel().getSelectedItem()) {
-                    case "Title" -> instance.getWorksByTitle(fldSearch.getText());
-                    case "Tags" -> instance.getWorksByTag(fldSearch.getText());
-                    case "Author" -> instance.getWorksByAuthor(fldSearch.getText());
+                    case "Title","Naziv" -> instance.getWorksByTitle(fldSearch.getText());
+                    case "Tags","Oznake" -> instance.getWorksByTag(fldSearch.getText());
+                    case "Author","Autor" -> instance.getWorksByAuthor(fldSearch.getText());
                     default -> new ArrayList<>();
                 };
                 ObservableList<ScientificWork> list = FXCollections.observableArrayList();
@@ -76,20 +82,59 @@ public class GuestController {
             tableView.refresh();
         }
         else {
-            lblStatusBar.setText("Please, fill the form properly");
+            lblStatusBar.setText(bundle.getString("notFilled"));
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Please enter some keywords");
+            alert.setTitle(bundle.getString("Error"));
+            alert.setHeaderText(bundle.getString("keywords"));
             alert.show();
         }
-        lblStatusBar.setText("Searching finished");
+        lblStatusBar.setText(bundle.getString("searched"));
+        });
+
+        itemEnglish.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemBosnian.setSelected(false);
+                Locale.setDefault(new Locale("en", "US"));
+                Scene scene = btnSearch.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"), bundle);
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemEnglish.setSelected(true);
+            }
+        });
+
+        itemBosnian.selectedProperty().addListener((obs, o, n) -> {
+            if(n){
+                itemEnglish.setSelected(false);
+                Locale.setDefault(new Locale("bs", "BA"));
+                Scene scene = btnSearch.getScene();
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"), bundle);
+               Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                scene.setRoot(root);
+            }else if(o && !itemBosnian.isSelected()){
+                itemBosnian.setSelected(true);
+            }
         });
     }
 
     private void loadSearchChoices(ChoiceBox<String> choiceCategory) {
-        choiceCategory.getItems().add("Title");
-        choiceCategory.getItems().add("Tags");
-        choiceCategory.getItems().add("Author");
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        choiceCategory.getItems().add(bundle.getString("titleColumn"));
+        choiceCategory.getItems().add(bundle.getString("tagsChoice"));
+        choiceCategory.getItems().add(bundle.getString("itemAuthor"));
         choiceCategory.getSelectionModel().selectFirst();
     }
 
@@ -99,7 +144,7 @@ public class GuestController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
         LoginController loginWindow = loader.getController();
-        stage.setTitle("Login");
+        stage.setTitle(bundle.getString("login"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         lblWelcome.getScene().getWindow().hide();
@@ -120,14 +165,15 @@ public class GuestController {
         loader.setController(aboutController);
         root = loader.load();
 
-        stage.setTitle("About");
+        stage.setTitle(bundle.getString("about"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
     }
 
     public void actionRefresh(ActionEvent actionEvent) {
-        lblStatusBar.setText("Refreshed");
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        lblStatusBar.setText(bundle.getString("refreshed"));
         tableView.refresh();
         fldSearch.setText("");
         choiceCategory.getSelectionModel().clearSelection();
@@ -141,11 +187,9 @@ public class GuestController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/help.fxml"),bundle);
         HelpController aboutController = new HelpController();
         loader.setController(aboutController);
-        ResourceBundle paragraph = ResourceBundle.getBundle("Translation");
-        aboutController.txtAreaInstructions = new TextArea(paragraph.getString("instructionsText"));
+        aboutController.txtAreaInstructions = new TextArea(bundle.getString("instructionsText"));
         root = loader.load();
-
-        stage.setTitle("About");
+        stage.setTitle(bundle.getString("about"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(true);
         stage.show();
