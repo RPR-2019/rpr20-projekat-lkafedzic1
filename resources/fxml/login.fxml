@@ -50,15 +50,15 @@
             </GridPane.margin>
             <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="%account" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-               <children>
-                  <Button fx:id="btnSignUp" mnemonicParsing="false" onAction="#actionSignUp" text="%signup" textFill="#2d8bc9" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="%or">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Button fx:id="btnContinueAsGuest" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#actionContinueAsGuest" text="%guest" textFill="#2d8bc9" />
-               </children>
+               <Button fx:id="btnSignUp" mnemonicParsing="false" onAction="#actionSignUp" text="%signup"
+                       textFill="#2d8bc9"/>
+               <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="%or">
+                  <HBox.margin>
+                     <Insets/>
+                  </HBox.margin>
+               </Label>
+               <Button fx:id="btnContinueAsGuest" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                       onAction="#actionContinueAsGuest" text="%guest" textFill="#2d8bc9"/>
             </HBox>
          </VBox>
          <VBox fx:id="vboxError" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="4">

@@ -117,7 +117,7 @@ public class AuthorController implements Validation {
         return gender;
     }
 
-    public void actionCancel(ActionEvent actionEvent) {
+    public void actionCancel() {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }

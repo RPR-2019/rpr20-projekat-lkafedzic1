@@ -1,20 +1,21 @@
-/*
 package ba.unsa.etf.rpr.project;
 
+import ba.unsa.etf.rpr.project.enums.Gender;
+import ba.unsa.etf.rpr.project.models.Author;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorTest {
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
     Author author = null;
 
     @BeforeEach
     void before() {
-        author = new Author("Ela","Kagocic", simpleDateFormat.format("20.12.1997."), Gender.FEMALE);
+        author = new Author("Ela Kagocic", LocalDate.of(1997,12,20), Gender.FEMALE);
     }
 
     @Test
@@ -23,14 +24,14 @@ class AuthorTest {
     }
 
     @Test
-    void setFirstname() {
-        author.setFirstname("Ella");
-        assertEquals("Ella", author.getFirstname());
+    void setName() {
+        author.setName("Ella");
+        assertEquals("Ella", author.getName());
     }
 
     @Test
     void testEquals() {
-        Author other = new Author("Ela", "Kagocic", simpleDateFormat.format("20.12.1997."), Gender.FEMALE);
+        Author other = new Author("Ela Kagocic", LocalDate.of(1997,12,20), Gender.FEMALE);
         assertEquals(author, other);
     }
 
@@ -39,24 +40,4 @@ class AuthorTest {
         assertEquals(Gender.FEMALE, author.getGender());
     }
 
-    @Test
-    void setGender() {
-    }
-
-    @Test
-    void getDateOfBirth() {
-    }
-
-    @Test
-    void setDateOfBirth() {
-    }
-
-    @Test
-    void testToString() {
-    }
-
-    @Test
-    void compareTo() {
-    }
 }
-*/

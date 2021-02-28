@@ -105,7 +105,7 @@ public class DocumentController {
         });
     }
 
-    public void actionDownload(ActionEvent actionEvent) {
+    public void actionDownload() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (scientificWork!= null) {
             JFileChooser chooser = new JFileChooser(new File("c::\\"));
@@ -130,12 +130,12 @@ public class DocumentController {
         }
     }
 
-    public void actionClose(ActionEvent actionEvent) {
+    public void actionClose() {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }
 
-    public void actionAbout(ActionEvent actionEvent) throws IOException {
+    public void actionAbout() throws IOException {
         Stage stage = new Stage();
         Parent root;
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");

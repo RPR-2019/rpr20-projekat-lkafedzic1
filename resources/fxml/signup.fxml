@@ -41,14 +41,12 @@
       <Label text="%password" GridPane.rowIndex="7" />
       <Label text="%gender" GridPane.rowIndex="3" />
       <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <children>
-            <RadioButton fx:id="radioMale" mnemonicParsing="false" text="%male">
-               <toggleGroup>
-                  <ToggleGroup fx:id="toggleGender" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="%female" toggleGroup="$toggleGender" />
-         </children>
+         <RadioButton fx:id="radioMale" mnemonicParsing="false" text="%male">
+            <toggleGroup>
+               <ToggleGroup fx:id="toggleGender"/>
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="%female" toggleGroup="$toggleGender"/>
       </HBox>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="9">
          <buttons>
@@ -58,16 +56,15 @@
       </ButtonBar>
       <PasswordField fx:id="fldPassword" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    </GridPane>
-   <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0" VBox.vgrow="ALWAYS">
-      <children>
-         <Label fx:id="lblStatusBar" text="%addingAccount" HBox.hgrow="ALWAYS">
-            <padding>
-               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-            <HBox.margin>
-               <Insets bottom="2.0" />
-            </HBox.margin>
-         </Label>
-      </children>
+   <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0"
+         VBox.vgrow="ALWAYS">
+      <Label fx:id="lblStatusBar" text="%addingAccount" HBox.hgrow="ALWAYS">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+         </padding>
+         <HBox.margin>
+            <Insets bottom="2.0"/>
+         </HBox.margin>
+      </Label>
    </HBox>
 </VBox>

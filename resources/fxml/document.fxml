@@ -31,37 +31,37 @@
             </VBox.margin>
             <GridPane hgap="10.0" prefHeight="96.0" prefWidth="660.0" vgap="10.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="86.0" prefWidth="88.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="502.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="86.0" prefWidth="88.0"/>
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="100.0"
+                                     prefWidth="502.0"/>
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                </rowConstraints>
-               <children>
-                  <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="89.0" text="%title" />
-                  <Label text="%year" GridPane.rowIndex="2" />
-                  <Label text="%tags" GridPane.rowIndex="3" />
-                  <Label text="%author" GridPane.rowIndex="1" />
-                  <Label text="%reference" GridPane.rowIndex="4" />
-                  <Label fx:id="lblTitle" textFill="#756060" GridPane.columnIndex="1" />
-                  <Label fx:id="lblAuthor" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="lblYear" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="lblTags" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label fx:id="lblReference" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-               </children>
                <HBox.margin>
-                  <Insets />
+                  <Insets/>
                </HBox.margin>
+               <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="89.0" text="%title"/>
+               <Label text="%year" GridPane.rowIndex="2"/>
+               <Label text="%tags" GridPane.rowIndex="3"/>
+               <Label text="%author" GridPane.rowIndex="1"/>
+               <Label text="%reference" GridPane.rowIndex="4"/>
+               <Label fx:id="lblTitle" textFill="#756060" GridPane.columnIndex="1"/>
+               <Label fx:id="lblAuthor" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+               <Label fx:id="lblYear" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+               <Label fx:id="lblTags" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+               <Label fx:id="lblReference" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             </GridPane>
-            <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="96.0" prefWidth="50.0" spacing="5.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Button fx:id="btnDownload" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="%download" />
-                  <Button fx:id="btnCancel" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" prefHeight="26.0" prefWidth="118.0" text="%close" />
-               </children>
+            <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="96.0" prefWidth="50.0" spacing="5.0"
+                  HBox.hgrow="ALWAYS">
+               <Button fx:id="btnDownload" defaultButton="true" maxWidth="1.7976931348623157E308"
+                       mnemonicParsing="false" onAction="#actionDownload" text="%download"/>
+               <Button fx:id="btnCancel" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                       onAction="#actionClose" prefHeight="26.0" prefWidth="118.0" text="%close"/>
             </VBox>
          </HBox>
          <TextArea fx:id="txtArea" editable="false" prefHeight="481.0" prefWidth="722.0">
@@ -75,10 +75,8 @@
       <MenuBar BorderPane.alignment="CENTER">
          <Menu mnemonicParsing="false" text="%file">
             <Menu mnemonicParsing="false" text="%language">
-              <items>
-                <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english" />
-                  <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian" />
-              </items>
+               <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english"/>
+               <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian"/>
             </Menu>
             <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="%close" />
          </Menu>

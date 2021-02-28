@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.project.models;
 public class ChoiceField {
     private String title;
 
-    public ChoiceField(int id, String title) {
+    public ChoiceField(String title) {
         this.title = title;
     }
 
