@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.project.controllers;
 import ba.unsa.etf.rpr.project.*;
 import ba.unsa.etf.rpr.project.enums.Gender;
 import ba.unsa.etf.rpr.project.models.Author;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;

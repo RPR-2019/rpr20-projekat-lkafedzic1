@@ -4,7 +4,6 @@ import ba.unsa.etf.rpr.project.ScientificWorkDAO;
 import ba.unsa.etf.rpr.project.models.ScientificWork;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -172,7 +171,6 @@ public class HomeAdminController extends HomeController {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"), bundle);
         Parent root = loader.load();
-        AuthorController newWindow = loader.getController();
         stage.setTitle(bundle.getString("addAuthor"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
@@ -188,7 +186,7 @@ public class HomeAdminController extends HomeController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(bundle.getString("confirm"));
         alert.setHeaderText(bundle.getString("sure"));
-        alert.setContentText(bundle.getString("deleting") + scientificWork.getTitle()+"\"");
+        alert.setContentText(bundle.getString("deleting") + " " + scientificWork.getTitle()+"\"");
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -205,8 +203,8 @@ public class HomeAdminController extends HomeController {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(bundle.getString("confirm"));
-        alert.setHeaderText(bundle.getString("deletingField") + field.toUpperCase() + "?");
-        alert.setContentText(bundle.getString("deletingQuote") + field + "\" " + bundle.getString("willDelete"));
+        alert.setHeaderText(bundle.getString("deletingField") + " " + field.toUpperCase() + "?");
+        alert.setContentText(bundle.getString("deletingQuote") + " " + field + " " + bundle.getString("willDelete"));
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -223,8 +221,8 @@ public class HomeAdminController extends HomeController {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(bundle.getString("confirm"));
-        alert.setHeaderText(bundle.getString("deletingType") + type.toUpperCase() + "?");
-        alert.setContentText(bundle.getString("deletingQuote") + type + "\" " + bundle.getString("willDeleteType"));
+        alert.setHeaderText(bundle.getString("deletingType") +  " " + type.toUpperCase() + "?");
+        alert.setContentText(bundle.getString("deletingQuote") +  " " + type + " " + bundle.getString("willDeleteType"));
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();
@@ -241,8 +239,8 @@ public class HomeAdminController extends HomeController {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(bundle.getString("confirm"));
-        alert.setHeaderText(bundle.getString("deletingAuthor") + author.toUpperCase() + "?");
-        alert.setContentText(("deletingQuote") + author + bundle.getString("andAll") + author);
+        alert.setHeaderText(bundle.getString("deletingAuthor") + " " + author.toUpperCase() + "?");
+        alert.setContentText(("deletingQuote") + " " + author + " " + bundle.getString("andAll") + " " + author);
         alert.setResizable(true);
 
         Optional<ButtonType> result = alert.showAndWait();

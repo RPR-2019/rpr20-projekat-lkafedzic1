@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.project.controllers;
 
 import ba.unsa.etf.rpr.project.ScientificWorkDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;

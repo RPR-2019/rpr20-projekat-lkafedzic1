@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.project.controllers;
 import ba.unsa.etf.rpr.project.*;
 import ba.unsa.etf.rpr.project.exceptions.IllegalChoiceException;
 import ba.unsa.etf.rpr.project.models.ScientificWork;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
