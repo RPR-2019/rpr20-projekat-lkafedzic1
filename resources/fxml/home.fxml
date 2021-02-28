@@ -83,7 +83,7 @@
                         <Tooltip text="Enter keywords" />
                      </tooltip>
                   </TextField>
-                  <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="20.0" prefWidth="63.0" text="Search">
+                        <Button fx:id="btnSearch" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
