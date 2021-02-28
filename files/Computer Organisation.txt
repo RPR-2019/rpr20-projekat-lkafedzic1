@@ -1,0 +1,9 @@
+In Praise of Computer Organization and Design: The Hardware/
+Software Interface, Fifth Edition
+
+Textbook selection is oft en a frustrating act of compromise—pedagogy, content
+coverage, quality of exposition, level of rigor, cost. Computer Organization and
+Design is the rare book that hits all the right notes across the board, without
+compromise. It is not only the premier computer organization textbook, it is a
+shining example of what all computer science textbooks could and should be.
+—Michael Goldener, Xavier University
