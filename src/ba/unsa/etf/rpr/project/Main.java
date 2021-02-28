@@ -15,9 +15,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Log in");
         primaryStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         primaryStage.setResizable(false);
         primaryStage.show();
