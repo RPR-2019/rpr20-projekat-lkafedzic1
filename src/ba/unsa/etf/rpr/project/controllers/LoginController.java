@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -79,7 +80,8 @@ public class LoginController {
 
     public void showUserView() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"), bundle);
         Parent root = loader.load();
         HomeController homeController = loader.getController();
         stage.setTitle("Scientific works database");
@@ -92,7 +94,8 @@ public class LoginController {
 
     public void showAdministratorView() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeAdministrator.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/homeAdministrator.fxml"), bundle);
         Parent root = loader.load();
         HomeAdminController homeController = loader.getController();
         stage.setTitle("Scientific works database");
@@ -106,7 +109,8 @@ public class LoginController {
     public void actionSignUp(ActionEvent actionEvent) throws IOException {
         fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"), bundle);
         Parent root = loader.load();
         SignUpController signupWindow = loader.getController();
         stage.setTitle("Sign up");
@@ -119,7 +123,8 @@ public class LoginController {
     public void actionContinueAsGuest(ActionEvent actionEvent) throws IOException {
         fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"), bundle);
         Parent root = loader.load();
         GuestController guestController = loader.getController();
         stage.setTitle("Scientific works database");
@@ -132,7 +137,8 @@ public class LoginController {
 
     public void actionChangePassword(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/password.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/password.fxml"), bundle);
         Parent root = loader.load();
         PasswordController newWindow = loader.getController();
         stage.setTitle("Password");

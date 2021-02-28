@@ -19,12 +19,12 @@
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
-   <Label text="Instructions" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+   <Label text="%instructions" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
       <GridPane.margin>
          <Insets />
       </GridPane.margin>
    </Label>
-   <TextArea editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="158.0" prefWidth="342.0" text="For quick searching through our Scientific Works&#10;Database, you can use this app as a guest. &#10;&#10;Users have the possibillity to read wanted &#10;scientific paper, and option to download as many&#10;papers as they wish.&#10;&#10;&#10;" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+   <TextArea fx:id="txtAreaInstructions" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="158.0" prefWidth="342.0" promptText="%instructionsText" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
       <GridPane.margin>
          <Insets />
       </GridPane.margin>

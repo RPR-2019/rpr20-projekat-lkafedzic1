@@ -31,11 +31,11 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="89.0" text="Title:" />
-                  <Label text="Year:" GridPane.rowIndex="2" />
-                  <Label text="Tags:" GridPane.rowIndex="3" />
-                  <Label text="Author:" GridPane.rowIndex="1" />
-                  <Label text="Reference:" GridPane.rowIndex="4" />
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="89.0" text="%title" />
+                  <Label text="%year" GridPane.rowIndex="2" />
+                  <Label text="%tags" GridPane.rowIndex="3" />
+                  <Label text="%author" GridPane.rowIndex="1" />
+                  <Label text="%reference:" GridPane.rowIndex="4" />
                   <Label fx:id="lblTitle" textFill="#756060" GridPane.columnIndex="1" />
                   <Label fx:id="lblAuthor" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label fx:id="lblYear" textFill="#756060" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -48,8 +48,8 @@
             </GridPane>
             <VBox alignment="TOP_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="96.0" prefWidth="50.0" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="btnDownload" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="Download" />
-                  <Button fx:id="btnCancel" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" prefHeight="26.0" prefWidth="118.0" text="Close" />
+                  <Button fx:id="btnDownload" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionDownload" text="%download" />
+                  <Button fx:id="btnCancel" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionClose" prefHeight="26.0" prefWidth="118.0" text="%close" />
                </children>
             </VBox>
          </HBox>
@@ -62,11 +62,11 @@
    </center>
    <top>
       <MenuBar BorderPane.alignment="CENTER">
-         <Menu mnemonicParsing="false" text="File">
-            <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
+         <Menu mnemonicParsing="false" text="%file">
+            <MenuItem fx:id="itemClose" mnemonicParsing="false" onAction="#actionClose" text="%close" />
          </Menu>
-         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="About" />
+         <Menu mnemonicParsing="false" text="%help">
+            <MenuItem fx:id="itemAbout" mnemonicParsing="false" onAction="#actionAbout" text="%about" />
          </Menu>
       </MenuBar>
    </top>
@@ -78,7 +78,7 @@
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
-         <Label fx:id="lblStatusBar" text="Reading selected scientific work" />
+         <Label fx:id="lblStatusBar" text="%statusReading" />
       </HBox>
    </bottom>
 </BorderPane>

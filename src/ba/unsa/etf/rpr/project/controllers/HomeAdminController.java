@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -18,7 +19,8 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"), bundle);
         Parent root = loader.load();
         ScientificWorkController scientificWorkController = loader.getController();
         stage.setTitle("Add new scientific work");
@@ -42,7 +44,8 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddFieldOfStudy(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newFieldOfStudy.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newFieldOfStudy.fxml"), bundle);
         Parent root = loader.load();
         FieldOfStudyController newWindow = loader.getController();
         stage.setTitle("Add new field of study");
@@ -53,7 +56,8 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddPublicationType(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newPublicationType.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newPublicationType.fxml"), bundle);
         Parent root = loader.load();
         PublicationTypeController newWindow = loader.getController();
         newWindow.lblStatusBar.setText("Add new type of publication");
@@ -65,7 +69,8 @@ public class HomeAdminController extends HomeController {
 
     public void actionAddAuthor(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"), bundle);
         Parent root = loader.load();
         AuthorController newWindow = loader.getController();
         stage.setTitle("Add author");

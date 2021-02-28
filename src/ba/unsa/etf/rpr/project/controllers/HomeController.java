@@ -21,6 +21,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -98,11 +99,11 @@ public class HomeController {
     }
 
     public void actionSignOut(ActionEvent actionEvent) throws IOException {
-        Node node = (Node) actionEvent.getSource();
-        Stage st = (Stage) node.getScene().getWindow();
+        Stage st = (Stage) lblStatusBar.getScene().getWindow();
         st.hide();
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
         LoginController loginWindow = loader.getController();
         stage.setTitle("Login");
@@ -117,7 +118,8 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
 
     Stage stage = new Stage();
     Parent root;
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"));
+    ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/document.fxml"), bundle);
     DocumentController documentController = new DocumentController(scientificWork);
     loader.setController(documentController);
     root = loader.load();
@@ -145,8 +147,9 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
     public void actionAbout(ActionEvent actionEvent)  throws IOException {
         Stage stage = new Stage();
         Parent root;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
-        HelpController aboutController = new HelpController();
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
+        AboutController aboutController = new AboutController();
         loader.setController(aboutController);
         root = loader.load();
 
@@ -167,7 +170,8 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
     public void onActionHelp(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/help.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/help.fxml"), bundle);
         HelpController aboutController = new HelpController();
         loader.setController(aboutController);
         root = loader.load();

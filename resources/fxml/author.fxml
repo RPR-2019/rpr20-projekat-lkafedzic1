@@ -5,58 +5,54 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="240.0"
-      prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="ba.unsa.etf.rpr.project.controllers.AuthorController">
+<VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="240.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.project.controllers.AuthorController">
    <stylesheets>
-      <URL value="@/css/style.css"/>
+      <URL value="@/css/style.css" />
    </stylesheets>
-   <GridPane fx:id="formPane" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-             prefHeight="251.0" prefWidth="353.0" vgap="10.0">
+   <GridPane fx:id="formPane" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="251.0" prefWidth="353.0" vgap="10.0">
       <columnConstraints>
-         <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0"/>
-         <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0"/>
+         <ColumnConstraints maxWidth="107.0" minWidth="93.0" prefWidth="107.0" />
+         <ColumnConstraints maxWidth="192.0" minWidth="178.0" prefWidth="178.0" />
       </columnConstraints>
       <rowConstraints>
-         <RowConstraints/>
-         <RowConstraints/>
-         <RowConstraints/>
-         <RowConstraints/>
-         <RowConstraints/>
-         <RowConstraints/>
-         <RowConstraints/>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
       </rowConstraints>
       <padding>
-         <Insets bottom="20.0" left="10.0" right="10.0" top="20.0"/>
+         <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
       </padding>
-      <Label text="Full name:" GridPane.rowIndex="1"/>
-      <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-      <Label text="Date of birth:" GridPane.rowIndex="2"/>
-      <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-      <Label text="Gender:" GridPane.rowIndex="3"/>
+      <Label text="%name" GridPane.rowIndex="1" />
+      <TextField fx:id="fldName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="%dateOfBirth" GridPane.rowIndex="2" />
+      <DatePicker fx:id="dateOfBirth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="%gender" GridPane.rowIndex="3" />
       <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <RadioButton fx:id="radioMale" mnemonicParsing="false" text="male">
+         <RadioButton fx:id="radioMale" mnemonicParsing="false" text="%male">
             <toggleGroup>
-               <ToggleGroup fx:id="toggleGender"/>
+               <ToggleGroup fx:id="toggleGender" />
             </toggleGroup>
          </RadioButton>
-         <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="female" toggleGroup="$toggleGender"/>
+         <RadioButton fx:id="radioFemale" mnemonicParsing="false" text="%female" toggleGroup="$toggleGender" />
       </HBox>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
          <buttons>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok"/>
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="Close"/>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#actionSave" text="Ok" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#actionCancel" text="%close" />
          </buttons>
       </ButtonBar>
    </GridPane>
-   <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0"
-         VBox.vgrow="ALWAYS">
-      <Label fx:id="lblStatusBar" text="Adding new author" HBox.hgrow="ALWAYS">
+   <HBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="334.0" VBox.vgrow="ALWAYS">
+      <Label fx:id="lblStatusBar" text="%labelAddingAuthor" HBox.hgrow="ALWAYS">
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
          <HBox.margin>
-            <Insets bottom="2.0"/>
+            <Insets bottom="2.0" />
          </HBox.margin>
       </Label>
    </HBox>

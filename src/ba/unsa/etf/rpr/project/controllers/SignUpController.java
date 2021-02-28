@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -176,7 +177,8 @@ public class SignUpController implements Validation{
     public void actionCancel(ActionEvent actionEvent) throws IOException {
         fldName.getScene().getWindow().hide();
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
         LoginController loginWindow = loader.getController();
         stage.setTitle("Login");

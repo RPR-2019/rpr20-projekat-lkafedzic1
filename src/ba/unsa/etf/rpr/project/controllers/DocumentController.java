@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -94,8 +95,9 @@ public class DocumentController {
     public void actionAbout(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
-        HelpController aboutController = new HelpController();
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
+        AboutController aboutController = new AboutController();
         loader.setController(aboutController);
         root = loader.load();
 

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -112,9 +113,10 @@ public class ScientificWorkController implements Validation {
 
     public void actionAbout(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
         Parent root = loader.load();
-        HomeController aboutWindow = loader.getController();
+        AboutController aboutWindow = loader.getController();
         stage.setTitle("About");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
