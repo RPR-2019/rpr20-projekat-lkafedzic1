@@ -124,7 +124,7 @@ public class SignUpController implements Validation{
         return (isInputValid(fldName) && isInputValid(fldEmail) &&  isInputValid(fldUsername) && isInputValid(fldPassword) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
     }
 
-    public void actionSave(ActionEvent actionEvent) {
+    public void actionSave() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (isEveryInputValid()) {
             if(instance.findUser(fldUsername)) {
@@ -175,13 +175,12 @@ public class SignUpController implements Validation{
         return datePicker.getValue().isBefore(LocalDate.now());
     }
 
-    public void actionCancel(ActionEvent actionEvent) throws IOException {
+    public void actionCancel() throws IOException {
         fldName.getScene().getWindow().hide();
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
         Parent root = loader.load();
-        LoginController loginWindow = loader.getController();
         stage.setTitle(bundle.getString("login"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);

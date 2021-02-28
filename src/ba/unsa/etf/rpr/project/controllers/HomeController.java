@@ -139,7 +139,7 @@ public class HomeController {
         choiceCategory.getSelectionModel().selectFirst();
     }
 
-    public void actionSignOut(ActionEvent actionEvent) throws IOException {
+    public void actionSignOut() throws IOException {
         Stage st = (Stage) lblStatusBar.getScene().getWindow();
         st.hide();
         Stage stage = new Stage();
@@ -153,7 +153,7 @@ public class HomeController {
         stage.show();
     }
 
-public void actionRead(ActionEvent actionEvent) throws IOException {
+public void actionRead() throws IOException {
     checkSelection();
     ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
 
@@ -186,7 +186,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         }
     }
 
-    public void actionAbout(ActionEvent actionEvent)  throws IOException {
+    public void actionAbout()  throws IOException {
         Stage stage = new Stage();
         Parent root;
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
@@ -201,7 +201,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         stage.show();
     }
 
-    public void actionRefresh(ActionEvent actionEvent) {
+    public void actionRefresh() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         lblStatusBar.setText(bundle.getString("refreshed"));
         tableView.refresh();
@@ -210,7 +210,7 @@ public void actionRead(ActionEvent actionEvent) throws IOException {
         tableView.setItems(scientificWorksList);
     }
 
-    public void onActionHelp(ActionEvent actionEvent) throws IOException {
+    public void onActionHelp() throws IOException {
         Stage stage = new Stage();
         Parent root;
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");

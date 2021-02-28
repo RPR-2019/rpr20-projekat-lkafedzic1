@@ -138,7 +138,7 @@ public class GuestController {
         choiceCategory.getSelectionModel().selectFirst();
     }
 
-    public void actionLogin(ActionEvent actionEvent) throws IOException {
+    public void actionLogin() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"), bundle);
@@ -151,12 +151,12 @@ public class GuestController {
         stage.show();
     }
 
-    public void actionClose(ActionEvent actionEvent) {
+    public void actionClose() {
         Stage window = (Stage) lblWelcome.getScene().getWindow();
         window.close();
     }
 
-    public void actionAbout(ActionEvent actionEvent) throws IOException {
+    public void actionAbout() throws IOException {
         Stage stage = new Stage();
         Parent root;
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
@@ -171,7 +171,7 @@ public class GuestController {
         stage.show();
     }
 
-    public void actionRefresh(ActionEvent actionEvent) {
+    public void actionRefresh() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         lblStatusBar.setText(bundle.getString("refreshed"));
         tableView.refresh();
@@ -180,7 +180,7 @@ public class GuestController {
         tableView.setItems(scientificWorks);
     }
 
-    public void onActionHelp(ActionEvent actionEvent) throws IOException {
+    public void onActionHelp() throws IOException {
         Stage stage = new Stage();
         Parent root;
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");

@@ -32,7 +32,7 @@ public class FieldOfStudyController{
         );
     }
 
-    public void actionAddNewField(ActionEvent actionEvent) {
+    public void actionAddNewField() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (fldTitle.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
             ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
@@ -47,7 +47,7 @@ public class FieldOfStudyController{
         }
     }
 
-    public void actionCancel(ActionEvent actionEvent) {
+    public void actionCancel() {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }

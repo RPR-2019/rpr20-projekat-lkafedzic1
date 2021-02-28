@@ -75,7 +75,7 @@ public class PasswordController {
         );
     }
     
-    public void actionSave(ActionEvent actionEvent) {
+    public void actionSave() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         String username = fldUsername.getText();
         String oldPassword = fldCurrentPassword.getText();
@@ -114,7 +114,7 @@ public class PasswordController {
         return field==null || field.getText().trim().length() < 8;
     }
 
-    public void actionCancel(ActionEvent actionEvent) {
+    public void actionCancel() {
         Stage window = (Stage) fldUsername.getScene().getWindow();
         window.close();
     }

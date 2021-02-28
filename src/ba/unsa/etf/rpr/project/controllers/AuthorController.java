@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.project.models.Author;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class AuthorController implements Validation {
     public ToggleGroup toggleGender;
     public Label lblStatusBar;
     public TextField fldName;
+    public GridPane formPane;
     private Author author = null;
 
     private ScientificWorkDAO instance;
@@ -79,7 +81,7 @@ public class AuthorController implements Validation {
         return (isInputValid(fldName) && !radioMale.getStyleClass().contains("fieldNotValid") && dateOfBirth.getStyleClass().contains("fieldValid"));
     }
 
-    public void actionSave(ActionEvent actionEvent) {
+    public void actionSave() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (isEveryInputValid()) {
             if(instance.findAuthorFromPerson(fldName.getText())) {

@@ -32,36 +32,30 @@
                 </BorderPane.margin>
                 <MenuBar maxWidth="1.7976931348623157E308">
                     <Menu text="%file">
-                        <items>
-                            <Menu mnemonicParsing="false" text="%language">
-                                <items>
-                                    <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english"/>
-                                    <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian"/>
-                                </items>
-                            </Menu>
-                            <MenuItem onAction="#actionClose" text="%exit">
-                                <accelerator>
-                                    <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP"
-                                                        shortcut="UP"/>
-                                </accelerator>
-                            </MenuItem>
-                        </items>
+                        <Menu mnemonicParsing="false" text="%language">
+                            <items>
+                                <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english"/>
+                                <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian"/>
+                            </items>
+                        </Menu>
+                        <MenuItem onAction="#actionClose" text="%exit">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
                     </Menu>
                     <Menu text="%edit">
-                        <items>
-                            <MenuItem onAction="#actionRefresh" text="%refresh">
-                                <accelerator>
-                                    <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP"
-                                                        shortcut="UP"/>
-                                </accelerator>
-                            </MenuItem>
-                        </items>
+                        <MenuItem onAction="#actionRefresh" text="%refresh">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
                     </Menu>
                     <Menu text="%help">
-                        <items>
-                            <MenuItem fx:id="mniHelp" onAction="#onActionHelp" text="%help"/>
-                            <MenuItem onAction="#actionAbout" text="%about"/>
-                        </items>
+                        <MenuItem fx:id="mniHelp" onAction="#onActionHelp" text="%help"/>
+                        <MenuItem onAction="#actionAbout" text="%about"/>
                     </Menu>
                 </MenuBar>
                 <HBox alignment="TOP_RIGHT" spacing="5.0">

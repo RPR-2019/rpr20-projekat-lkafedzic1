@@ -61,7 +61,7 @@ public class LoginController {
         );
     }
 
-    public void actionLogin(ActionEvent actionEvent) throws IOException {
+    public void actionLogin() throws IOException {
         boolean test = instance.isAccount(fldUsername.getText(), fldPassword.getText());
         if (fldUsername.getStyleClass().contains("fieldNotValid") || fldPassword.getStyleClass().contains("fieldNotValid") || !test) {
             vboxError.setVisible(true);
@@ -106,13 +106,12 @@ public class LoginController {
         stage.show();
     }
 
-    public void actionSignUp(ActionEvent actionEvent) throws IOException {
+    public void actionSignUp() throws IOException {
         fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/signup.fxml"), bundle);
         Parent root = loader.load();
-        SignUpController signupWindow = loader.getController();
         stage.setTitle(bundle.getString("signup"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMinHeight(370);
@@ -120,13 +119,12 @@ public class LoginController {
         stage.show();
     }
 
-    public void actionContinueAsGuest(ActionEvent actionEvent) throws IOException {
+    public void actionContinueAsGuest() throws IOException {
         fldUsername.getScene().getWindow().hide();
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/guest.fxml"), bundle);
         Parent root = loader.load();
-        GuestController guestController = loader.getController();
         stage.setTitle(bundle.getString("appName"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setMaxWidth(695);
@@ -135,12 +133,11 @@ public class LoginController {
         stage.show();
     }
 
-    public void actionChangePassword(ActionEvent actionEvent) throws IOException {
+    public void actionChangePassword() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/password.fxml"), bundle);
         Parent root = loader.load();
-        PasswordController newWindow = loader.getController();
         stage.setTitle(bundle.getString("password"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.show();

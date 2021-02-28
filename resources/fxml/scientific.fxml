@@ -74,28 +74,24 @@
          </ButtonBar>
          <Label text="%addAdditional" GridPane.rowIndex="7"/>
          <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-            <children>
-               <CheckBox fx:id="checkBoxAdditional" mnemonicParsing="false" onAction="#actionCheckBox">
-                  <HBox.margin>
-                     <Insets top="5.0"/>
-                  </HBox.margin>
-               </CheckBox>
-               <TextField fx:id="fldPublishedIn" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="252.0"
-                          visible="false"/>
-            </children>
+            <CheckBox fx:id="checkBoxAdditional" mnemonicParsing="false" onAction="#actionCheckBox">
+               <HBox.margin>
+                  <Insets top="5.0"/>
+               </HBox.margin>
+            </CheckBox>
+            <TextField fx:id="fldPublishedIn" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="252.0"
+                       visible="false"/>
          </HBox>
          <Label text="%scientificWork" GridPane.rowIndex="6"/>
          <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <children>
-               <Button fx:id="btnUpload" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                       mnemonicParsing="false" onAction="#actionUpload" prefHeight="26.0" prefWidth="167.0"
-                       text="%uploadFile"/>
-               <Label fx:id="lblNothingChosen" text="You haven't chosen any file" textFill="#cd1111" visible="false">
-                  <HBox.margin>
-                     <Insets top="5.0"/>
-                  </HBox.margin>
-               </Label>
-            </children>
+            <Button fx:id="btnUpload" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                    mnemonicParsing="false" onAction="#actionUpload" prefHeight="26.0" prefWidth="167.0"
+                    text="%uploadFile"/>
+            <Label fx:id="lblNothingChosen" text="You haven't chosen any file" textFill="#cd1111" visible="false">
+               <HBox.margin>
+                  <Insets top="5.0"/>
+               </HBox.margin>
+            </Label>
          </HBox>
          <ChoiceBox fx:id="choiceFieldOfStudy" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1"
                     GridPane.rowIndex="5"/>

@@ -107,24 +107,23 @@ public class ScientificWorkController implements Validation {
         );
     }
 
-    public void actionCancel(ActionEvent actionEvent) {
+    public void actionCancel() {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }
 
-    public void actionAbout(ActionEvent actionEvent) throws IOException {
+    public void actionAbout() throws IOException {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Stage stage = new Stage();
         stage.setTitle(bundle.getString("about"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
         Parent root = loader.load();
-        AboutController aboutWindow = loader.getController();
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
     }
 
-    public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
+    public void actionAddScientificWork() throws IOException {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (choiceAuthor.getSelectionModel() == null || choiceFieldOfStudy.getSelectionModel() == null || choicePublicationType.getSelectionModel() == null ) {
             throw new IllegalChoiceException("Nothing selected");
@@ -176,7 +175,7 @@ public class ScientificWorkController implements Validation {
         return fld.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"));
     }
 
-    public void actionUpload(ActionEvent actionEvent) {
+    public void actionUpload() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(bundle.getString("extension"), "*.txt")); //can add also xml and pdf extensions
@@ -191,11 +190,11 @@ public class ScientificWorkController implements Validation {
         fldTitle.setText(chosenFile.getName());
     }
 
-    public void actionClose(ActionEvent actionEvent) {
+    public void actionClose() {
         fldTitle.getScene().getWindow().hide();
     }
 
-    public void actionCheckBox(ActionEvent actionEvent) {
+    public void actionCheckBox() {
         fldPublishedIn.setVisible(checkBoxAdditional.isSelected());
         if (!checkBoxAdditional.isSelected()) fldPublishedIn.setText("");
     }

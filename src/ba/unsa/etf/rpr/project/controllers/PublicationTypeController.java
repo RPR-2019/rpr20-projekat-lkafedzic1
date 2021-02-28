@@ -33,7 +33,7 @@ public class PublicationTypeController {
         );
     }
 
-    public void actionAddNewType(ActionEvent actionEvent) {
+    public void actionAddNewType() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         if (fldTitle.getStyleClass().stream().anyMatch(style -> style.equals("fieldValid"))) {
             ScientificWorkDAO instance = ScientificWorkDAO.getInstance();
@@ -48,7 +48,7 @@ public class PublicationTypeController {
         }
     }
 
-    public void actionCancel(ActionEvent actionEvent) {
+    public void actionCancel() {
         Stage stage = (Stage) lblStatusBar.getScene().getWindow();
         stage.close();
     }

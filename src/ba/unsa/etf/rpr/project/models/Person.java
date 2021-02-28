@@ -32,10 +32,6 @@ public class Person implements Validation {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Gender getGender() {
         return gender;
     }

@@ -120,7 +120,7 @@ public class HomeAdminController extends HomeController {
         choiceCategory.getSelectionModel().selectFirst();
     }
 
-    public void actionAddScientificWork(ActionEvent actionEvent) throws IOException {
+    public void actionAddScientificWork() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/scientific.fxml"), bundle);
@@ -143,19 +143,18 @@ public class HomeAdminController extends HomeController {
         });
     }
 
-    public void actionAddFieldOfStudy(ActionEvent actionEvent) throws IOException {
+    public void actionAddFieldOfStudy() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newFieldOfStudy.fxml"), bundle);
         Parent root = loader.load();
-        FieldOfStudyController newWindow = loader.getController();
         stage.setTitle(bundle.getString("addFieldTitle"));
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
         stage.setResizable(false);
         stage.show();
     }
 
-    public void actionAddPublicationType(ActionEvent actionEvent) throws IOException {
+    public void actionAddPublicationType() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/newPublicationType.fxml"), bundle);
@@ -168,7 +167,7 @@ public class HomeAdminController extends HomeController {
         stage.show();
     }
 
-    public void actionAddAuthor(ActionEvent actionEvent) throws IOException {
+    public void actionAddAuthor() throws IOException {
         Stage stage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/author.fxml"), bundle);
@@ -180,7 +179,7 @@ public class HomeAdminController extends HomeController {
         stage.show();
     }
 
-    public void actionDeleteScientificWork(ActionEvent actionEvent) {
+    public void actionDeleteScientificWork() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         checkSelection();
         ScientificWork scientificWork = tableView.getSelectionModel().getSelectedItem();
@@ -199,7 +198,7 @@ public class HomeAdminController extends HomeController {
         }
     }
 
-    public void actionDeleteFieldOfStudy(ActionEvent actionEvent) {
+    public void actionDeleteFieldOfStudy() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         checkSelection();
         String field = tableView.getSelectionModel().getSelectedItem().getField();
@@ -217,7 +216,7 @@ public class HomeAdminController extends HomeController {
         }
     }
 
-    public void actionDeletePublicationType(ActionEvent actionEvent) {
+    public void actionDeletePublicationType() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         checkSelection();
         String type = tableView.getSelectionModel().getSelectedItem().getType();
@@ -235,7 +234,7 @@ public class HomeAdminController extends HomeController {
         }
     }
 
-    public void actionDeleteAuthor(ActionEvent actionEvent) {
+    public void actionDeleteAuthor() {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         checkSelection();
         String author = tableView.getSelectionModel().getSelectedItem().getAuthor();

@@ -21,6 +21,8 @@ public class Author extends Person implements Comparable<Author> {
 
     @Override
     public boolean equals(Object obj) {
+        if (getClass() != obj.getClass())
+            return false;
         Author a = (Author) obj;
         return getName().equals(a.getName()) && getDateOfBirth().equals(a.getDateOfBirth()) && getGender().equals(a.getGender());
     }

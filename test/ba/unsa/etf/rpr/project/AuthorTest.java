@@ -4,8 +4,6 @@ import ba.unsa.etf.rpr.project.enums.Gender;
 import ba.unsa.etf.rpr.project.models.Author;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;

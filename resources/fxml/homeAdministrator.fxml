@@ -29,10 +29,8 @@
             <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                 <Menu text="%file">
                     <Menu mnemonicParsing="false" text="%language">
-                        <items>
-                            <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english"/>
-                            <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian"/>
-                        </items>
+                        <RadioMenuItem fx:id="itemEnglish" mnemonicParsing="false" text="%english"/>
+                        <RadioMenuItem fx:id="itemBosnian" mnemonicParsing="false" text="%bosnian"/>
                     </Menu>
                     <MenuItem onAction="#actionSignOut" text="%exit">
                         <accelerator>
@@ -140,51 +138,49 @@
                     </TableView>
                     <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
                           spacing="10.0" HBox.hgrow="ALWAYS">
-                        <children>
-                            <MenuButton alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                        text="%addNew">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionAddScientificWork"
-                                              text="%itemScientific"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionAddFieldOfStudy"
-                                              text="%fieldOfStudy"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionAddPublicationType"
-                                              text="%publicationType"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionAddAuthor" text="%itemAuthor"/>
-                                </items>
-                            </MenuButton>
-                            <MenuButton alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                        text="%delete">
-                                <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionDeleteScientificWork"
-                                              text="%itemScientific"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionDeleteFieldOfStudy"
-                                              text="%fieldOfStudy"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionDeletePublicationType"
-                                              text="%publicationType"/>
-                                    <MenuItem mnemonicParsing="false" onAction="#actionDeleteAuthor"
-                                              text="%itemAuthor"/>
-                                </items>
-                            </MenuButton>
-                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionRead"
-                                    text="%read">
-                                <tooltip>
-                                    <Tooltip text="%clickRead"/>
-                                </tooltip>
-                            </Button>
-                            <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                    onAction="#actionSignOut" text="%signOut">
-                                <tooltip>
-                                    <Tooltip text="%clickSignOut"/>
-                                </tooltip>
-                            </Button>
-                        </children>
                         <HBox.margin>
                             <Insets/>
                         </HBox.margin>
                         <padding>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                         </padding>
+                        <MenuButton alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                    text="%addNew">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#actionAddScientificWork"
+                                          text="%itemScientific"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionAddFieldOfStudy"
+                                          text="%fieldOfStudy"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionAddPublicationType"
+                                          text="%publicationType"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionAddAuthor" text="%itemAuthor"/>
+                            </items>
+                        </MenuButton>
+                        <MenuButton alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                    text="%delete">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#actionDeleteScientificWork"
+                                          text="%itemScientific"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionDeleteFieldOfStudy"
+                                          text="%fieldOfStudy"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionDeletePublicationType"
+                                          text="%publicationType"/>
+                                <MenuItem mnemonicParsing="false" onAction="#actionDeleteAuthor"
+                                          text="%itemAuthor"/>
+                            </items>
+                        </MenuButton>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionRead"
+                                text="%read">
+                            <tooltip>
+                                <Tooltip text="%clickRead"/>
+                            </tooltip>
+                        </Button>
+                        <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                                onAction="#actionSignOut" text="%signOut">
+                            <tooltip>
+                                <Tooltip text="%clickSignOut"/>
+                            </tooltip>
+                        </Button>
                     </VBox>
                 </HBox>
             </VBox>
